@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
+const { User, Spot, Image, Review, Booking } = require('../../db/models');
 
 // Get all Reviews of the Current User
 
