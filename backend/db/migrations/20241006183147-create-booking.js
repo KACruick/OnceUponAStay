@@ -5,6 +5,12 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
+const { Booking } = require('../models');
+const { User } = require('../models');
+const { Spot } = require('../models');
+const { Review } = require('../models');
+
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {

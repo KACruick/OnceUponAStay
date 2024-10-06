@@ -6,6 +6,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const { Review } = require('../models');
+const { Spot } = require('../models');
+const { User } = require('../models');
+const { Booking } = require('../models');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
