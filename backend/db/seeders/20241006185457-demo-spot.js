@@ -39,7 +39,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    mapFinderOptions.tableName = 'Spots';
+    options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
       id: { [Op.in]: [1, 2] }
