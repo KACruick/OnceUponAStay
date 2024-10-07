@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 })
 
 // Get all Spots owned by the Current User
-router.get('/current', async (req, res) => {
+router.get('/current/spots', async (req, res) => { //is this the correct path? 
     const spots = await Spot.findAll({
         where: {
             ownerId: req.user.id
