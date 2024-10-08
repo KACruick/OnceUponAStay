@@ -5,6 +5,9 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const { ValidationError } = require('sequelize');
+
+const routes = require('./routes');
 
 //Create a variable called isProduction that will be true if 
 //the environment is in production or not by checking the environment key 
@@ -42,7 +45,6 @@ if (!isProduction) {
 );
 
 // backend/app.js
-const routes = require('./routes');
 app.use(routes); // Connect all the routes
 
 // Catch unhandled requests and forward to error handler.
@@ -55,7 +57,7 @@ app.use((_req, _res, next) => {
 });
 
 
-const { ValidationError } = require('sequelize');
+
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
