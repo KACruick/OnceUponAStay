@@ -5,10 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { Review } = require('../models');
-const { Spot } = require('../models');
-const { User } = require('../models');
-const { Booking } = require('../models');
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -47,6 +44,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'ReviewImages';
-    await queryInterface.dropTable('ReviewImages');
+    await queryInterface.dropTable(options);
   }
 };

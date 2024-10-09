@@ -71,12 +71,12 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {
       type: DataTypes.DATE
     },
-    numReviews: {
-      type: DataTypes.INTEGER
-    },
-    avgStarRating: {
-      type: DataTypes.DECIMAL
-    }
+    // numReviews: {
+    //   type: DataTypes.INTEGER
+    // },
+    // avgStarRating: {
+    //   type: DataTypes.DECIMAL
+    // }
   }, {
     sequelize,
     modelName: 'Spot',

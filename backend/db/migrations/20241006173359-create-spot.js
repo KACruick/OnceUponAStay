@@ -5,10 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-const { Review } = require('../models');
-const { Spot } = require('../models');
-const { User } = require('../models');
-const { Booking } = require('../models');
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -72,31 +69,31 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      numReviews: {
-        type: Sequelize.INTEGER,
-        calculateNumReviews(){
-          const reviews = Review.findAll({
-            where: {
-              spotId: this.id
-            }
-          })
-          return reviews.length;
-        }
+      // numReviews: {
+      //   type: Sequelize.INTEGER,
+      //   calculateNumReviews(){
+      //     const reviews = Review.findAll({
+      //       where: {
+      //         spotId: this.id
+      //       }
+      //     })
+      //     return reviews.length;
+      //   }
 
-      },
-      avgStarRating: {
-        type: Sequelize.DECIMAL,
-        calculateAvgStarRating(){
-          const reviews = Review.findAll({
-            where: {
-              spotId: this.id
-            }
-          })
-          const totalStars = reviews.reduce((total, review) => total + review.stars, 0);
-          const avgStarRating = totalStars / reviews.length; //round to 2 decimal places? 
-          return avgStarRating;
-        }
-      },
+      // },
+      // avgStarRating: {
+      //   type: Sequelize.DECIMAL,
+      //   calculateAvgStarRating(){
+      //     const reviews = Review.findAll({
+      //       where: {
+      //         spotId: this.id
+      //       }
+      //     })
+      //     const totalStars = reviews.reduce((total, review) => total + review.stars, 0);
+      //     const avgStarRating = totalStars / reviews.length; //round to 2 decimal places? 
+      //     return avgStarRating;
+      //   }
+      // },
       
     }, options);
   },
