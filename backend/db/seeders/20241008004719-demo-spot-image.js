@@ -9,8 +9,7 @@ if (process.env.NODE_ENV === "production") {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    options.tableName = 'SpotImages';
-    await queryInterface.bulkInsert(options, [
+    const spotImages = [
       {
         spotId: 1,
         url: "https://placehold.co/600x400/ffcc00/png",
@@ -25,14 +24,17 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      
-    ], { validate: true });
-   
+    ];
+    try {
+      await queryInterface.bulkInsert('SpotImages', spotImages, {});
+      console.log('Spot Images seeded successfully');
+    } catch (error) {
+      console.error('Error seeding Spot Images:', error);
+    }
    
   },
 
   async down (queryInterface, Sequelize) {
-    options.tableName = 'SpotImages';
     await queryInterface.bulkDelete('SpotImages', null, {});
   }
 };

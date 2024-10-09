@@ -66,17 +66,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     createdAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     updatedAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
-    // numReviews: {
-    //   type: DataTypes.INTEGER
-    // },
-    // avgStarRating: {
-    //   type: DataTypes.DECIMAL
-    // }
   }, {
     sequelize,
     modelName: 'Spot',
