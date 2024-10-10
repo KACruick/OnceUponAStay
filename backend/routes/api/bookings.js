@@ -3,15 +3,39 @@ const router = express.Router();
 
 const { User, Spot, Image, Review, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
+const { handleValidationErrors } = require("../../utils/validation");
+const { check } = require("express-validator");
+
+//add validation middleware??
 
 // Get all of the Current User's Bookings
-router.get('/current/bookings', requireAuth, async (req, res) => { //is this the correct path?
+router.get('/current', requireAuth, async (req, res) => {
+    const currentUser = req.user.id;
+    try {
     const bookings = await Booking.findAll({
-        where: {
-            userId: req.user.id
-        }
+        where: { userId: currentUser },
+      include: {
+        model: Spot, // Include the Spot model to get spot details
+        attributes: [
+          "id",
+          "ownerId",
+          "address",
+          "city",
+          "state",
+          "country",
+          "lat",
+          "lng",
+          "name",
+          "price",
+          "previewImage",
+        ],
+      },
     });
-    return res.json(bookings);
+    return res.status(200).json({ Bookings: bookings });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 })
 
 // Get all Bookings for a Spot based on the Spot's id
@@ -77,7 +101,7 @@ router.post('/:id', async (req, res) => {
 })
 
 // Edit a Booking
-router.post('/:id', requireAuth, async (req, res) => {
+router.put('/:id', requireAuth, async (req, res) => {
     const {
         spotId,
         userId,

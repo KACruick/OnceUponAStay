@@ -7,8 +7,50 @@ const { requireAuth } = require("../../utils/auth");
 
 // Get all Spots
 router.get('/', async (req, res) => {
-    const spots = await Spot.findAll();
-    res.json(spots);
+    const spots = await Spot.findAll({
+        include:[
+            {
+                model: Review,
+                attributes: ['stars']
+            }, {
+                model: SpotImage,
+                attributes: ['url', 'preview'],
+            }
+        ]
+    });
+    const spotsList = [];
+    spots.forEach((spot) => {
+        spotsList.push(spot.toJSON());
+    });
+    const spotsFinal = spotsList.map((spot) => {
+        //calculate average rating
+        let totalStars = 0;
+        let reviewCount = 0;
+        spot.Review.forEach((review) => {
+          totalStars += review.stars;
+          reviewCount++;
+        });
+        let averageRating;
+        if (reviewCount === 0) {
+          averageRating = 0;
+        } else {
+          averageRating = totalStars / reviewCount;
+        }
+        spot.averageRating = averageRating;
+
+        //call preview image
+        spot.SpotImages.forEach((image) => {
+            if (image.preview === true) {
+                spot.previewImage = image.url;
+            }
+        });
+        if (!spot.previewImage) {
+            spot.previewImage = 'No preview image available';
+        }
+
+        return spot;
+    })
+    res.json({Spots: spotsFinal});
 })
 
 // Get all Spots owned by the Current User
