@@ -19,7 +19,6 @@ module.exports = {
         email: 'demo@user.io',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password'),
-        isOwner: true,
       },
       {
         firstName: 'user2first',
@@ -27,7 +26,6 @@ module.exports = {
         email: 'user1@user.io',
         username: 'FakeUser1',
         hashedPassword: bcrypt.hashSync('password2'),
-        isOwner: false,
       },
       {
         firstName: 'user3first',
@@ -35,23 +33,21 @@ module.exports = {
         email: 'user2@user.io',
         username: 'FakeUser3',
         hashedPassword: bcrypt.hashSync('password3'),
-        isOwner: false,
-      }
+      },
       {
         firstName: 'user4first',
         lastName: 'user3last',
         email: 'user2@user.io',
         username: 'FakeUser4',
         hashedPassword: bcrypt.hashSync('password4'),
-        isOwner: false,
-      }
+
+      },
       {
         firstName: 'user5first',
         lastName: 'user3last',
         email: 'user2@user.io',
         username: 'FakeUser5',
         hashedPassword: bcrypt.hashSync('password5'),
-        isOwner: false,
       }
     ], { validate: true });
   },
