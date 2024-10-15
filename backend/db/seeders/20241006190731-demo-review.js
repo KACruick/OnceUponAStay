@@ -13,6 +13,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
     await queryInterface.bulkInsert(options, [
+      //spot 1
       {
         spotId: 1,
         userId: 2,
@@ -25,6 +26,93 @@ module.exports = {
         review: 'Amazing!',
         stars: 5,
       },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // starting spot 2
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // starting spot 3
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      //starting spot 4
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
     ], { validate: true });
   },
 

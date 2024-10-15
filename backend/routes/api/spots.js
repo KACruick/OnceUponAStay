@@ -39,7 +39,7 @@ const { requireAuth } = require("../../utils/auth");
 //         spot.averageRating = averageRating;
 
 //         //call preview image
-//         spot.SpotImages.forEach((image) => {
+//         spot.SpotImage.forEach((image) => {
 //             if (image.preview === true) {
 //                 spot.previewImage = image.url;
 //             }
@@ -53,63 +53,63 @@ const { requireAuth } = require("../../utils/auth");
 //     res.json({Spots: spotsFinal});
 // })
 
-// Get all Spots owned by the Current User
-// router.get('/current', requireAuth, async (req, res) => {
-//     const spots = await Spot.findAll({
-//         where: {
-//             ownerId: req.user.id
-//         },
+//Get all Spots owned by the Current User
+router.get('/current', requireAuth, async (req, res) => {
+    const spots = await Spot.findAll({
+        where: {
+            ownerId: req.user.id
+        },
 
-//     });
-//     return res.json(spots);
-// })
+    });
+    return res.json(spots);
+})
 
-// Get details of a Spot from an id
-// router.get('/:spotId', async (req, res) => {
-//     const spot = await Spot.findByPk(req.params.id);
-//     if (!spot) {
-//         return res.status(404).json({
-//             message: "Spot couldn't be found"
-//         })
-//     }
-//     return res.json(spot);
-// })
+//Get details of a Spot from an id
+router.get('/:spotId', async (req, res) => {
+    const spot = await Spot.findByPk(req.params.id);
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+    return res.json(spot);
+})
 
 // Create a Spot
-// router.post('/', requireAuth, async (req, res) => {
-//     const {
-//         address,
-//         city,
-//         state,
-//         country,
-//         lat,
-//         lng,
-//         name,
-//         description,
-//         price
-//     } = req.body;
+router.post('/', requireAuth, async (req, res) => {
+    const {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    } = req.body;
 
-//     //error: Validation error
-//     if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
-//         return res.status(400).json({
-//             message: "Bad Request",
-//             errors: {
-//                 address: "Street address is required",
-//                 city: "City is required",
-//                 state: "State is required",
-//                 country: "Country is required",
-//                 lat: "Latitude is not valid",
-//                 lng: "Longitude must be within -180 and 180",
-//                 name: "Name must be less than 50 characters",
-//                 description: "Description is required",
-//                 price: "Price per day must be a positive number"
-//             }
-//         })
-//     }
+    //error: Validation error
+    if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: {
+                address: "Street address is required",
+                city: "City is required",
+                state: "State is required",
+                country: "Country is required",
+                lat: "Latitude is not valid",
+                lng: "Longitude must be within -180 and 180",
+                name: "Name must be less than 50 characters",
+                description: "Description is required",
+                price: "Price per day must be a positive number"
+            }
+        })
+    }
 
-//     await Spot.create(req.body);
-//     return res.json({message: "successfully created a new spot"});
-// })
+    await Spot.create(req.body);
+    return res.json({message: "successfully created a new spot"});
+})
 
 // Add an Image to a Spot based on the Spot's id
     //require authentication
