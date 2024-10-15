@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await User.bulkCreate([
       {
         firstName: 'user1first',
@@ -33,14 +33,30 @@ module.exports = {
         firstName: 'user3first',
         lastName: 'user3last',
         email: 'user2@user.io',
-        username: 'FakeUser2',
+        username: 'FakeUser3',
         hashedPassword: bcrypt.hashSync('password3'),
+        isOwner: false,
+      }
+      {
+        firstName: 'user4first',
+        lastName: 'user3last',
+        email: 'user2@user.io',
+        username: 'FakeUser4',
+        hashedPassword: bcrypt.hashSync('password4'),
+        isOwner: false,
+      }
+      {
+        firstName: 'user5first',
+        lastName: 'user3last',
+        email: 'user2@user.io',
+        username: 'FakeUser5',
+        hashedPassword: bcrypt.hashSync('password5'),
         isOwner: false,
       }
     ], { validate: true });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, null, {
