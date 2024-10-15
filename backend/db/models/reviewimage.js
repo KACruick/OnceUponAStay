@@ -1,50 +1,42 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class Review extends Model {
+  class ReviewImage extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Review.belongsTo(models.User, { foreignKey: 'userId' });
-      Review.belongsTo(models.Spot, { foreignKey: 'spotId' });
+      ReviewImage.belongsTo(models.Review, { foreignKey: 'reviewId', onDelete: 'CASCADE' });
     }
   }
-  Review.init({
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    spotId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    review: {
+  ReviewImage.init({
+    url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    stars: {
+    reviewId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        min: 1,
-        max: 5
+      references: {
+        model: 'Reviews',
+        key: 'id',
       }
     },
     createdAt: {
       type: DataTypes.DATE,
+      
     },
     updatedAt: {
       type: DataTypes.DATE,
+      
     }
   }, {
     sequelize,
-    modelName: 'Review',
-    tableName: 'Reviews',
+    modelName: 'ReviewImage',
+    tableName: 'ReviewImages',
   });
-  return Review;
+  return ReviewImage;
 };

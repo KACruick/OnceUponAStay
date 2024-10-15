@@ -10,7 +10,8 @@ const { Booking } = require('../models');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Bookings', [
+    options.tableName = 'Bookings';
+    await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
         userId: 3,
