@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const { User, Spot, Image, Review, Booking } = require('../../db/models');
+const { User, Spot, Image, Review, Booking, SpotImage } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 
 
@@ -112,56 +112,88 @@ router.post('/', requireAuth, async (req, res) => {
 })
 
 // Add an Image to a Spot based on the Spot's id
-    //require authentication
-    //error: Couldn't find a Spot with the specified id
-
-
-// Edit a Spot
-// router.post('/:id', async (req, res) => {
+// router.post('/:spotId/images', requireAuth, async (req, res) => {
+//     const {spotId} = req.params;
 //     const {
-//         address,
-//         city,
-//         state,
-//         country,
-//         lat,
-//         lng,
-//         name,
-//         description,
-//         price
+//         url,
+//         preview
 //     } = req.body;
+//     const userId = req.user.id;
 
-//     //error: Validation error
-//     if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
-//         return res.status(400).json({
-//             message: "Bad Request",
-//             errors: {
-//                 address: "Street address is required",
-//                 city: "City is required",
-//                 state: "State is required",
-//                 country: "Country is required",
-//                 lat: "Latitude is not valid",
-//                 lng: "Longitude must be within -180 and 180",
-//                 name: "Name must be less than 50 characters",
-//                 description: "Description is required",
-//                 price: "Price per day must be a positive number"
-//             }
-//         })
-//     }
+//     const spot = await Spot.findByPk(spotId);
 //     //error: Couldn't find a Spot with the specified id
-//     const spot = await Spot.findByPk(req.params.id);
 //     if (!spot) {
 //         return res.status(404).json({
 //             message: "Spot couldn't be found"
 //         })
 //     }
 
-//     await Spot.update(req.body, {
-//         where: {
-//             id: req.params.id
-//         }
+//     //check if current user is the owner of the spot
+//     if (spot.ownerId !== userId) {
+//         return res.status(403).json({
+//             message: "Forbidden"
+//         })
+//     }
+
+//     //create and add the image
+//     const newImage = await SpotImage.create({
+//         url,
+//         preview,
+//         spotId
 //     });
-//     return res.json({message: "successfully updated the spot"});
-// })
+//     return res.status(201).json({
+//         id: newImage.id,
+//         url: newImage.url,
+//         preview: newImage.preview
+//     })
+// });
+
+//Edit a Spot
+router.post('/:id', async (req, res) => {
+    const {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    } = req.body;
+
+    //error: Validation error
+    if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: {
+                address: "Street address is required",
+                city: "City is required",
+                state: "State is required",
+                country: "Country is required",
+                lat: "Latitude is not valid",
+                lng: "Longitude must be within -180 and 180",
+                name: "Name must be less than 50 characters",
+                description: "Description is required",
+                price: "Price per day must be a positive number"
+            }
+        })
+    }
+    //error: Couldn't find a Spot with the specified id
+    const spot = await Spot.findByPk(req.params.id);
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    await Spot.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    });
+    return res.json({message: "successfully updated the spot"});
+})
 
 // Delete a Spot
 // router.delete('/:id', requireAuth, async (req, res) => {
