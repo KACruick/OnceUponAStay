@@ -65,21 +65,11 @@ module.exports = (sequelize, DataTypes) => {
         min: 0,
       }
     },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
-    },
-    numReviews: {
-      type: DataTypes.INTEGER
-    },
-    avgStarRating: {
-      type: DataTypes.DECIMAL
-    }
+    
   }, {
     sequelize,
     modelName: 'Spot',
+    tableName: 'Spots',
   });
   return Spot;
 };

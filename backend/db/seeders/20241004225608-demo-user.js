@@ -2,6 +2,7 @@
 
 const { User } = require('../models');
 const bcrypt = require("bcryptjs");
+const { Op } = require("sequelize");
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -10,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await User.bulkCreate([
       {
         firstName: 'user1first',
@@ -18,7 +19,6 @@ module.exports = {
         email: 'demo@user.io',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password'),
-        isOwner: true,
       },
       {
         firstName: 'user2first',
@@ -26,24 +26,34 @@ module.exports = {
         email: 'user1@user.io',
         username: 'FakeUser1',
         hashedPassword: bcrypt.hashSync('password2'),
-        isOwner: false,
       },
       {
         firstName: 'user3first',
         lastName: 'user3last',
         email: 'user2@user.io',
-        username: 'FakeUser2',
+        username: 'FakeUser3',
         hashedPassword: bcrypt.hashSync('password3'),
-        isOwner: false,
+      },
+      {
+        firstName: 'user4first',
+        lastName: 'user3last',
+        email: 'user2@user.io',
+        username: 'FakeUser4',
+        hashedPassword: bcrypt.hashSync('password4'),
+
+      },
+      {
+        firstName: 'user5first',
+        lastName: 'user3last',
+        email: 'user2@user.io',
+        username: 'FakeUser5',
+        hashedPassword: bcrypt.hashSync('password5'),
       }
     ], { validate: true });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Users';
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
-    }, {});
+    await queryInterface.bulkDelete(options, null,{});
   }
 };
