@@ -21,35 +21,41 @@ module.exports = {
         stars: 5,
       },
       {
-        spotId: 2,
+        spotId: 1,
         userId: 3,
         review: 'Amazing!',
         stars: 5,
       },
-      // {
-      //   spotId: 2,
-      //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
-      // },
-      // {
-      //   spotId: 2,
-      //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
-      // },
-      // {
-      //   spotId: 2,
-      //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
-      // },
+      {
+        spotId: 1,
+        userId: 3,
+        review: 'Its OK',
+        stars: 4,
+      },
+      {
+        spotId: 1,
+        userId: 3,
+        review: 'So cool!',
+        stars: 5,
+      },
+      {
+        spotId: 1,
+        userId: 3,
+        review: 'Amazing!',
+        stars: 5,
+      },
       // starting spot 2
       // {
       //   spotId: 2,
       //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
+      //   review: 'Not enough parking',
+      //   stars: 3,
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 3,
+      //   review: 'Really close to train stops.',
+      //   stars: 4,
       // },
       // {
       //   spotId: 2,
@@ -60,55 +66,169 @@ module.exports = {
       // {
       //   spotId: 2,
       //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
+      //   review: 'Not enough beds.',
+      //   stars: 2,
       // },
       // {
       //   spotId: 2,
       //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
-      // },
-      // {
-      //   spotId: 2,
-      //   userId: 3,
-      //   review: 'Amazing!',
-      //   stars: 5,
+      //   review: 'It was a place to stay',
+      //   stars: 4,
       // },
       // starting spot 3
       // {
-      //   spotId: 2,
+      //   spotId: 3,
       //   userId: 3,
       //   review: 'Amazing!',
       //   stars: 5,
       // },
       // {
-      //   spotId: 2,
+      //   spotId: 3,
       //   userId: 3,
       //   review: 'Amazing!',
       //   stars: 5,
       // },
       // {
-      //   spotId: 2,
+      //   spotId: 3,
       //   userId: 3,
       //   review: 'Amazing!',
       //   stars: 5,
       // },
       // {
-      //   spotId: 2,
+      //   spotId: 3,
       //   userId: 3,
       //   review: 'Amazing!',
       //   stars: 5,
       // },
       //starting spot 4
       // {
-      //   spotId: 2,
+      //   spotId: 4,
       //   userId: 3,
       //   review: 'Amazing!',
       //   stars: 5,
       // },
       // {
-      //   spotId: 2,
+      //   spotId: 4,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 4,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      //starting spot 5
+      // {
+      //   spotId: 5,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 5,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 5,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      //starting spot 6
+      // {
+      //   spotId: 6,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 6,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 6,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      //starting spot 7
+      // {
+      //   spotId: 7,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 7,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 7,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      //starting spot 8
+      // {
+      //   spotId: 8,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 8,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 8,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // starting spot 9
+      // {
+      //   spotId: 9,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 9,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 9,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      ///starting spot 10
+      // {
+      //   spotId: 10,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 10,
+      //   userId: 3,
+      //   review: 'Amazing!',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 10,
       //   userId: 3,
       //   review: 'Amazing!',
       //   stars: 5,
