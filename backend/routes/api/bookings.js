@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const { User, Spot, Image, Review, Booking } = require('../../db/models');
+const { User, Spot, Image, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
@@ -11,7 +11,7 @@ const { check } = require("express-validator");
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
     const currentUser = req.user.id;
-    try {
+    
     const bookings = await Booking.findAll({
         where: { userId: currentUser },
       include: {
@@ -27,15 +27,13 @@ router.get('/current', requireAuth, async (req, res) => {
           "lng",
           "name",
           "price",
-          "previewImage",
+          //"previewImage",
         ],
+        
       },
     });
     return res.status(200).json({ Bookings: bookings });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
+  
 })
 
 

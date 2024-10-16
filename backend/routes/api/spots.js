@@ -8,19 +8,26 @@ const { check, validationResult } = require('express-validator');
 
 
 // Get all Spots
-// router.get('/', async (req, res) => {
-//     const spots = await Spot.findAll({
-//         include:[
-//             {
-//                 model: Review,
-//                 attributes: ['stars']
-//             }, 
-//             {
-//                 model: SpotImage,
-//                 attributes: ['url', 'preview'],
-//             }
-//         ]
-//     });
+router.get('/', async (req, res) => {
+    const spots = await Spot.findAll({
+        include:[
+            {
+                model: Review,
+                attributes: ['stars']
+            }, 
+            {
+                model: SpotImage,
+                attributes: ['url', 'preview'],
+            }
+        ]
+    });
+
+    //for each spot, calculate average rating
+
+    //for each spot, check if preview image exists
+
+    return res.json({Spots: spots});
+})
 //     const spotsArray = [];
 //     spots.forEach((spot) => {
 //         spotsArray.push(spot.toJSON());
