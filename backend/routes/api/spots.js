@@ -68,11 +68,11 @@ router.get('/current', requireAuth, async (req, res) => {
 
 //Get details of a Spot from an id
 router.get('/:spotId', async (req, res) => {
-    const spot = await Spot.findByPk(req.params.id, {
+    const { spotId } = req.params;
+    const spot = await Spot.findByPk(spotId, {
         include: [
             {
                 model: User,
-                as: 'Owner',
                 attributes: ['id', 'firstName', 'lastName'],
             },
             {
