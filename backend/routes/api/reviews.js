@@ -53,6 +53,7 @@ router.post('/:id/images', requireAuth, async (req, res) => {
     const userId = req.user.id;
     const reviewId = req.params.id;
     const review = await Review.findByPk(reviewId);
+    const { url } = req.body;
     //check if review exists
     if (!review) {
         return res.status(404).json({
@@ -95,8 +96,8 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         review,
         stars
     } = req.body;
-    const userId = req.user.id;
-    const reviewId = req.params.id;
+    const { user } = req;
+    const { reviewId } = req.params;
 
     const reviewToEdit = await Review.findByPk(reviewId);
 
@@ -108,7 +109,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     }
 
     //check if owner of review
-    if (reviewToEdit.userId !== userId) {
+    if (reviewToEdit.userId !== user.id) {
         return res.status(403).json({
             message: "Forbidden"
         })
