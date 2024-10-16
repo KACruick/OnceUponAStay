@@ -1,81 +1,52 @@
 const express = require('express')
 const router = express.Router();
 
-const { User, Spot, Image, Review, Booking } = require('../../db/models');
+const { User, Spot, Image, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
+const { where } = require('sequelize');
 
 // Get all Reviews of the Current User
-// router.get('/current/reviews', requireAuth, async (req, res) => {
+// router.get('/current', requireAuth, async (req, res) => {
+//     const userId = req.user.id;
 //     const reviews = await Review.findAll({
-//         where: {
-//             userId: req.user.id
-//         }
-//     });
-//     return res.json(reviews);
-// })
-
-// // Get all Reviews by a Spot's id
-// router.get('/:spotId', requireAuth, async (req, res) => {
-//     const reviews = await Review.findAll({
-//         where: {
-//             spotId: req.params.id
-//         }
-//     });
-
-//     //error: Couldn't find a Review with the specified id
-//     if (!reviews) {
-//         return res.status(404).json({
-//             message: "Review couldn't be found"
-//         })
-//     }
-
-//     return res.json(reviews);
-// })
-
-// // Create a Review for a Spot based on the Spot's id
-// router.post('/:spotId', requireAuth, async (req, res) => {
-//     const {
-//         spotId,
-//         userId,
-//         review,
-//         stars
-//     } = req.body;
-
-//     // error for body validation
-//     if (!review || !stars) {
-//         return res.status(400).json({
-//             message: "Validation Error",
-//             errors: {
-//                 review: "Review text is required",
-//                 stars: "Stars must be an integer from 1 to 5"
+//         where: { userId },
+//         include: [
+//             {
+//                 model: User,
+//                 attributes: ['id', 'firstName', 'lastName']
+//             },
+//             {
+//                 model: Spot,
+//                 attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+//                 include: [
+//                     {
+//                         model: SpotImage,
+//                         attributes: ['url'],
+//                         where: {
+//                             preview: true
+//                         }
+//                     }
+//                 ]
+//             },
+//             {
+//                 model: ReviewImage,
+//                 attributes: ['id', 'url'],
+                
 //             }
-//         })
-//     }
-//     //error: couldn't find spot from id 
-//     const spot = await Spot.findByPk(spotId);
-//     if (!spot) {
-//         return res.status(404).json({
-//             message: "Spot couldn't be found"
-//         })
-//     }
-
-//     //error: Review from the current user already exists for the Spot
-//     const existingReview = await Review.findOne({
-//         where: {
-//             spotId: spotId,
-//             userId: userId
-//         }
+//         ]
 //     });
-//     if (existingReview) {
-//         return res.status(500).json({ 
-//             message: "User already has a review for this spot"
+
+//     if (!reviews.length) { 
+//         return res.status(200).json({
+//             message: "No reviews yet"
 //         })
 //     }
 
-//     await Review.create(req.body);
+//     return res.json(reviews);
+// });
 
-//     return res.json(res.body);
-// })
+
+
 
 // // Add an Image to a Review based on the Review's id
 //     //error: Couldn't find a Review with the specified id
