@@ -6,7 +6,7 @@ const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
 
-//add validation middleware??
+//add validation functions? 
 
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
