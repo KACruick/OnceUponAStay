@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const { User, Spot, Image, Review, Booking, SpotImage } = require('../../db/models');
+const { User, Spot, Review, Booking, SpotImage, reviewImage } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 const { check, validationResult } = require('express-validator');
 
@@ -21,11 +21,11 @@ const { check, validationResult } = require('express-validator');
 //             }
 //         ]
 //     });
-//     const spotsList = [];
+//     const spotsArray = [];
 //     spots.forEach((spot) => {
-//         spotsList.push(spot.toJSON());
+//         spotsArray.push(spot.toJSON());
 //     });
-//     const spotsFinal = spotsList.map((spot) => {
+//     const spotsFinal = spotsArray.map((spot) => {
 //         //calculate average rating
 //         let totalStars = 0;
 //         let reviewCount = 0;

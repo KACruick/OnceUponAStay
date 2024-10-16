@@ -86,6 +86,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     }
     //error: booking conflict 403 "Sorry, this spot is already booked for the specified dates"
     const existingBooking = await Booking.findOne({
+        //need more specific code to check for overlapping dates??
         where: {
             spotId: spot,
             startDate: startDate,
