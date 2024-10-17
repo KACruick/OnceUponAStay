@@ -11,7 +11,8 @@ if (process.env.NODE_ENV === "production") {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const reviewImages = [
+    options.tableName = 'ReviewImages';
+    await queryInterface.bulkInsert(options, [
       {
         reviewId: 1,
         url: "https://placehold.co/600x400/00ff00/png",
@@ -24,17 +25,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-    ];
-    try {
-      await queryInterface.bulkInsert('ReviewImages', reviewImages, {});
-      console.log('Review Images seeded successfully');
-    } catch (error) {
-      console.error('Error seeding Review Images:', error);
-    }
+    ], {validate: true});
   },
   
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('ReviewImages', null, {});
+    options.tableName = 'ReviewImages';
+    await queryInterface.bulkDelete(options, null, {});
   }
 };
