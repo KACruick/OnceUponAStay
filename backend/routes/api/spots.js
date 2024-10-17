@@ -21,12 +21,39 @@ router.get('/', async (req, res) => {
             }
         ]
     });
+    //console.log("console.log", spots);
+    // for each spot, calculate average rating
+    const spotsArray = [];
+    for (let spot in spots) {
+        spotsArray.push(spots[spot])
+    }
+    spotsArray.forEach((spot) => {
+        console.log(spot.Reviews)
+    })
+    // spots.forEach((spot) => {
+    //     spotsArray.push(spot.toJSON());
+    // });
 
-    //for each spot, calculate average rating
+    // const spotsFinal = spotsArray.map((spot) => {
+    //     //calculate average rating
+    //     let totalStars = 0;
+    //     let reviewCount = 0;
+    //     spot.Review.forEach((review) => {
+    //       totalStars += review.stars;
+    //       reviewCount++;
+    //     });
+    //     let averageRating;
+    //     if (reviewCount === 0) {
+    //       averageRating = 0;
+    //     } else {
+    //       averageRating = totalStars / reviewCount;
+    //     }
+    //     spot.averageRating = averageRating;
+    // })
 
     //for each spot, check if preview image exists
-
-    return res.json({Spots: spots});
+    console.log(spotsArray[0].address);
+    return res.json(spotsArray);
 })
 //     const spotsArray = [];
 //     spots.forEach((spot) => {
