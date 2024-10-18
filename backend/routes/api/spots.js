@@ -5,10 +5,65 @@ const { User, Spot, Review, Booking, SpotImage, reviewImage } = require('../../d
 const { requireAuth } = require("../../utils/auth");
 const { check, validationResult } = require('express-validator');
 
+//helper function for calculating average rating and preview image from array for get all spots
+function finalSpots(spotsArray){
+    const final = spotsArray.map((spot) => {
+        // Calculate average rating
+        let totalStars = 0;
+        let reviewCount = 0;
+        spot.Reviews.forEach((review) => {
+            totalStars += review.stars;
+            reviewCount++;
+        });
+  
+        if (reviewCount > 0) {
+            spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
+        } else {
+            spot.avgRating = null;
+        }
+        delete spot.Reviews; 
+  
+        // Calculate preview image
+        spot.SpotImages.forEach((image) => {
+            if (image.preview === true) {
+                spot.previewImage = image.url;
+            }
+        });
+        if (!spot.previewImage) {
+            spot.previewImage = 'No preview image available';
+        }
+        delete spot.SpotImages; 
+  
+        return spot;
+      })
+      return final;
+}
 
+//helper function for calculating average rating and numReviews for get details of a spot from id 
+function calcAvgRating(spot){
+   
+        // Calculate average rating
+        let totalStars = 0;
+        let reviewCount = 0;
+        spot.Reviews.forEach((review) => {
+            totalStars += review.stars;
+            reviewCount++;
+        });
+  
+        if (reviewCount > 0) {
+            spot.numReviews = reviewCount;
+            spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
+
+        } else {
+            spot.avgRating = null;
+        }
+        delete spot.Reviews; 
+        return spot;
+    
+}
 
 // Get all Spots
-router.get('/', async (req, res) => {
+router.get('/', async (req, res ) => {
     const spots = await Spot.findAll({
         include:[
             {
@@ -21,74 +76,18 @@ router.get('/', async (req, res) => {
             }
         ]
     });
-    //console.log("console.log", spots);
-    // for each spot, calculate average rating
-    const spotsArray = [];
-    for (let spot in spots) {
-        spotsArray.push(spots[spot])
-    }
-    spotsArray.forEach((spot) => {
-        console.log(spot.Reviews)
-    })
-    // spots.forEach((spot) => {
-    //     spotsArray.push(spot.toJSON());
-    // });
+    let spotsArray = [];
 
-    // const spotsFinal = spotsArray.map((spot) => {
-    //     //calculate average rating
-    //     let totalStars = 0;
-    //     let reviewCount = 0;
-    //     spot.Review.forEach((review) => {
-    //       totalStars += review.stars;
-    //       reviewCount++;
-    //     });
-    //     let averageRating;
-    //     if (reviewCount === 0) {
-    //       averageRating = 0;
-    //     } else {
-    //       averageRating = totalStars / reviewCount;
-    //     }
-    //     spot.averageRating = averageRating;
-    // })
+  // Push each spot into an array to be able to add the average rating and preview image
+    spots.forEach((spot) => {
+      spotsArray.push(spot.toJSON());
+    });
+////
+   const final = finalSpots(spotsArray);
+  res.json({ Spots: final });
+});
 
-    //for each spot, check if preview image exists
-    console.log(spotsArray[0].address);
-    return res.json(spotsArray);
-})
-//     const spotsArray = [];
-//     spots.forEach((spot) => {
-//         spotsArray.push(spot.toJSON());
-//     });
-//     const spotsFinal = spotsArray.map((spot) => {
-//         //calculate average rating
-//         let totalStars = 0;
-//         let reviewCount = 0;
-//         spot.Review.forEach((review) => {
-//           totalStars += review.stars;
-//           reviewCount++;
-//         });
-//         let averageRating;
-//         if (reviewCount === 0) {
-//           averageRating = 0;
-//         } else {
-//           averageRating = totalStars / reviewCount;
-//         }
-//         spot.averageRating = averageRating;
 
-//         //call preview image
-//         spot.SpotImage.forEach((image) => {
-//             if (image.preview === true) {
-//                 spot.previewImage = image.url;
-//             }
-//         });
-//         if (!spot.previewImage) {
-//             spot.previewImage = 'No preview image available';
-//         }
-
-//         return spot;
-//     })
-//     res.json({Spots: spotsFinal});
-// })
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
@@ -96,9 +95,24 @@ router.get('/current', requireAuth, async (req, res) => {
         where: {
             ownerId: req.user.id
         },
-
+        include: [
+            {
+                model: Review,
+                attributes: ['stars']
+            },
+            {
+                model: SpotImage,
+                attributes: ['url', 'preview'],
+            }
+        ]
+        
     });
-    return res.json(spots);
+    let spotsArray = [];
+    spots.forEach((spot) => {
+        spotsArray.push(spot.toJSON());
+      });
+     const final = finalSpots(spotsArray);
+    return res.json({ spots: final });
 })
 
 //Get details of a Spot from an id
@@ -107,12 +121,17 @@ router.get('/:spotId', async (req, res) => {
     const spot = await Spot.findByPk(spotId, {
         include: [
             {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName'],
-            },
+                model: Review,
+                attributes: ['stars']
+            }, 
             {
                 model: SpotImage,
                 attributes: ['id', 'url', 'preview'],
+            },
+            {
+                model: User,
+                as: 'Owner',
+                attributes: ['id', 'firstName', 'lastName'],
             }
         ]
     });
@@ -121,7 +140,10 @@ router.get('/:spotId', async (req, res) => {
             message: "Spot couldn't be found"
         })
     }
-    return res.json(spot);
+    //needs num of reviews and avg rating
+    console.log("spot: ", spot.toJSON())
+    let final = calcAvgRating(spot.toJSON())
+    return res.json({ spot: final });
 })
 
 // Create a Spot
@@ -156,7 +178,18 @@ router.post('/', requireAuth, async (req, res) => {
         })
     }
 
-    await Spot.create(req.body);
+    await Spot.create({
+        ownerId: req.user.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    });
     return res.json({message: "successfully created a new spot"});
 })
 

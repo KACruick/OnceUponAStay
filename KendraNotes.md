@@ -1,3 +1,118 @@
+{
+        spotId: 1,
+        userId: 2,
+        startDate: new Date('2025-01-01'),
+        endDate: new Date('2025-01-05'),
+      },
+      {
+        spotId: 2,
+        userId: 2,
+        startDate: new Date('2025-02-01'),
+        endDate: new Date('2025-02-05'),
+      },
+      {
+        spotId: 3,
+        userId: 3,
+        startDate: new Date('2025-01-01'),
+        endDate: new Date('2025-01-05'),
+      },
+      {
+        spotId: 4,
+        userId: 3,
+        startDate: new Date('2025-02-01'),
+        endDate: new Date('2025-02-05'),
+      },
+      {
+        spotId: 5,
+        userId: 4,
+        startDate: new Date('2025-02-01'),
+        endDate: new Date('2025-02-05'),
+      },
+      {
+        spotId: 6,
+        userId: 4,
+        startDate: new Date('2025-05-01'),
+        endDate: new Date('2025-05-05'),
+      },
+      {
+        spotId: 7,
+        userId: 5,
+        startDate: new Date('2025-05-01'),
+        endDate: new Date('2025-05-05'),
+      },
+      {
+        spotId: 8,
+        userId: 5,
+        startDate: new Date('2025-06-01'),
+        endDate: new Date('2025-06-05'),
+      },
+      // {
+      //   spotId: 9,
+      //   userId: 1,
+      //   startDate: new Date('2025-01-01'),
+      //   endDate: new Date('2025-01-05'),
+      // },
+      // {
+      //   spotId: 10,
+      //   userId: 1,
+      //   startDate: new Date('2025-02-01'),
+      //   endDate: new Date('2025-02-05'),
+      // },
+
+
+// Get all Spots
+router.get('/', async (req, res ) => {
+    const spots = await Spot.findAll({
+        include:[
+            {
+                model: Review,
+                attributes: ['stars']
+            }, 
+            {
+                model: SpotImage,
+                attributes: ['url', 'preview'],
+            }
+        ]
+    });
+    let spotsArray = [];
+
+  // Push each spot into an array to be able to add the average rating and preview image
+    spots.forEach((spot) => {
+      spotsArray.push(spot.toJSON());
+    });
+    
+    const finalSpots = spotsArray.map((spot) => {
+      // Calculate average rating
+      let totalStars = 0;
+      let reviewCount = 0;
+      spot.Reviews.forEach((review) => {
+          totalStars += review.stars;
+          reviewCount++;
+      });
+
+      if (reviewCount > 0) {
+          spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
+      } else {
+          spot.avgRating = null;
+      }
+      delete spot.Reviews; 
+
+      // Calculate preview image
+      spot.SpotImages.forEach((image) => {
+          if (image.preview === true) {
+              spot.previewImage = image.url;
+          }
+      });
+      if (!spot.previewImage) {
+          spot.previewImage = 'No preview image available';
+      }
+      delete spot.SpotImages; 
+
+      return spot;
+    })
+  res.json({ Spots: finalSpots });
+});
+
 // numReviews: {
       //   type: Sequelize.INTEGER,
       //   calculateNumReviews(){
