@@ -62,9 +62,63 @@ function calcAvgRating(spot){
     
 }
 
-// Get all Spots
+// Get all Spots with query filters 
 router.get('/', async (req, res ) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
+      req.query;
+  
+    const limit = size ?? 20;
+    const offset = page ? (page - 1) * size : 0;
+    const where = {};
+
+    // Apply filters based on the query parameters
+  if (minLat !== undefined && maxLat !== undefined) {
+    where.lat = {
+      [Op.between]: [minLat, maxLat]
+    };
+  } else if (minLat !== undefined) {
+    where.lat = {
+      [Op.gte]: minLat
+    };
+  } else if (maxLat !== undefined) {
+    where.lat = {
+      [Op.lte]: maxLat
+    };
+  }
+
+  if (minLng !== undefined && maxLng !== undefined) {
+    where.lng = {
+      [Op.between]: [minLng, maxLng]
+    };
+  } else if (minLng !== undefined) {
+    where.lng = {
+      [Op.gte]: minLng
+    };
+  } else if (maxLng !== undefined) {
+    where.lng = {
+      [Op.lte]: maxLng
+    };
+  }
+
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    where.price = {
+      [Op.between]: [minPrice, maxPrice]
+    };
+  } else if (minPrice !== undefined) {
+    where.price = {
+      [Op.gte]: minPrice
+    };
+  } else if (maxPrice !== undefined) {
+    where.price = {
+      [Op.lte]: maxPrice
+    };
+  }
+
+
     const spots = await Spot.findAll({
+        where,
+        limit,
+        offset,
         include:[
             {
                 model: Review,
@@ -231,7 +285,9 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 });
 
 //Edit a Spot
-router.put('/:id', async (req, res) => {
+router.put('/:id', requireAuth, async (req, res) => {
+    const userId = req.user.id;
+
     const {
         address,
         city,
@@ -243,6 +299,13 @@ router.put('/:id', async (req, res) => {
         description,
         price
     } = req.body;
+
+    const spot = await Spot.findByPk(req.params.id);
+
+    //check if owner of spot
+    if (spot.ownerId !== userId) {
+        return res.status(403).json({ message: 'Forbidden - You are not the owner of this spot'})
+    }
 
     //error: Validation error
     if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
@@ -262,7 +325,7 @@ router.put('/:id', async (req, res) => {
         })
     }
     //error: Couldn't find a Spot with the specified id
-    const spot = await Spot.findByPk(req.params.id);
+
     if (!spot) {
         return res.status(404).json({
             message: "Spot couldn't be found"
@@ -395,13 +458,17 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 })
 
 // Create a Booking from a Spot based on the Spot's id
-router.post('/:id/bookings', async (req, res) => {
-    const {
-        //spotId, ?? 
-        //userId, ??
-        startDate,
-        endDate
-    } = req.body;
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const userId = req.user.id;
+    const { startDate, endDate } = req.body;
+
+    //check to make sure the user is not the owner of the spot
+    if(spot.ownerId === userId) {
+        return res.status(404).json({
+            message: "Cannot book your own spot"
+        })
+    }
 
     //error: Validation error 400
     if (!startDate || !endDate) {
@@ -445,12 +512,6 @@ router.post('/:id/bookings', async (req, res) => {
     });
     return res.json(newBooking);
 })
-
-//Add Query Filters to Get All Spots
-
-
-//Get all Spots with Page/size Query Parameters
-
 
 
 module.exports = router;

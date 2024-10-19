@@ -119,7 +119,16 @@ router.put('/:id', requireAuth, async (req, res) => {
 
 
 // Delete a Booking
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireAuth, async (req, res) => {
+    const userId = req.user.id;
+
+    //check if owner of the booking
+    if (booking.userId !== userId) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    }
+
     const booking = await Booking.findByPk(req.params.id);
 
     //error: Couldn't find a Booking with the specified id
