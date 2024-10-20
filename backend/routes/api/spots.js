@@ -190,7 +190,19 @@ router.get('/', validateQueryParams, async (req, res ) => {
     });
 ////
    const final = finalSpots(spotsArray);
-  res.json({ Spots: final });
+
+   if (limit || offset){
+    return res.json({
+        Spots: final,
+        page: page,
+        size: size
+    })
+   } else {
+    return res.json({
+        Spots: final
+    })
+   }
+  
 });
 
 
