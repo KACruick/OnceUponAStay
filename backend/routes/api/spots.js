@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const { User, Spot, Review, Booking, SpotImage, reviewImage } = require('../../db/models');
+const { User, Spot, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 const { check, validationResult } = require('express-validator');
 
@@ -381,11 +381,31 @@ router.delete('/:id', requireAuth, async (req, res) => {
 
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', requireAuth, async (req, res) => {
-    const spotId = req.params;
+    const { spotId } = req.params;
+
+    //check if spot exists
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
+    //find all reviews for the spot
     const reviews = await Review.findAll({
         where: {
             spotId
-        }
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
     });
 
     //error: Couldn't find a Review with the specified id
@@ -395,7 +415,7 @@ router.get('/:spotId/reviews', requireAuth, async (req, res) => {
         })
     }
 
-    return res.json(reviews);
+    return res.json({ Reviews: reviews });
 })
 
 // Create a Review for a Spot based on the Spot's id
@@ -480,6 +500,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { startDate, endDate } = req.body;
 
+    const spot = await Spot.findByPk(spotId);
     //check to make sure the user is not the owner of the spot
     if(spot.ownerId === userId) {
         return res.status(404).json({
@@ -498,7 +519,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         })
     }
     //error: Couldn't find a Spot
-    const spot = await Spot.findByPk(req.params.id);
+    
     if (!spot) {
         return res.status(404).json({
             message: "Spot couldn't be found"
@@ -507,7 +528,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     //error: Booking conflict
     const existingBooking = await Booking.findOne({
         where: {
-            spotId: req.params.id,
+            spotId,
             startDate: startDate,
             endDate: endDate
         }
@@ -522,7 +543,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         })
     }
     const newBooking = await Booking.create({
-        spotId: req.params.id,
+        spotId,
         userId: req.user.id,
         startDate,
         endDate
