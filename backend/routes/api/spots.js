@@ -118,7 +118,8 @@ const validateQueryParams = (req, res, next) => {
 router.get('/', validateQueryParams, async (req, res ) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
       req.query;
-  
+    
+    
     const limit = size ?? 20;
     const offset = page ? (page - 1) * size : 0;
     const where = {};
@@ -190,16 +191,16 @@ router.get('/', validateQueryParams, async (req, res ) => {
     });
 ////
    const final = finalSpots(spotsArray);
-
-   if (limit || offset){
+    console.log("page: ", page,"size: ", size)
+   if (page === 1 && size === 20) {
     return res.json({
         Spots: final,
-        page: page,
-        size: size
     })
    } else {
     return res.json({
-        Spots: final
+        Spots: final,
+        page,
+        size,
     })
    }
   
