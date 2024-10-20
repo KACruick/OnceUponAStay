@@ -191,7 +191,7 @@ router.get('/', validateQueryParams, async (req, res ) => {
     });
 ////
    const final = finalSpots(spotsArray);
-    console.log("page: ", page,"size: ", size)
+   
    if (page === 1 && size === 20) {
     return res.json({
         Spots: final,
