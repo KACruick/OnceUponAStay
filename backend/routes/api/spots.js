@@ -379,12 +379,32 @@ router.put('/:id', requireAuth, async (req, res) => {
         })
     }
 
-    await Spot.update(req.body, {
-        where: {
-            id: req.params.id
-        }
+    const updated = await spot.update({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
     });
-    return res.json({message: "successfully updated the spot"});
+    return res.json({
+        id: updated.id,
+        ownerId: updated.ownerId,
+        address: updated.address,
+        city: updated.city,
+        state: updated.state,
+        country: updated.country,
+        lat: updated.lat,
+        lng: updated.lng,
+        name: updated.name,
+        description: updated.description,
+        price: updated.price,
+        createdAt: updated.createdAt,
+        updatedAt: updated.updatedAt
+    });
 })
 
 // Delete a Spot
