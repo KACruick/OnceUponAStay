@@ -84,7 +84,7 @@ router.post('/:id/images', requireAuth, async (req, res) => {
         url,
         reviewId
     });
-    return res.json({
+    return res.status(201).json({
         id: newImage.id,
         url: newImage.url
     })
