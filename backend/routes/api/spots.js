@@ -108,11 +108,11 @@ router.get('/', validateQueryParams, async (req, res) => {
     //create an array of promises to fetch the average rating and preview image for each spot
     const spotsWithDetails = await Promise.all(
         spots.map(async (spot) => {
-          const avgRating = await calculateAvgStarRating(spot.id);
+          const avgStarRating = await calculateAvgStarRating(spot.id);
           const previewImage = await getPreviewImage(spot.id);
           return {
             ...spot.toJSON(),
-            avgRating,
+            avgStarRating,
             previewImage,
           };
         })
@@ -182,11 +182,11 @@ router.get('/current', requireAuth, async (req, res) => {
     //create an array of promises to fetch the average rating and preview image for each spot
     const spotsWithDetails = await Promise.all(
         spots.map(async (spot) => {
-          const avgRating = await calculateAvgStarRating(spot.id);
+          const avgStarRating = await calculateAvgStarRating(spot.id);
           const previewImage = await getPreviewImage(spot.id);
           return {
             ...spot.toJSON(),
-            avgRating,
+            avgStarRating,
             previewImage,
           };
         })
@@ -207,10 +207,10 @@ function calculateExtraDetails(spot){
 
     if (reviewCount > 0) {
         spot.numReviews = reviewCount;
-        spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
+        spot.avgStarRating = parseFloat((totalStars / reviewCount).toFixed(1));
 
     } else {
-        spot.avgRating = null;
+        spot.avgStarRating = null;
     }
     delete spot.Reviews; 
     return spot;
