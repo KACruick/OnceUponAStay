@@ -479,19 +479,34 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
             message: "Spot couldn't be found"
         })
     }
-    //check if owner of spot
+    
+    let bookings;
+
+    //if you are NOT the owner of the spot
     if (spot.ownerId !== req.user.id) {
-        return res.status(403).json({
-            message: "Forbidden"
-        })
+        bookings = await Booking.findAll({
+            where: {
+                spotId
+            },
+            attributes: ['spotId', 'startDate', 'endDate'],
+        });
     }
-    //get all bookings for a Spot based on the Spot's id
-    const bookings = await Booking.findAll({
-        where: {
-            spotId
-        }
-    });
-    return res.json(bookings);
+    // if you are the owner of the spot
+    if (spot.ownerId === req.user.id) {
+        bookings = await Booking.findAll({
+            where: {
+                spotId
+            },
+            attributes: ['id', 'spotId', 'userId', 'startDate', 'endDate', 'createdAt', 'updatedAt'],
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        });
+    }
+    return res.status(200).json({ Bookings: bookings });
 })
 
 // Create a Booking from a Spot based on the Spot's id
