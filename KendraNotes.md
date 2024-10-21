@@ -340,3 +340,28 @@ const validateQueryParams = (req, res, next) => {
 //    }
   
 // });
+
+//old code 
+//Get all Spots owned by the Current User
+// const spots = await Spot.findAll({
+    //     where: {
+    //         ownerId: req.user.id
+    //     },
+    //     include: [
+    //         {
+    //             model: Review,
+    //             attributes: ['stars']
+    //         },
+    //         {
+    //             model: SpotImage,
+    //             attributes: ['url', 'preview'],
+    //         }
+    //     ]
+        
+    // });
+    // let spotsArray = [];
+    // spots.forEach((spot) => {
+    //     spotsArray.push(spot.toJSON());
+    //   });
+    //  const final = finalSpots(spotsArray);
+    // return res.json({ spots: final });
