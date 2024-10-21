@@ -279,8 +279,7 @@ router.post('/', requireAuth, async (req, res) => {
             }
         })
     }
-
-    await Spot.create({
+    const newSpot = await Spot.create({
         ownerId: req.user.id,
         address,
         city,
@@ -292,7 +291,7 @@ router.post('/', requireAuth, async (req, res) => {
         description,
         price
     });
-    return res.json({message: "successfully created a new spot"});
+    return res.status(201).json(newSpot);
 })
 
 // Add an Image to a Spot based on the Spot's id
