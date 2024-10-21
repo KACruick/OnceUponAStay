@@ -349,6 +349,13 @@ router.put('/:id', requireAuth, async (req, res) => {
 
     const spot = await Spot.findByPk(req.params.id);
 
+    //error: Couldn't find a Spot with the specified id
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    }
+
     //check if owner of spot
     if (spot.ownerId !== userId) {
         return res.status(403).json({ message: 'Forbidden - You are not the owner of this spot'})
@@ -369,13 +376,6 @@ router.put('/:id', requireAuth, async (req, res) => {
                 description: "Description is required",
                 price: "Price per day must be a positive number"
             }
-        })
-    }
-    //error: Couldn't find a Spot with the specified id
-
-    if (!spot) {
-        return res.status(404).json({
-            message: "Spot couldn't be found"
         })
     }
 
