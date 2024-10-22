@@ -9,8 +9,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     const imageId = req.params.imageId;
     const userId = req.user.id;
     const image = await ReviewImage.findByPk(imageId);
-    // .reviewId gives Postman error
-    // const review = image.reviewId;
+    
 
     //check if image exists
     if (!image) {
