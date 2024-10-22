@@ -12,18 +12,66 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Bookings';
     await queryInterface.bulkInsert(options, [
-      {
-        spotId: 1,
-        userId: 3,
-        startDate: new Date('2023-01-01'),
-        endDate: new Date('2023-01-05'),
-      },
-      {
-        spotId: 2,
-        userId: 2,
-        startDate: new Date('2023-02-01'),
-        endDate: new Date('2023-02-05'),
-      },
+    {
+      spotId: 1,
+      userId: 2,
+      startDate: new Date('2025-01-01'),
+      endDate: new Date('2025-01-05'),
+    },
+    {
+      spotId: 2,
+      userId: 2,
+      startDate: new Date('2025-02-01'),
+      endDate: new Date('2025-02-05'),
+    },
+    {
+      spotId: 3,
+      userId: 3,
+      startDate: new Date('2025-01-01'),
+      endDate: new Date('2025-01-05'),
+    },
+    {
+      spotId: 4,
+      userId: 3,
+      startDate: new Date('2025-02-01'),
+      endDate: new Date('2025-02-05'),
+    },
+    {
+      spotId: 5,
+      userId: 4,
+      startDate: new Date('2025-02-01'),
+      endDate: new Date('2025-02-05'),
+    },
+    {
+      spotId: 6,
+      userId: 4,
+      startDate: new Date('2025-05-01'),
+      endDate: new Date('2025-05-05'),
+    },
+    {
+      spotId: 7,
+      userId: 5,
+      startDate: new Date('2025-05-01'),
+      endDate: new Date('2025-05-05'),
+    },
+    {
+      spotId: 8,
+      userId: 5,
+      startDate: new Date('2025-06-01'),
+      endDate: new Date('2025-06-05'),
+    },
+    {
+      spotId: 9,
+      userId: 1,
+      startDate: new Date('2025-01-01'),
+      endDate: new Date('2025-01-05'),
+    },
+    {
+      spotId: 10,
+      userId: 1,
+      startDate: new Date('2025-02-01'),
+      endDate: new Date('2025-02-05'),
+    },
     ], { validate: true });
   },
 

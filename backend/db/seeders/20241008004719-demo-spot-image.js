@@ -9,7 +9,8 @@ if (process.env.NODE_ENV === "production") {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const spotImages = [
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
         url: "https://placehold.co/600x400/ffcc00/png",
@@ -24,17 +25,69 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-    ];
-    try {
-      await queryInterface.bulkInsert('SpotImages', spotImages, {});
-      console.log('Spot Images seeded successfully');
-    } catch (error) {
-      console.error('Error seeding Spot Images:', error);
-    }
-   
+      {
+        spotId: 3,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 4,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 5,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 6,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 7,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 8,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 9,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 10,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {validate: true});
   },
+   
+   
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('SpotImages', null, {});
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkDelete(options, null, {});
   }
 };

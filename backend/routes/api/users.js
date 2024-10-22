@@ -1,7 +1,7 @@
 // backend/routes/api/users.js
 const express = require('express')
 const router = express.Router();
-
+const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -34,9 +34,37 @@ const validateSignup = [
 router.post(
     '/',
     validateSignup,
-    async (req, res) => {
+    async (req, res, next) => {
       const { firstName, lastName, email, password, username } = req.body;
       const hashedPassword = bcrypt.hashSync(password);
+
+      // Check if username or email already exists
+      const existingUser = await User.findOne({
+        where: {
+          [Op.or]: [{ username }, { email }]
+        }
+      });
+      if (existingUser) {
+        const err = new Error('User already exists');
+        err.status = 500;
+        err.errors = { username: 'User with that username already exists', email: 'User with that email already exists' };
+        return next(err);
+      }
+      
+      // if (firstName === "" || lastName === "" || email === "" || username === "" || password === "") {
+      //   const err = new Error();
+      //   err.message = 'Bad Request';
+      //   err.status = 400;
+      //   err.errors = { 
+      //     email: "Invalid email",
+      //     username: "Username is required", 
+      //     firstName: "First Name is required",
+      //     lastName: "Last Name is required",
+      //     password: "Password is required"
+      //   };
+      //   return next(err);
+      // }
+
       const user = await User.create({ firstName, lastName, email, username, hashedPassword });
   
       const safeUser = {
