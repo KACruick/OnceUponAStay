@@ -365,3 +365,55 @@ const validateQueryParams = (req, res, next) => {
     //   });
     //  const final = finalSpots(spotsArray);
     // return res.json({ spots: final });
+
+
+
+    // Get all Reviews of the Current User
+router.get('/current', requireAuth, async (req, res) => {
+    const userId = req.user.id;
+    const reviews = await Review.findAll({
+        where: { userId },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: Spot,
+                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+                include: [
+                    {
+                        model: SpotImage,
+                        as: 'previewImage',
+                        attributes: ['url'],
+                        where: {
+                            preview: true
+                        }
+                    }
+                ]
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url'],
+                
+            }
+        ]
+    });
+
+    if (!reviews.length) { 
+        return res.status(200).json({
+            message: "No reviews yet"
+        })
+    }
+
+    return res.json({ Reviews: reviews });
+});
+
+
+ //new code
+    // console.log("reviews: ", reviews)
+    // reviews.forEach(review => {
+    //     review.previewImage = review.Spot.previewImage.url;
+    //     delete review.Spot.previewImage;
+    // });
+    //end of new code
