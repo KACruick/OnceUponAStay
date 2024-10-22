@@ -109,7 +109,7 @@ module.exports = {
         price: 100,
       },
       {
-        ownerId: 1,
+        ownerId: 5,
         address: '821 Bourbon St',
         city: 'New Orleans',
         state: 'LA',
@@ -121,7 +121,7 @@ module.exports = {
         price: 100,
       },
       {
-        ownerId: 1,
+        ownerId: 5,
         address: '123 106th St',
         city: 'Bar Harbor',
         state: 'ME',

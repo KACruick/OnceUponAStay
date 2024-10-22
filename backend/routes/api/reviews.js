@@ -4,47 +4,66 @@ const router = express.Router();
 const { User, Spot, Image, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
+// Helper function to retrieve preview image URL
+const getPreviewImage = async (spotId) => {
+    const image = await SpotImage.findOne({ where: { spotId } });
+    if (image) {
+      return image.url;
+    } else {
+      return 'No preview image available'; // Return null if no preview image is found
+    }
+};
 
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res) => {
-    const userId = req.user.id;
+    const userId = req.user.id;  
     const reviews = await Review.findAll({
         where: { userId },
         include: [
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            },
-            {
-                model: Spot,
-                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-                include: [
                     {
-                        model: SpotImage,
-                        attributes: ['url'],
-                        where: {
-                            preview: true
-                        }
-                    }
+                        model: User,
+                        attributes: ['id', 'firstName', 'lastName']
+                    },
+                    {
+                        model: Spot,
+                        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+                    },
+                    // {
+                    //     model: ReviewImage,
+                    //     attributes: ['id', 'url'],
+                        
+                    // }
                 ]
-            },
-            {
-                model: ReviewImage,
-                attributes: ['id', 'url'],
-                
-            }
-        ]
     });
-
+    
     if (!reviews.length) { 
         return res.status(200).json({
             message: "No reviews yet"
         })
     }
 
-    return res.json(reviews);
-});
-
+        //create an array of promises to fetch the spot and preview image for the spot
+        const reviewsWithDetails = await Promise.all(
+            reviews.map(async (review) => {
+                const spot = review.Spot;
+                const previewImage = await getPreviewImage(spot.id);
+                const reviewImages = await ReviewImage.findAll({
+                    where: { reviewId: review.id },
+                    attributes: ['id', 'url'],
+                });
+                return {
+                    ...review.toJSON(),
+                    Spot: {
+                        ...spot.toJSON(),
+                        previewImage // Add the previewImage to the Spot object
+                    },
+                    //add ReviewImages 
+                    ReviewImages: reviewImages
+                };
+            })
+        );
+        return res.json({ Reviews: reviewsWithDetails });
+    });
 
 
 
@@ -84,7 +103,7 @@ router.post('/:id/images', requireAuth, async (req, res) => {
         url,
         reviewId
     });
-    return res.json({
+    return res.status(201).json({
         id: newImage.id,
         url: newImage.url
     })
