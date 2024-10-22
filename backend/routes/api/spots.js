@@ -420,7 +420,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
     }
 
     //check if current user is the owner of the spot
-    if (spot.userId !== userId) {
+    if (spot.ownerId !== userId) {
         return res.status(403).json({
             message: "Forbidden - You are not the owner of this spot"
         })
