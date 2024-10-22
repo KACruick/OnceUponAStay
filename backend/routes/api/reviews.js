@@ -28,11 +28,11 @@ router.get('/current', requireAuth, async (req, res) => {
                         model: Spot,
                         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
                     },
-                    {
-                        model: ReviewImage,
-                        attributes: ['id', 'url'],
+                    // {
+                    //     model: ReviewImage,
+                    //     attributes: ['id', 'url'],
                         
-                    }
+                    // }
                 ]
     });
     
@@ -47,12 +47,18 @@ router.get('/current', requireAuth, async (req, res) => {
             reviews.map(async (review) => {
                 const spot = review.Spot;
                 const previewImage = await getPreviewImage(spot.id);
+                const reviewImages = await ReviewImage.findAll({
+                    where: { reviewId: review.id },
+                    attributes: ['id', 'url'],
+                });
                 return {
                     ...review.toJSON(),
                     Spot: {
                         ...spot.toJSON(),
                         previewImage // Add the previewImage to the Spot object
-                    }
+                    },
+                    //add ReviewImages 
+                    ReviewImages: reviewImages
                 };
             })
         );
