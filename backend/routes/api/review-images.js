@@ -9,7 +9,9 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     const imageId = req.params.imageId;
     const userId = req.user.id;
     const image = await ReviewImage.findByPk(imageId);
-    
+    const reviewId = image.reviewId;
+    const review = await Review.findByPk(reviewId);
+    const reviewOwnerId = review.userId;
 
     //check if image exists
     if (!image) {
@@ -18,7 +20,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         })
     }
     //check if current user is the owner of the review
-    if (image.userID !== userId) {
+    if (reviewOwnerId !== userId) {
         return res.status(403).json({
             message: "Forbidden"
         })
