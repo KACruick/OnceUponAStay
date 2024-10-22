@@ -51,6 +51,9 @@ router.get('/current', requireAuth, async (req, res) => {
                     where: { reviewId: review.id },
                     attributes: ['id', 'url'],
                 });
+                if (reviewImages.length === 0) {
+                    reviewImages = "No images in this review"
+                }
                 return {
                     ...review.toJSON(),
                     Spot: {
