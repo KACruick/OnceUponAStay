@@ -6,10 +6,11 @@ const { requireAuth } = require("../../utils/auth");
 
 //delete a review image 
 router.delete('/:imageId', requireAuth, async (req, res) => {
-    const { imageId } = req.params;
+    const imageId = req.params.imageId;
     const userId = req.user.id;
     const image = await ReviewImage.findByPk(imageId);
-    const review = image.reviewId;
+    // .reviewId gives Postman error
+    // const review = image.reviewId;
 
     //check if image exists
     if (!image) {
@@ -18,7 +19,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         })
     }
     //check if current user is the owner of the review
-    if (review.userID !== userId) {
+    if (image.userID !== userId) {
         return res.status(403).json({
             message: "Forbidden"
         })
