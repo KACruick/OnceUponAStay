@@ -210,7 +210,8 @@ function calculateExtraDetails(spot){
         spot.avgStarRating = parseFloat((totalStars / reviewCount).toFixed(1));
 
     } else {
-        spot.avgStarRating = null;
+        spot.avgStarRating = "no reviews yet";
+        spot.numReviews = 0;
     }
     delete spot.Reviews; 
     return spot;
