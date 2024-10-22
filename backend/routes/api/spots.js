@@ -137,40 +137,7 @@ router.get('/', validateQueryParams, async (req, res) => {
 
 });
 
-//OLD - replace if time
-//helper function for calculating average rating and preview image from array for get all spots
-function finalSpots(spotsArray){
-    const final = spotsArray.map((spot) => {
-        // Calculate average rating
-        let totalStars = 0;
-        let reviewCount = 0;
-        spot.Reviews.forEach((review) => {
-            totalStars += review.stars;
-            reviewCount++;
-        });
-  
-        if (reviewCount > 0) {
-            spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
-        } else {
-            spot.avgRating = null;
-        }
-        delete spot.Reviews; 
-  
-        // Calculate preview image
-        spot.SpotImages.forEach((image) => {
-            if (image.preview === true) {
-                spot.previewImage = image.url;
-            }
-        });
-        if (!spot.previewImage) {
-            spot.previewImage = 'No preview image available';
-        }
-        delete spot.SpotImages; 
-  
-        return spot;
-      })
-      return final;
-}
+
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
