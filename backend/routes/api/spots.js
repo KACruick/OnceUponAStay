@@ -126,11 +126,11 @@ router.get('/', validateQueryParams, async (req, res) => {
             spot.lat = parseFloat(spot.lat);
             spot.lng = parseFloat(spot.lng);
             spot.price = parseFloat(spot.price);
-          const avgStarRating = await calculateAvgStarRating(spot.id);
+          const avgRating = await calculateAvgStarRating(spot.id);
           const previewImage = await getPreviewImage(spot.id);
           return {
             ...spot.toJSON(),
-            avgStarRating,
+            avgRating,
             previewImage,
           };
         })
