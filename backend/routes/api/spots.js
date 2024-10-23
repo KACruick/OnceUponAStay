@@ -212,7 +212,7 @@ router.get('/:spotId', async (req, res) => {
     }
     //needs num of reviews and avg rating
     let final = calculateExtraDetails(spot.toJSON())
-    return res.json({ final });
+    return res.json(final);
 })
 
 // Create a Spot
