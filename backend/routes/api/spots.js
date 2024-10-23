@@ -8,24 +8,7 @@ const { Op } = require('sequelize');
 
 // Middleware for validating query parameters
 const validateQueryParams = (req, res, next) => {
-    const allowedParams = ['page', 'size', 'minLat', 'maxLat', 'minLng', 'maxLng', 'minPrice', 'maxPrice'];
     const errors = {};
-
-    // Check for unexpected parameters
-    const unexpectedParams = Object.keys(req.query).filter(param => !allowedParams.includes(param));
-    if (unexpectedParams.length > 0) {
-        return res.status(400).json({ message: "Bad Request", errors: {
-            "page": "Page must be greater than or equal to 1",
-            "size": "Size must be between 1 and 20",
-            "maxLat": "Maximum latitude is invalid",
-            "minLat": "Minimum latitude is invalid",
-            "minLng": "Maximum longitude is invalid",
-            "maxLng": "Minimum longitude is invalid",
-            "minPrice": "Minimum price must be greater than or equal to 0",
-            "maxPrice": "Maximum price must be greater than or equal to 0"
-          } });
-    }
-
     const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     
   
