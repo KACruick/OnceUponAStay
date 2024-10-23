@@ -96,27 +96,27 @@ const getPreviewImage = async (spotId) => {
     }
 };
 
-router.get('/', async (req, res) => {
-    // let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+router.get('/', validateQueryParams, async (req, res) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     
-    // page = parseInt(page);
-    // size = parseInt(size);
+    page = parseInt(page);
+    size = parseInt(size);
 
-    // const filters = {};
-    // if (minLat) filters.lat = { ...filters.lat, [Op.gte]: parseFloat(minLat) };
-    // if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: parseFloat(maxLat) };
+    const filters = {};
+    if (minLat) filters.lat = { ...filters.lat, [Op.gte]: parseFloat(minLat) };
+    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: parseFloat(maxLat) };
 
-    // if (minLng) filters.lng = { ...filters.lng, [Op.gte]: parseFloat(minLng) };
-    // if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: parseFloat(maxLng) };
+    if (minLng) filters.lng = { ...filters.lng, [Op.gte]: parseFloat(minLng) };
+    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: parseFloat(maxLng) };
 
-    // if (minPrice) filters.price = { ...filters.price, [Op.gte]: parseFloat(minPrice) };
-    // if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
+    if (minPrice) filters.price = { ...filters.price, [Op.gte]: parseFloat(minPrice) };
+    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
     
 
     const spots = await Spot.findAll({
-        // where: filters,
-        // limit: size,
-        // offset: (page - 1) * size,
+        where: filters,
+        limit: size,
+        offset: (page - 1) * size,
         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
     });
 
@@ -135,89 +135,23 @@ router.get('/', async (req, res) => {
 
     let response;
     ///if there are no page and size adjustments, return the spots with details without including page and size
-    // if (page === 1 && size === 20) {
-    //     response = {
-    //         Spots: spotsWithDetails,
-    //     };
-    // }
-    // else {
-    //     response = {
-    //         Spots: spotsWithDetails,
-    //         page: parseInt(page),
-    //         size: parseInt(size),
-    //     };
-    // }
+    if (page === 1 && size === 20) {
+        response = {
+            Spots: spotsWithDetails,
+        };
+    }
+    else {
+        response = {
+            Spots: spotsWithDetails,
+            page: parseInt(page),
+            size: parseInt(size),
+        };
+    }
     
-    response = {
-                Spots: spotsWithDetails,
-            };
     return res.status(200).json(response);    
 
 });
 
-// add query validations to get all spots
-router.get( '/',
-[
-    check('page').optional().isInt({ min: 1 }).withMessage('Page must be an integer greater than or equal to 1'),
-    check('size').optional().isInt({ min: 1, max: 20 }).withMessage('Size must be an integer between 1 and 20'),
-    check('minLat').optional().isFloat({ min: -90, max: 90 }).withMessage('minLat must be a valid latitude'),
-    check('maxLat').optional().isFloat({ min: -90, max: 90 }).withMessage('maxLat must be a valid latitude'),
-    check('minLng').optional().isFloat({ min: -180, max: 180 }).withMessage('minLng must be a valid longitude'),
-    check('maxLng').optional().isFloat({ min: -180, max: 180 }).withMessage('maxLng must be a valid longitude'),
-    check('minPrice').optional().isFloat({ min: 0 }).withMessage('minPrice must be greater than or equal to 0'),
-    check('maxPrice').optional().isFloat({ min: 0 }).withMessage('maxPrice must be greater than or equal to 0'),
-],
-async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
- // GET /api/spots - Return spots filtered by query parameters
- router.get('/', async (req, res) => {
-    try {
-        let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-
-        // Convert page and size to integers and apply default limits
-        page = parseInt(page);
-        size = parseInt(size);
-
-        // Limit the maximum page size
-        if (size > 20) size = 20;
-        if (page < 1) page = 1;
-
-        // Build query filters based on optional parameters
-        const filters = {};
-
-        if (minLat) filters.lat = { ...filters.lat, [Op.gte]: parseFloat(minLat) };
-        if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: parseFloat(maxLat) };
-
-        if (minLng) filters.lng = { ...filters.lng, [Op.gte]: parseFloat(minLng) };
-        if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: parseFloat(maxLng) };
-
-        if (minPrice) filters.price = { ...filters.price, [Op.gte]: parseFloat(minPrice) };
-        if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
-
-        // Fetch spots from the database with applied filters
-        const spots = await Spot.findAll({
-            where: filters,
-            limit: size,
-            offset: (page - 1) * size,
-            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
-        });
-
-        // Return spots data along with pagination info
-        return res.json({
-            Spots: spots,
-            page,
-            size,
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
-    }
-  });
-  }
-);
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
