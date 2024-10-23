@@ -198,7 +198,7 @@ async (req, res) => {
         if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
 
         // Fetch spots from the database with applied filters
-        const spots = await Spots.findAll({
+        const spots = await Spot.findAll({
             where: filters,
             limit: size,
             offset: (page - 1) * size,
