@@ -22,23 +22,64 @@ const validateQueryParams = (req, res, next) => {
     }
   
     // Validate optional filters
-    if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
-      errors.minLat = "Minimum latitude is invalid";
+    // if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
+    //   errors.minLat = "Minimum latitude is invalid";
+    // }
+    // if (maxLat && (isNaN(maxLat) || maxLat < -90 || maxLat > 90)) {
+    //   errors.maxLat = "Maximum latitude is invalid";
+    // }
+    // if (minLng && (isNaN(minLng) || minLng < -180 || minLng > 180)) {
+    //   errors.minLng = "Minimum longitude is invalid";
+    // }
+    // if (maxLng && (isNaN(maxLng) || maxLng < -180 || maxLng > 180)) {
+    //   errors.maxLng = "Maximum longitude is invalid";
+    // }
+    // if (minPrice && (isNaN(minPrice) || minPrice < 0)) {
+    //   errors.minPrice = "Minimum price must be greater than or equal to 0";
+    // }
+    // if (maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
+    //   errors.maxPrice = "Maximum price must be greater than or equal to 0";
+    // }
+    if (minLat !== undefined) {
+        const parsedMinLat = parseFloat(minLat);
+        if (isNaN(parsedMinLat) || parsedMinLat < -90 || parsedMinLat > 90) {
+            errors.minLat = "Minimum latitude is invalid";
+        }
     }
-    if (maxLat && (isNaN(maxLat) || maxLat < -90 || maxLat > 90)) {
-      errors.maxLat = "Maximum latitude is invalid";
+
+    if (maxLat !== undefined) {
+        const parsedMaxLat = parseFloat(maxLat);
+        if (isNaN(parsedMaxLat) || parsedMaxLat < -90 || parsedMaxLat > 90) {
+            errors.maxLat = "Maximum latitude is invalid";
+        }
     }
-    if (minLng && (isNaN(minLng) || minLng < -180 || minLng > 180)) {
-      errors.minLng = "Minimum longitude is invalid";
+
+    if (minLng !== undefined) {
+        const parsedMinLng = parseFloat(minLng);
+        if (isNaN(parsedMinLng) || parsedMinLng < -180 || parsedMinLng > 180) {
+            errors.minLng = "Minimum longitude is invalid";
+        }
     }
-    if (maxLng && (isNaN(maxLng) || maxLng < -180 || maxLng > 180)) {
-      errors.maxLng = "Maximum longitude is invalid";
+
+    if (maxLng !== undefined) {
+        const parsedMaxLng = parseFloat(maxLng);
+        if (isNaN(parsedMaxLng) || parsedMaxLng < -180 || parsedMaxLng > 180) {
+            errors.maxLng = "Maximum longitude is invalid";
+        }
     }
-    if (minPrice && (isNaN(minPrice) || minPrice < 0)) {
-      errors.minPrice = "Minimum price must be greater than or equal to 0";
+
+    if (minPrice !== undefined) {
+        const parsedMinPrice = parseFloat(minPrice);
+        if (isNaN(parsedMinPrice) || parsedMinPrice < 0) {
+            errors.minPrice = "Minimum price must be greater than or equal to 0";
+        }
     }
-    if (maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
-      errors.maxPrice = "Maximum price must be greater than or equal to 0";
+
+    if (maxPrice !== undefined) {
+        const parsedMaxPrice = parseFloat(maxPrice);
+        if (isNaN(parsedMaxPrice) || parsedMaxPrice < 0) {
+            errors.maxPrice = "Maximum price must be greater than or equal to 0";
+        }
     }
   
     if (Object.keys(errors).length) {
@@ -91,12 +132,12 @@ router.get('/', validateQueryParams, async (req, res) => {
     
 
     const filters = {};
-    if (!isNaN(minLat)) filters.lat = { [Op.gte]: minLat };
-    if (!isNaN(maxLat)) filters.lat = { ...filters.lat, [Op.lte]: maxLat };
-    if (!isNaN(minLng)) filters.lng = { [Op.gte]: minLng };
-    if (!isNaN(maxLng)) filters.lng = { ...filters.lng, [Op.lte]: maxLng };
-    if (!isNaN(minPrice)) filters.price = { [Op.gte]: minPrice };
-    if (!isNaN(maxPrice)) filters.price = { ...filters.price, [Op.lte]: maxPrice };
+    if (minLat) filters.lat = { [Op.gte]: minLat };
+    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: maxLat };
+    if (minLng) filters.lng = { [Op.gte]: minLng };
+    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: maxLng };
+    if (minPrice) filters.price = { [Op.gte]: minPrice };
+    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: maxPrice };
 
 
     const spots = await Spot.findAll({
