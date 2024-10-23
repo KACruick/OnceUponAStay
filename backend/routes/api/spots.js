@@ -103,13 +103,21 @@ router.get('/', validateQueryParams, async (req, res) => {
     size = parseInt(size);
 
     const filters = {};
-    if (minLat) filters.lat = { [Op.gte]: parseFloat(minLat) };
-    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: parseFloat(maxLat) };
-    if (minLng) filters.lng = { [Op.gte]: parseFloat(minLng) };
-    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: parseFloat(maxLng) };
-    if (minPrice) filters.price = { [Op.gte]: parseFloat(minPrice) };
-    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
-
+    if (minLat) filters.lat = { [Op.gte]: minLat };
+    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: maxLat };
+    if(minLat || maxLat) {
+        parseFloat(filters.lat)
+    }
+    if (minLng) filters.lng = { [Op.gte]: minLng };
+    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: maxLng };
+    if(minLng || maxLng) {
+        parseFloat(filters.lng)
+    }
+    if (minPrice) filters.price = { [Op.gte]: minPrice };
+    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: maxPrice };
+    if (minPrice || maxPrice) {
+        parseFloat(filters.lng)
+    }
 
     const spots = await Spot.findAll({
         where: filters,
