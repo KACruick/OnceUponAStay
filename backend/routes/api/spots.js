@@ -4,7 +4,7 @@ const router = express.Router();
 const { User, Spot, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 const { check, validationResult } = require('express-validator');
-
+const { Op } = require('sequelize');
 
 // Middleware for validating query parameters
 const validateQueryParams = (req, res, next) => {
