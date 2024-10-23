@@ -158,7 +158,7 @@ router.get('/current', requireAuth, async (req, res) => {
           };
         })
     );
-    return res.json({ spotsWithDetails });
+    return res.json({ Spots: spotsWithDetails });
 })
 
 //helper function for calculating average rating and numReviews for get details of a spot from id 
@@ -211,9 +211,8 @@ router.get('/:spotId', async (req, res) => {
         })
     }
     //needs num of reviews and avg rating
-    console.log("spot: ", spot.toJSON())
     let final = calculateExtraDetails(spot.toJSON())
-    return res.json({ spot: final });
+    return res.json({ final });
 })
 
 // Create a Spot
