@@ -43,7 +43,16 @@ const validateQueryParams = (req, res, next) => {
     }
   
     if (Object.keys(errors).length) {
-      return res.status(400).json({ message: "Bad Request", errors });
+      return res.status(400).json({ message: "Bad Request", errors: {
+        page: "Page must be greater than or equal to 1",
+        size: "Size must be between 1 and 20",
+        maxLat: "Maximum latitude is invalid",
+        minLat: "Minimum latitude is invalid",
+        minLng: "Minimum longitude is invalid",
+        maxLng: "Maximum longitude is invalid",
+        minPrice: "Minimum price must be greater than or equal to 0",
+        maxPrice: "Maximum price must be greater than or equal to 0"
+        } });
     }
   
     // Set validated query parameters
