@@ -123,6 +123,9 @@ router.get('/', validateQueryParams, async (req, res) => {
     //create an array of promises to fetch the average rating and preview image for each spot
     const spotsWithDetails = await Promise.all(
         spots.map(async (spot) => {
+            spot.lat = parseFloat(spot.lat);
+            spot.lng = parseFloat(spot.lng);
+            spot.price = parseFloat(spot.price);
           const avgStarRating = await calculateAvgStarRating(spot.id);
           const previewImage = await getPreviewImage(spot.id);
           return {
