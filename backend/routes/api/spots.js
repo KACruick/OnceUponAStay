@@ -483,7 +483,7 @@ router.post('/:id/reviews', requireAuth, async (req, res) => {
         stars
     });
 
-    return res.json(newReview);
+    return res.status(201).json(newReview);
 })
 
 

@@ -77,7 +77,7 @@ router.post('/:id/images', requireAuth, async (req, res) => {
     //check if review exists
     if (!review) {
         return res.status(404).json({
-            message: "Review not found"
+            message: "Review couldn't be found"
         })
     }
     //check if owner of review 
@@ -156,6 +156,13 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 // Delete a Review
 router.delete('/:id', requireAuth, async (req, res) => {
     const review = await Review.findByPk(req.params.id);
+
+    //check if owner of review
+    if (review.userId !== req.user.id) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    }
 
     if (!review) {
         return res.status(404).json({
