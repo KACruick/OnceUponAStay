@@ -158,7 +158,7 @@ router.get('/current', requireAuth, async (req, res) => {
           };
         })
     );
-    return res.json({ spots: spotsWithDetails });
+    return res.json({ spotsWithDetails });
 })
 
 //helper function for calculating average rating and numReviews for get details of a spot from id 
@@ -394,7 +394,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
         })
     }
     await spot.destroy();
-    return res.json({message: "successfully deleted the spot"});
+    return res.json({message: "Successfully deleted"});
 })
 
 // Get all Reviews by a Spot's id
