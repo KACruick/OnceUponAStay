@@ -99,14 +99,16 @@ const getPreviewImage = async (spotId) => {
 router.get('/', validateQueryParams, async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     
+    page = parseInt(page);
+    size = parseInt(size);
 
     const filters = {};
-    if (minLat) filters.lat = { [Op.gte]: minLat };
-    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: maxLat };
-    if (minLng) filters.lng = { [Op.gte]: minLng };
-    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: maxLng };
-    if (minPrice) filters.price = { [Op.gte]: minPrice };
-    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: maxPrice };
+    if (minLat) filters.lat = { [Op.gte]: parseFloat(minLat) };
+    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: parseFloat(maxLat) };
+    if (minLng) filters.lng = { [Op.gte]: parseFloat(minLng) };
+    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: parseFloat(maxLng) };
+    if (minPrice) filters.price = { [Op.gte]: parseFloat(minPrice) };
+    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
 
 
     const spots = await Spot.findAll({
