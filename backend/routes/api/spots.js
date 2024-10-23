@@ -153,7 +153,7 @@ router.get('/current', requireAuth, async (req, res) => {
           const previewImage = await getPreviewImage(spot.id);
           return {
             ...spot.toJSON(),
-            avgStarRating,
+            avgRating,
             previewImage,
           };
         })
@@ -174,10 +174,10 @@ function calculateExtraDetails(spot){
 
     if (reviewCount > 0) {
         spot.numReviews = reviewCount;
-        spot.avgStarRating = parseFloat((totalStars / reviewCount).toFixed(1));
+        spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
 
     } else {
-        spot.avgStarRating = "no reviews yet";
+        spot.avgRating = "no reviews yet";
         spot.numReviews = 0;
     }
     delete spot.Reviews; 
