@@ -88,6 +88,14 @@ const getPreviewImage = async (spotId) => {
 
 router.get('/', validateQueryParams, async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    
+    // Parse latitudes and ensure they are numbers
+    minLat = minLat ? parseFloat(minLat) : undefined;
+    maxLat = maxLat ? parseFloat(maxLat) : undefined;
+    minLng = minLng ? parseFloat(minLng) : undefined;
+    maxLng = maxLng ? parseFloat(maxLng) : undefined;
+    minPrice = minPrice ? parseFloat(minPrice) : undefined;
+    maxPrice = maxPrice ? parseFloat(maxPrice) : undefined;
 
     const filters = {};
     if (minLat) filters.lat = { [Op.gte]: minLat };
