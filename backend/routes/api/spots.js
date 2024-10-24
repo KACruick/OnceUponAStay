@@ -13,7 +13,8 @@ const validateQueryParams = (req, res, next) => {
     
   
     // Validate page
-    if (isNaN(page)) {
+    // console.log("page: ", page);
+    if (page !== undefined && isNaN(page)) {
         errors.page = "Page must be greater than or equal to 1";
     }
     if (page < 1) {
@@ -21,10 +22,10 @@ const validateQueryParams = (req, res, next) => {
     }
     
     // Validate size
-    if (isNaN(size)) {
+    if (size !== undefined && isNaN(size)) {
         errors.size = "Size must be between 1 and 20";
     }
-    if (size < 1 || size > 20) {
+    if (size && size < 1 || size > 20) {
         errors.size = "Size must be between 1 and 20";
     }
   
@@ -103,21 +104,24 @@ const getPreviewImage = async (spotId) => {
 };
 
 router.get('/', validateQueryParams, async (req, res) => {
-    let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-    
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    console.log("page: ", page);
+    console.log("size: ", size);
+
+    if (isNaN(page)) {
+        page = 1;
+    }   
+    if (isNaN(size)) {
+        size = 20;
+    }
+    console.log("page: ", page);
+    console.log("size: ", size);
+
     page = parseInt(page);
     size = parseInt(size);
    
     if (size > 20) size = 20;
     if (page < 1) page = 1;
-
-
-    if (page == null) {
-
-    }   
-    if (size == null) {
-
-    }
 
     const filters = {};
     if (minLat) filters.lat = { ...filters.lat, [Op.gte]: parseFloat(minLat) };
