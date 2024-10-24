@@ -8,6 +8,17 @@ const { check } = require("express-validator");
 
 //add validation functions? 
 
+
+// Helper function to retrieve preview image URL
+const getPreviewImage = async (spotId) => {
+    const image = await SpotImage.findOne({ where: { spotId } });
+    if (image) {
+      return image.url;
+    } else {
+      return 'No preview image available'; // Return null if no preview image is found
+    }
+};
+
 // Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res) => {
     const currentUser = req.user.id;
@@ -15,7 +26,7 @@ router.get('/current', requireAuth, async (req, res) => {
     const bookings = await Booking.findAll({
         where: { userId: currentUser },
       include: {
-        model: Spot, // Include the Spot model to get spot details
+        model: Spot,
         attributes: [
           "id",
           "ownerId",
@@ -27,13 +38,35 @@ router.get('/current', requireAuth, async (req, res) => {
           "lng",
           "name",
           "price",
-          //"previewImage",
         ],
         
       },
     });
-    return res.status(200).json({ Bookings: bookings });
-  
+
+    if (!bookings.length) {
+        return res.status(200).json({
+            message: "No bookings yet"
+        })
+    }
+
+    bookingsWithDetails = await Promise.all(
+        bookings.map(async (booking) => {
+            const spot = booking.Spot;
+            const previewImage = await getPreviewImage(spot.id);
+
+            return {
+                ...booking.toJSON(),
+                Spot: {
+                    ...spot.toJSON(),
+                    previewImage
+                }
+            }
+            
+        })
+    )
+    
+
+    return res.status(200).json({ Bookings: bookingsWithDetails });
 })
 
 

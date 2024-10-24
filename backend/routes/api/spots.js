@@ -4,21 +4,29 @@ const router = express.Router();
 const { User, Spot, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 const { check, validationResult } = require('express-validator');
-
+const { Op } = require('sequelize');
 
 // Middleware for validating query parameters
 const validateQueryParams = (req, res, next) => {
-    const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     const errors = {};
+    const { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    
   
     // Validate page
-    if (page < 1) {
-      errors.page = "Page must be greater than or equal to 1";
+    // console.log("page: ", page);
+    if (page !== undefined && isNaN(page)) {
+        errors.page = "Page must be greater than or equal to 1";
     }
-  
+    if (page < 1) {
+        errors.page = "Page must be greater than or equal to 1";
+    }
+    
     // Validate size
+    if (size !== undefined && isNaN(size)) {
+        errors.size = "Size must be between 1 and 20";
+    }
     if (size < 1 || size > 20) {
-      errors.size = "Size must be between 1 and 20";
+        errors.size = "Size must be between 1 and 20";
     }
   
     // Validate optional filters
@@ -42,7 +50,16 @@ const validateQueryParams = (req, res, next) => {
     }
   
     if (Object.keys(errors).length) {
-      return res.status(400).json({ message: "Bad Request", errors });
+      return res.status(400).json({ message: "Bad Request", errors: {
+        page: "Page must be greater than or equal to 1",
+        size: "Size must be between 1 and 20",
+        maxLat: "Maximum latitude is invalid",
+        minLat: "Minimum latitude is invalid",
+        minLng: "Minimum longitude is invalid",
+        maxLng: "Maximum longitude is invalid",
+        minPrice: "Minimum price must be greater than or equal to 0",
+        maxPrice: "Maximum price must be greater than or equal to 0"
+        } });
     }
   
     // Set validated query parameters
@@ -88,89 +105,71 @@ const getPreviewImage = async (spotId) => {
 
 router.get('/', validateQueryParams, async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    // console.log("page: ", page);
+    // console.log("size: ", size);
+
+    if (isNaN(page)) {
+        page = 1;
+    }   
+    if (isNaN(size)) {
+        size = 20;
+    }
+    // console.log("page: ", page);
+    // console.log("size: ", size);
+
+    page = parseInt(page);
+    size = parseInt(size);
+   
+    if (size > 20) size = 20;
+    if (page < 1) page = 1;
 
     const filters = {};
-    if (minLat) filters.lat = { [Op.gte]: minLat };
-    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: maxLat };
-    if (minLng) filters.lng = { [Op.gte]: minLng };
-    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: maxLng };
-    if (minPrice) filters.price = { [Op.gte]: minPrice };
-    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: maxPrice };
+    if (minLat) filters.lat = { ...filters.lat, [Op.gte]: parseFloat(minLat) };
+    if (maxLat) filters.lat = { ...filters.lat, [Op.lte]: parseFloat(maxLat) };
 
+    if (minLng) filters.lng = { ...filters.lng, [Op.gte]: parseFloat(minLng) };
+    if (maxLng) filters.lng = { ...filters.lng, [Op.lte]: parseFloat(maxLng) };
+
+    if (minPrice) filters.price = { ...filters.price, [Op.gte]: parseFloat(minPrice) };
+    if (maxPrice) filters.price = { ...filters.price, [Op.lte]: parseFloat(maxPrice) };
+    
 
     const spots = await Spot.findAll({
         where: filters,
         limit: size,
         offset: (page - 1) * size,
-        
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
     });
 
     //create an array of promises to fetch the average rating and preview image for each spot
     const spotsWithDetails = await Promise.all(
         spots.map(async (spot) => {
-          const avgStarRating = await calculateAvgStarRating(spot.id);
+            spot.lat = parseFloat(spot.lat);
+            spot.lng = parseFloat(spot.lng);
+            spot.price = parseFloat(spot.price);
+          const avgRating = await calculateAvgStarRating(spot.id);
           const previewImage = await getPreviewImage(spot.id);
           return {
             ...spot.toJSON(),
-            avgStarRating,
+            avgRating,
             previewImage,
           };
         })
     );
 
-    let response;
-    ///if there are no page and size adjustments, return the spots with details without including page and size
-    if (page === 1 && size === 20) {
-        response = {
-            Spots: spotsWithDetails,
-        };
-    }
-    else {
-        response = {
+
+
+        const response = {
             Spots: spotsWithDetails,
             page: parseInt(page),
             size: parseInt(size),
         };
-    }
-
+   
+    
     return res.status(200).json(response);    
 
 });
 
-//OLD - replace if time
-//helper function for calculating average rating and preview image from array for get all spots
-function finalSpots(spotsArray){
-    const final = spotsArray.map((spot) => {
-        // Calculate average rating
-        let totalStars = 0;
-        let reviewCount = 0;
-        spot.Reviews.forEach((review) => {
-            totalStars += review.stars;
-            reviewCount++;
-        });
-  
-        if (reviewCount > 0) {
-            spot.avgRating = parseFloat((totalStars / reviewCount).toFixed(1));
-        } else {
-            spot.avgRating = null;
-        }
-        delete spot.Reviews; 
-  
-        // Calculate preview image
-        spot.SpotImages.forEach((image) => {
-            if (image.preview === true) {
-                spot.previewImage = image.url;
-            }
-        });
-        if (!spot.previewImage) {
-            spot.previewImage = 'No preview image available';
-        }
-        delete spot.SpotImages; 
-  
-        return spot;
-      })
-      return final;
-}
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res) => {
@@ -182,16 +181,16 @@ router.get('/current', requireAuth, async (req, res) => {
     //create an array of promises to fetch the average rating and preview image for each spot
     const spotsWithDetails = await Promise.all(
         spots.map(async (spot) => {
-          const avgStarRating = await calculateAvgStarRating(spot.id);
+          const avgRating = await calculateAvgStarRating(spot.id);
           const previewImage = await getPreviewImage(spot.id);
           return {
             ...spot.toJSON(),
-            avgStarRating,
+            avgRating,
             previewImage,
           };
         })
     );
-    return res.json({ spots: spotsWithDetails });
+    return res.json({ Spots: spotsWithDetails });
 })
 
 //helper function for calculating average rating and numReviews for get details of a spot from id 
@@ -210,7 +209,8 @@ function calculateExtraDetails(spot){
         spot.avgStarRating = parseFloat((totalStars / reviewCount).toFixed(1));
 
     } else {
-        spot.avgStarRating = null;
+        spot.avgStarRating = "no reviews yet";
+        spot.numReviews = 0;
     }
     delete spot.Reviews; 
     return spot;
@@ -243,9 +243,8 @@ router.get('/:spotId', async (req, res) => {
         })
     }
     //needs num of reviews and avg rating
-    console.log("spot: ", spot.toJSON())
     let final = calculateExtraDetails(spot.toJSON())
-    return res.json({ spot: final });
+    return res.json(final);
 })
 
 // Create a Spot
@@ -426,7 +425,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
         })
     }
     await spot.destroy();
-    return res.json({message: "successfully deleted the spot"});
+    return res.json({message: "Successfully deleted"});
 })
 
 // Get all Reviews by a Spot's id
@@ -515,7 +514,7 @@ router.post('/:id/reviews', requireAuth, async (req, res) => {
         stars
     });
 
-    return res.json(newReview);
+    return res.status(201).json(newReview);
 })
 
 
