@@ -9,16 +9,17 @@ const { Op } = require('sequelize');
 // Middleware for validating query parameters
 const validateQueryParams = (req, res, next) => {
     const errors = {};
-    const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    const { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     
   
     // Validate page
-    if (page < 1) {
+    
+    if (isNaN(page) || page < 1) {
       errors.page = "Page must be greater than or equal to 1";
     }
   
     // Validate size
-    if (size < 1 || size > 20) {
+    if (isNaN(size) || size < 1 || size > 20) {
       errors.size = "Size must be between 1 and 20";
     }
   
@@ -101,6 +102,13 @@ router.get('/', validateQueryParams, async (req, res) => {
     
     page = parseInt(page);
     size = parseInt(size);
+
+    if (page == null) {
+
+    }   
+    if (size == null) {
+
+    }
 
     const filters = {};
     if (minLat) filters.lat = { ...filters.lat, [Op.gte]: parseFloat(minLat) };
