@@ -13,20 +13,20 @@ const validateQueryParams = (req, res, next) => {
     
   
     // Validate page
-    if (page && isNaN(page)) {
-        errors.page = "Page must be a number";
-      }
-      if (page && page < 1) {
+    if (isNaN(page)) {
         errors.page = "Page must be greater than or equal to 1";
-      }
+    }
+    if (page < 1) {
+        errors.page = "Page must be greater than or equal to 1";
+    }
     
-      // Validate size
-      if (size && isNaN(size)) {
-        errors.size = "Size must be a number";
-      }
-      if (size && size < 1 || size > 20) {
+    // Validate size
+    if (isNaN(size)) {
         errors.size = "Size must be between 1 and 20";
-      }
+    }
+    if (size < 1 || size > 20) {
+        errors.size = "Size must be between 1 and 20";
+    }
   
     // Validate optional filters
     if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
@@ -103,10 +103,14 @@ const getPreviewImage = async (spotId) => {
 };
 
 router.get('/', validateQueryParams, async (req, res) => {
-    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     
     page = parseInt(page);
     size = parseInt(size);
+   
+    if (size > 20) size = 20;
+    if (page < 1) page = 1;
+
 
     if (page == null) {
 
