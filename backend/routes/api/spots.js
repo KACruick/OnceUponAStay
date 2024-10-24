@@ -13,15 +13,20 @@ const validateQueryParams = (req, res, next) => {
     
   
     // Validate page
+    if (page && isNaN(page)) {
+        errors.page = "Page must be a number";
+      }
+      if (page && page < 1) {
+        errors.page = "Page must be greater than or equal to 1";
+      }
     
-    if (isNaN(page) || page < 1) {
-      errors.page = "Page must be greater than or equal to 1";
-    }
-  
-    // Validate size
-    if (isNaN(size) || size < 1 || size > 20) {
-      errors.size = "Size must be between 1 and 20";
-    }
+      // Validate size
+      if (size && isNaN(size)) {
+        errors.size = "Size must be a number";
+      }
+      if (size && size < 1 || size > 20) {
+        errors.size = "Size must be between 1 and 20";
+      }
   
     // Validate optional filters
     if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
