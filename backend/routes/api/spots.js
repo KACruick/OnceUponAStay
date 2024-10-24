@@ -25,7 +25,7 @@ const validateQueryParams = (req, res, next) => {
     if (size !== undefined && isNaN(size)) {
         errors.size = "Size must be between 1 and 20";
     }
-    if (size && size < 1 || size > 20) {
+    if (size < 1 || size > 20) {
         errors.size = "Size must be between 1 and 20";
     }
   
@@ -105,8 +105,8 @@ const getPreviewImage = async (spotId) => {
 
 router.get('/', validateQueryParams, async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-    console.log("page: ", page);
-    console.log("size: ", size);
+    // console.log("page: ", page);
+    // console.log("size: ", size);
 
     if (isNaN(page)) {
         page = 1;
@@ -114,8 +114,8 @@ router.get('/', validateQueryParams, async (req, res) => {
     if (isNaN(size)) {
         size = 20;
     }
-    console.log("page: ", page);
-    console.log("size: ", size);
+    // console.log("page: ", page);
+    // console.log("size: ", size);
 
     page = parseInt(page);
     size = parseInt(size);
@@ -157,20 +157,14 @@ router.get('/', validateQueryParams, async (req, res) => {
         })
     );
 
-    let response;
-    ///if there are no page and size adjustments, return the spots with details without including page and size
-    if (page === 1 && size === 20) {
-        response = {
-            Spots: spotsWithDetails,
-        };
-    }
-    else {
-        response = {
+
+
+        const response = {
             Spots: spotsWithDetails,
             page: parseInt(page),
             size: parseInt(size),
         };
-    }
+   
     
     return res.status(200).json(response);    
 
