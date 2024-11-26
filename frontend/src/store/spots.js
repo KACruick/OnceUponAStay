@@ -1,3 +1,4 @@
+
 import { csrfFetch } from "./csrf";
 
 // actions
@@ -15,9 +16,14 @@ const getSpotsAction = (spots) => {
 
 // thunks
 export const getSpots = () => async (dispatch) => {
-    const res = await csrfFetch("/api/spots");
-    const data = await res.json();
-    return dispatch(getSpotsAction(data));
+    const response = await csrfFetch("/api/spots");
+    
+    if (response.ok) {
+        const data = await response.json();
+        console.log('API response:', data)
+        console.log("key into 1 spot", data.Spots[0])
+        return dispatch(getSpotsAction(data.Spots));
+    }
 };
 
 
@@ -31,7 +37,7 @@ const initialState = {
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
       case GET_SPOTS:
-        return { ...state, allSpots: [...action.payload.Spots] };
+        return { ...state, allSpots: action.payload };
     default:
         return state;
     }

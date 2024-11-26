@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;     
+    gap: 20px;             
+    justify-content: space-between; 
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+}   
+
+.spot-tile {
+    flex: 1 1 calc(25% - 20px); /* Make each spot card take up 1/4 of the container minus the gap */
+    box-sizing: border-box;   
+    background-color: white;    
+    overflow: hidden;    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 310px;
+}
+  
+.spot-image-container img {
+    width: 100%; 
+    height: auto;  
+}
+  
+.spot-tile-info {
+    padding: 16px;  
+    display: flex;
+    flex-direction: column;
+}
+  
+.spot-tile-location {
+    font-size: 1rem;  
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;   
+}
+  
+.spot-tile-rating {
+    font-weight: bold;
+    margin-left: 8px; 
+}
+  
+.spot-tile-price {
+    font-size: 16px;      
+    font-weight: bold;
+       
+}
+
+@media (max-width: 768px) {
+    .spot-tile {
+      flex: 1 1 calc(50% - 20px);  /* Make each tile take up 50% of the container width on medium screens */
+    }
+}
+  
+@media (max-width: 480px) {
+    .spot-tile {
+     flex: 1 1 calc(100% - 20px);  /* Make each tile take up 100% of the container width on mobile screens */
+    } 
+} 

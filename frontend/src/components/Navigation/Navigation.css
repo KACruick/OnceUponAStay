@@ -1,5 +1,10 @@
 nav {
     display: flex;
     justify-content: space-between;
+    border-bottom: grey 2px solid;
+    height: 80px;
 }
 
+.profile-button{
+    height: 50px;
+}

@@ -8,28 +8,34 @@ function LandingPage() {
     const spots = useSelector((state) => state.spots.allSpots);
   
     useEffect(() => {
-      dispatch(getSpots());
+      dispatch(getSpots()); // uses getSpots thunk action
     }, [dispatch]);
 
+
     return (
+        <>
+
         <section className="container">
           {spots.map((spot) => (
-            <div className="spot-card" key={spot.id}>
-              <div className="spot-image-card-container">
+            <div className="spot-tile" key={spot.id}>
+              <div className="spot-image-container">
                 <img src={spot.previewImage} alt={spot.name} />
               </div>
               <div>
-                <div className="spot-card-info">
-                  <p className="spot-card-location">
+                <div className="spot-tile-info">
+                   
+                  <p className="spot-tile-location">
                     {spot.city}, {spot.state}
-                    <span className="spot-card-rating">{spot.avgRating}</span>
+                    <span className="spot-tile-rating">{spot.avgRating}</span>
                   </p>
-                  <p className="spot-card-price">${spot.price}</p>
+                
+                  <p className="spot-tile-price">${spot.price}</p>
                 </div>
               </div>
             </div>
           ))}
         </section>
+        </>
       );
     }
 

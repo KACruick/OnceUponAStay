@@ -6,6 +6,7 @@ import LoginFormModal from './components/LoginFormModal/LoginFormModal.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
 import * as sessionActions from './store/session.js';
 import LandingPage from './components/LandingPage/Landing.jsx';
+import { getSpots } from "./store/spots";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ function Layout() {
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true)
+      dispatch(getSpots());
+      setIsLoaded(true);
     });
   }, [dispatch]);
 
