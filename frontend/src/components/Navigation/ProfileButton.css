@@ -1,0 +1,49 @@
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 40px; /* Adjust for spacing below the button */
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    list-style: none;
+    padding: 10px 0;
+    width: 200px;
+    z-index: 1000;
+  }
+  
+  .profile-dropdown li {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .profile-dropdown li:hover {
+    background: #f6f6f6; /* Subtle hover effect */
+  }
+  
+  .profile-dropdown.hidden {
+    display: none; /* Hide dropdown when menu is not visible */
+  }
+  
+  .profile-button {
+    display: flex;
+    justify-content: space-around;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .menu {
+    margin: 5px;
+    color: #c15c6e
+  }
+
+  .user {
+    margin: 5px;
+    color: #c15c6e
+  }
+
+  .profile-button:hover {
+    color: #555;
+  }

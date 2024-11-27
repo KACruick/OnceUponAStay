@@ -2,9 +2,23 @@ nav {
     display: flex;
     justify-content: space-between;
     border-bottom: grey 2px solid;
-    height: 80px;
+    height: 70px;
+    align-items: center;
 }
 
-.profile-button{
-    height: 50px;
+.icon {
+    display: flex;
+    align-items: center;
+    text-decoration: none;  /* why isn't this working?? :(  */
+    color: #c15c6e;
 }
+
+.house {
+    color: #c15c6e;
+}
+
+.title{
+    margin: 5px;
+    color: #c15c6e;
+}
+

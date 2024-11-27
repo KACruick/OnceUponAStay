@@ -7,6 +7,7 @@ import Navigation from './components/Navigation/Navigation.jsx';
 import * as sessionActions from './store/session.js';
 import LandingPage from './components/LandingPage/Landing.jsx';
 import { getSpots } from "./store/spots";
+import BottomNav from './components/Navigation/BottomNav.jsx';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -23,7 +24,9 @@ function Layout() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
+      <BottomNav />
     </>
+    
   )
 }
 
