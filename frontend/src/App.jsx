@@ -8,6 +8,7 @@ import * as sessionActions from './store/session.js';
 import LandingPage from './components/LandingPage/Landing.jsx';
 import { getSpots } from "./store/spots";
 import BottomNav from './components/Navigation/BottomNav.jsx';
+import SpotPage from './components/SpotPage/SpotPage.jsx';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -46,6 +47,15 @@ const router = createBrowserRouter([
         path: 'signup',
         element: <SignupFormModal />
       },
+      {
+        path: "/api/spots/:spotId",
+        element: <SpotPage /> // prop? spot={spot}
+      },
+      {
+        path: '*',
+        element: <h1>Page Not Found</h1>
+      }
+
     ]
   }
 ]);

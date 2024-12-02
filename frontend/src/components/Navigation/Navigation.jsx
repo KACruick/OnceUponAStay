@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
       <nav>
         <div className='icon'>
           <NavLink to="/" className="home"> <GiMushroomHouse size={40} color='#c15c6e' /></NavLink>
-          <NavLink to="/" className="title">Catchy Title</NavLink>
+          <NavLink to="/" className="title">Once Upon A Stay</NavLink>
         </div>
         
         <div className='profile-button'>
