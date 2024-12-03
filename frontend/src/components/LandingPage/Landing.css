@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -10,14 +16,14 @@
   .spot-tile-link {
     display: block;
     text-decoration: none;
-    color: inherit; /* Ensures the text inside the link inherits parent styles */
+    color: inherit;
   }
   
   .spot-tile {
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    width: 300px; /* Set consistent width */
+    width: 300px;
     transition: box-shadow 0.3s;
     cursor: pointer;
   }
@@ -25,7 +31,7 @@
   .spot-tile:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   .spot-image-container img {
     width: 100%;
     height: 200px;
@@ -46,12 +52,18 @@
   }
   
   .spot-tile-rating {
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-left: 8px;
   }
   
+  .price-night{
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+  }
+
   .spot-tile-price {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
   }
 

@@ -10,6 +10,7 @@ import { getSpots } from "./store/spots";
 import BottomNav from './components/Navigation/BottomNav.jsx';
 import SpotPage from './components/SpotPage/SpotPage.jsx';
 
+
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
