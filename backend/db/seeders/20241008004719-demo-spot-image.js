@@ -11,6 +11,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'SpotImages';
     await queryInterface.bulkInsert(options, [
+      //spot 1
       {
         spotId: 1,
         url: "https://placehold.co/600x400/ffcc00/png",
@@ -19,7 +20,72 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        spotId: 1,
+        url: "https://placehold.co/600x400/ffcc00/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 1,
+        url: "https://placehold.co/600x400/ffcc00/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 1,
+        url: "https://placehold.co/600x400/ffcc00/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 1,
+        url: "https://placehold.co/600x400/ffcc00/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 2
+      {
         spotId: 2,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 2,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 2,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 2,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 2,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 3
+      {
+        spotId: 3,
         url: "https://placehold.co/600x400/00ccff/png",
         preview: true,
         createdAt: new Date(),
@@ -33,7 +99,65 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        spotId: 3,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 3,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 3,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 4
+      {
         spotId: 4,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 4,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 4,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 4,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 4,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 5
+      {
+        spotId: 5,
         url: "https://placehold.co/600x400/00ccff/png",
         preview: true,
         createdAt: new Date(),
@@ -47,7 +171,65 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        spotId: 5,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 5,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 5,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 6
+      {
         spotId: 6,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 6,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 6,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 6,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 6,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      //spot 7
+      {
+        spotId: 7,
         url: "https://placehold.co/600x400/00ccff/png",
         preview: true,
         createdAt: new Date(),
@@ -61,7 +243,37 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        spotId: 7,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 7,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 7,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 8
+      {
         spotId: 8,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 9
+      {
+        spotId: 9,
         url: "https://placehold.co/600x400/00ccff/png",
         preview: true,
         createdAt: new Date(),
@@ -69,6 +281,56 @@ module.exports = {
       },
       {
         spotId: 9,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 9,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 9,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 9,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      // spot 10
+      {
+        spotId: 10,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 10,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 10,
+        url: "https://placehold.co/600x400/00ccff/png",
+        preview: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        spotId: 10,
         url: "https://placehold.co/600x400/00ccff/png",
         preview: true,
         createdAt: new Date(),
