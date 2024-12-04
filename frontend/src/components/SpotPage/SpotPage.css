@@ -1,0 +1,71 @@
+.name-location {
+    margin: 20px;
+
+}
+
+.name {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: large;
+}
+
+.location {
+    font-size: small;
+}
+
+.img-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    border: 2px solid black;
+}
+
+.main-img {
+    width: 50%;
+}
+
+.others {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 10px; 
+    width: 50%
+}
+
+.img {
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+}
+
+.img img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;    
+}
+
+.owner {
+    margin: 15px;
+    font-size: larger;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.reserve-container {
+    border: 2px solid black;
+    border-radius: 8px;;
+    display: flex;
+    flex-direction: row;
+    width: 315px;
+    height: 100px;
+}
+
+.reserve-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.reserve-button {
+    background-color: red;
+}

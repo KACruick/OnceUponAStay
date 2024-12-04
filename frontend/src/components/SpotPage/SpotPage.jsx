@@ -45,23 +45,30 @@ function SpotPage() {
     <div className='spot-page-container'>
 
         <div className='spot-details-container'>
-            <h1>Spot Page</h1>
-            <div className='name'>{spot.name}</div>
-            <div className='location'>{spot.city}, {spot.state}, {spot.country}</div>
+            {/* <h1>Spot Page</h1> */}
+            <div className='name-location'>
+                <div className='name'>{spot.name}</div>
+                <div className='location'>{spot.city}, {spot.state}, {spot.country}</div>
+            </div>
             <div className='img-container'>
-                <div className='main-img'> </div>
-                <div className='other-img'> </div>
+                <div className='main-img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} main image`}/> </div>
+                <div className='others'>
+                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
+                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
+                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
+                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
+                </div>
             </div>
             <div className='owner'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
             <div className='description'>{spot.description}</div>
             <div className='reserve-container'>
-                <div className='reserve-box'>
+                <div className='reserve-info'>
                     <div className='price'>${spot.price}</div>
                     <div className='rating'><IoMdStar /> {spot.avgStarRating}</div>
                     <div className='num-reviews'>{spot.numReviews} reviews</div>
                 </div>
-                <div className='reserve-button'>
-                    <button>Reserve</button>
+                <div>
+                    <button className='reserve-button'>Reserve</button>
                 </div>
             </div>
         </div>
@@ -103,7 +110,3 @@ function SpotPage() {
 }
 
 export default SpotPage
-//<div className='main-img'>  <img src={mainImg(spot)} alt={spot.name} /> </div>
-//<div className='other-img'> {otherImg(spot).map((img) => (<img key={img.id} src={img.url} alt={`${spot.name} additional pictures`} />))} </div>
-
-//<h3><IoMdStar /> {spot.avgStarRating}  {spot.numReviews} reviews  </h3>

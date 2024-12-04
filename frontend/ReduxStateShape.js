@@ -1,6 +1,15 @@
 //  Create a .js file that has a mock up of your normalized Redux store
 
 const mockReduxStore = {
+    session: {
+        user: {
+          id: 1,
+          firstName: "user1first",
+          lastName: "user1last",
+          email: "user1@user.io",
+          username: "FakeUser1"
+        }
+    },
     spots: {
       allSpots: {
         1: { id: 1, name: "Cozy Cottage", city: "Anytown", avgStarRating: 4.5, price: 100 },
@@ -35,14 +44,6 @@ const mockReduxStore = {
         ]
       }
     },
-    session: {
-      user: {
-        id: 1,
-        firstName: "user1first",
-        lastName: "user1last",
-        email: "user1@user.io",
-        username: "FakeUser1"
-      }
-    },
+    
 
 };
