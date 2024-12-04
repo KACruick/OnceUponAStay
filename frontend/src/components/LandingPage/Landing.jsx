@@ -19,7 +19,7 @@ function LandingPage() {
     return (
         <>
     <section className="container">
-        {spots.map((spot) => (
+        {Object.values(spots).map((spot) => ( 
             <Link to={`/api/spots/${spot.id}`} key={spot.id} className="spot-tile-link">
         <div className="spot-tile" key={spot.id} data-tooltip-id={`tooltip-${spot.id}`}>
             <div className="spot-image-container">

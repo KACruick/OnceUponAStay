@@ -50,7 +50,7 @@ function SpotPage() {
                 <div className='name'>{spot.name}</div>
                 <div className='location'>{spot.city}, {spot.state}, {spot.country}</div>
             </div>
-            <div className='img-container'>
+            {/* <div className='img-container'>
                 <div className='main-img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} main image`}/> </div>
                 <div className='others'>
                     <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
@@ -70,7 +70,7 @@ function SpotPage() {
                 <div>
                     <button className='reserve-button'>Reserve</button>
                 </div>
-            </div>
+            </div> */}
         </div>
 
         <div className='reviews-container'>

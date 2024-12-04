@@ -29,7 +29,13 @@ export const getSpots = () => async (dispatch) => {
         const data = await response.json();
         // console.log('API response:', data)
         // console.log("key into 1 spot", data.Spots[0])
-        return dispatch(getSpotsAction(data.Spots));
+
+        // Normalize spots into an object with spot IDs as keys
+        const normalizedSpots = data.Spots.reduce((acc, spot) => {
+            acc[spot.id] = spot;
+            return acc;
+        }, {});
+        dispatch(getSpotsAction(normalizedSpots));
     }
 };
 
@@ -43,7 +49,7 @@ export const getDetails = (spotId) => async (dispatch) => {
 
 // spots initial state
 const initialState = {
-    allSpots: [],
+    allSpots: {},
     spotDetails: {},
 };
 
@@ -52,7 +58,7 @@ const initialState = {
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOTS:
-            return { ...state, allSpots: action.payload };
+            return { ...state, allSpots: { ...action.payload } };
         case GET_SPOTS_DETAILS: {
             return { ...state, spotDetails: action.payload };
         }
