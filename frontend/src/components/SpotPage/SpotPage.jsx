@@ -5,7 +5,7 @@ import { getDetails } from '../../store/spots';
 import { fetchReviews } from '../../store/reviews';
 import './SpotPage.css';
 import { IoMdStar } from "react-icons/io";
-
+import { RxDotFilled } from "react-icons/rx";
 
 
 
@@ -50,7 +50,7 @@ function SpotPage() {
                 <div className='name'>{spot.name}</div>
                 <div className='location'>{spot.city}, {spot.state}, {spot.country}</div>
             </div>
-            {/* <div className='img-container'>
+            <div className='img-container'>
                 <div className='main-img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} main image`}/> </div>
                 <div className='others'>
                     <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
@@ -59,28 +59,36 @@ function SpotPage() {
                     <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
                 </div>
             </div>
-            <div className='owner'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
-            <div className='description'>{spot.description}</div>
-            <div className='reserve-container'>
-                <div className='reserve-info'>
-                    <div className='price'>${spot.price}</div>
-                    <div className='rating'><IoMdStar /> {spot.avgStarRating}</div>
-                    <div className='num-reviews'>{spot.numReviews} reviews</div>
+            <div className='under-pictures-container'>
+                <div className='spot-text'>
+                    <div className='owner'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
+                    <div className='description'>{spot.description}</div>
                 </div>
-                <div>
-                    <button className='reserve-button'>Reserve</button>
+
+                <div className='reserve-container'>
+                    <div className='reserve-info'>
+                        <div className='price'>${spot.price} night</div>
+                        <div className='rating'><IoMdStar /> {spot.avgStarRating}</div>
+                        <div className='num-reviews'>{spot.numReviews} reviews</div>
+                    </div>
+                    <div>
+                        <button className='reserve-button'>Reserve</button>
+                    </div>
                 </div>
-            </div> */}
+            </div>
         </div>
+
+    <hr></hr>
 
         <div className='reviews-container'>
  
             <div className='reviews-top'>
                 <h3><IoMdStar /> {spot.avgStarRating}</h3>
+                < RxDotFilled />
                 <h3>{spot.numReviews} reviews</h3>
             </div>
 
-            <h2>Reviews</h2>
+            {/* <h2>Reviews</h2> */}
             {reviews && reviews.length > 0 ? (
             reviews.map((review) => {
             const reviewDate = new Date(review.createdAt);

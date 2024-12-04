@@ -1,6 +1,6 @@
 .name-location {
-    margin: 20px;
-
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .name {
@@ -43,8 +43,20 @@
     object-fit: cover;    
 }
 
+.under-pictures-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.spot-text {
+    /* border: 1px solid black; */
+    width: 70%;
+}
+
 .owner {
-    margin: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     font-size: larger;
 }
 
@@ -56,16 +68,67 @@
     border: 2px solid black;
     border-radius: 8px;;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 315px;
-    height: 100px;
+    height: 90px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    justify-content: space-around;
+ 
 }
 
 .reserve-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+.price {
+    font-weight: bolder;
+    font-size: medium;
+}
+
+.rating, .num-reviews {
+    font-size: small;
 }
 
 .reserve-button {
-    background-color: red;
+    background-color: #c15c6e;
+    width: 275px;
+    margin-left: 20px;
+    height: 30px;
+}
+
+/* reviews section styling */
+
+hr {
+    border-top: grey 2px solid;
+}
+
+/* .reviews-container {
+     border: 2px solid black; 
+} */
+
+.reviews-top {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    /* border: 1px solid black; */
+    width: 200px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-card {
+    border: 2px solid grey;
+    border-radius: 8px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+   
+}
+
+.review-header {
+    display: flex;
+    flex-direction: column;
 }
