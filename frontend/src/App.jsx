@@ -9,7 +9,7 @@ import LandingPage from './components/LandingPage/Landing.jsx';
 import { getSpots } from "./store/spots";
 import BottomNav from './components/Navigation/BottomNav.jsx';
 import SpotPage from './components/SpotPage/SpotPage.jsx';
-
+import CreateSpot from './components/CreateSpot.jsx';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -50,7 +50,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/api/spots/:spotId",
-        element: <SpotPage /> // prop? spot={spot}
+        element: <SpotPage /> 
+      },
+      {
+        path: "/api/spots", 
+        element: < CreateSpot/>
       },
       {
         path: '*',

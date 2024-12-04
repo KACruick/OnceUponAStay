@@ -25,5 +25,22 @@ nav {
     font-family: "Montserrat Alternates", sans-serif;
     font-weight: 400;
     font-style: normal;
- }
+}
 
+.right-nav {
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid black; */
+    align-items: center;
+}
+
+.create-link {
+    color: #c15c6e;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.profile-button {
+    border: 1px solid #c15c6e;
+    border-radius: 25px;
+}

@@ -20,10 +20,19 @@ function Navigation({ isLoaded }) {
           <NavLink to="/" className="title">Once Upon A Stay</NavLink>
         </div>
         
-        <div className='profile-button'>
-          {isLoaded && (<ProfileButton user={sessionUser} />)}
-        </div>
+        <div className="right-nav">
+          <div className='new-spot-link'>
+            {sessionUser && (
+              <NavLink to="api/spots" className="create-link">
+                Create a New Spot
+              </NavLink>
+            )}
+          </div>
 
+          <div className='profile-button'>
+            {isLoaded && (<ProfileButton user={sessionUser} />)}
+          </div>
+        </div>
       </nav>
     </div>
   );
