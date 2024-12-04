@@ -2,7 +2,8 @@ import "./CreateSpot.css";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { csrfFetch } from '../../store/csrf';
+// import { csrfFetch } from '../../store/csrf';
+import { createSpot } from "../../store/spots";
 
 function CreateSpot() {
   const dispatch = useDispatch();
@@ -13,12 +14,19 @@ function CreateSpot() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [previewImage, setPreviewImage] = useState('');
+  const [otherImages, setOtherImages] = useState(["", "", "", ""]);
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [errors, setErrors] = useState([]);
+
+  const handleOtherImages = (index, value) => {
+    const updatedImages = [...otherImages];
+    updatedImages[index] = value;
+    setOtherImages(updatedImages);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,28 +37,26 @@ function CreateSpot() {
       city,
       state,
       country,
-      price,
+      price: parseFloat(price),
       description,
       previewImage,
-      latitude,
-      longitude,
+      latitude: latitude ? parseFloat(latitude) : null,
+      longitude: longitude ? parseFloat(longitude) : null,
+      SpotImages: [previewImage, ...otherImages.filter((url) => url)].map(
+        (url) => ({ url }) // only include valid image URLs
+      )
     };
 
-    const response = await csrfFetch('/api/spots', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newSpot),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      navigate(`/api/spots/${data.id}`); // Navigate to the newly created spot's page
-    } else {
-      const data = await response.json();
-      setErrors(data.errors || ['Something went wrong']);
+    try {
+      console.log("newSpot: ", newSpot)
+      const createdSpot = await dispatch(createSpot(newSpot));
+      navigate(`/spots/${createdSpot.id}`); // redirect to the new spot's page
+    } catch (error) {
+      setErrors(error.errors || ["Something went wrong."]);
     }
 
   }
+
 
   return (
     <div className="create-spot-container">
@@ -147,26 +153,14 @@ function CreateSpot() {
               onChange={(e) => setPreviewImage(e.target.value)}
               required
             />
-            <input
+            {otherImages.map((img, index) => (
+              <input
+              key={index}  
               type="text"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-            />
-            <input
-              type="text"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-            />
-            <input
-              type="text"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-            />
-            <input
-              type="text"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-            />
+              value={img}
+              onChange={(e) => handleOtherImages(index, e.target.value)}
+              />
+          ))}
           </div>
 
         <hr></hr>
@@ -184,3 +178,5 @@ function CreateSpot() {
 }
 
 export default CreateSpot
+
+// https://placehold.co/600x400/ffcc00/png
