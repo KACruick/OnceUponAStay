@@ -14,7 +14,7 @@ function CreateSpot() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [previewImage, setPreviewImage] = useState('');
   const [otherImages, setOtherImages] = useState([]);
@@ -89,27 +89,27 @@ function CreateSpot() {
             <h4>Guests will only get your exact address once they book a reservation.</h4>
             <label>
             Country:
-            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} required />
+            <input type="text" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} required />
             </label>
             <label>
             Street Address:
-            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
+            <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
             </label>
             <label>
             City:
-            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} required />
+            <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required />
             </label>
             <label>
             State:
-            <input type="text" value={state} onChange={(e) => setState(e.target.value)} required />
+            <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required />
             </label>
             <label>
             Latitude:
-            <input type="text" value={latitude} onChange={(e) => setLatitude(e.target.value)}  />
+            <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)}  />
             </label>
             <label>
             Longitude:
-            <input type="text" value={longitude} onChange={(e) => setLongitude(e.target.value)}  />
+            <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)}  />
             </label>
           </div>
 
@@ -120,6 +120,7 @@ function CreateSpot() {
             <h4>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h4>
             <textarea
               value={description}
+              placeholder="Please write at least 30 characters"
               onChange={(e) => setDescription(e.target.value)}
               required
             ></textarea>
@@ -130,7 +131,7 @@ function CreateSpot() {
           <div className="create-title">
             <h3>Create a title for your spot</h3>
             <h4>Catch guests&apos; attention with a spot title that highlights what makes your place special.</h4>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+            <input type="text" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
 
         <hr></hr>
@@ -142,6 +143,7 @@ function CreateSpot() {
             $
             <input
               type="number"
+              placeholder="Price per night (USD)"
               value={price}
               onChange={(e) => setPrice(parseFloat(e.target.value))}
               min="0"
@@ -157,6 +159,7 @@ function CreateSpot() {
             <h4>Submit a link to at least one photo to publish your spot.</h4>
             <input
               type="text"
+              placeholder="Preview Image URL"
               value={previewImage}
               onChange={(e) => setPreviewImage(e.target.value)}
               required
