@@ -87,6 +87,8 @@ function CreateSpot() {
           <div className="set-location">
             <h3>Where&apos;s your place located?</h3>
             <h4>Guests will only get your exact address once they book a reservation.</h4>
+            
+          <div className="ctry-street">
             <label>
             Country:
             <input type="text" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} required />
@@ -95,6 +97,9 @@ function CreateSpot() {
             Street Address:
             <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
             </label>
+          </div>
+            
+          <div className="city-state">
             <label>
             City:
             <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required />
@@ -103,6 +108,9 @@ function CreateSpot() {
             State:
             <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required />
             </label>
+          </div>
+
+          <div className="lat-long">
             <label>
             Latitude:
             <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)}  />
@@ -111,6 +119,8 @@ function CreateSpot() {
             Longitude:
             <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)}  />
             </label>
+          </div>
+
           </div>
 
         <hr></hr>
@@ -139,9 +149,13 @@ function CreateSpot() {
           <div className="set-price">
             <h3>Set a base price for your spot</h3>
             <h4>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
+            
+            <div className="sign-input">
             <label>
-            $
+              <div className="dollar-sign">$</div>
+            
             <input
+              className="price-input"
               type="number"
               placeholder="Price per night (USD)"
               value={price}
@@ -150,6 +164,8 @@ function CreateSpot() {
               required
             />
             </label>
+            </div>
+
           </div>
           
         <hr></hr>

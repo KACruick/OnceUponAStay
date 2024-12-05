@@ -1,5 +1,5 @@
 .create-spot-container{
-    width: 400px;
+    width: 450px;
     margin: auto;
 }
 
@@ -7,27 +7,74 @@ h1 {
     font-weight: 600;
 }
 
-h3{
+h3 {
     font-weight: 500;
 }
 
 h4 {
     font-weight: 500;
+    font-size: small;
+}
+
+input {
+    width: 440px;
 }
 
 .set-location {
-    border: solid red 1px;
+    /* border: solid red 1px; */
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    gap: 10px;
+}
+
+.ctry-street {
+    /* border: solid red 1px; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.city-state {
+    /* border: solid red 1px; */
+    display: flex;
+    flex-direction: row;
+}
+
+
+.city-state input {
+    width: 200px;
+}
+
+.lat-long {
+    /* border: solid red 1px; */
+    display: flex;
+    flex-direction: row;
+}
+
+.lat-long input {
+    width: 200px;
 }
 
 .description {
-    border: solid red 1px;
+    /* border: solid red 1px; */
     margin-bottom: 15px; 
 }
 
+textarea {
+    width: 442px;
+    height: 110px;
+}
+
 .create-title {
-    border: solid red 1px;
+    /* border: solid red 1px; */
     margin-bottom: 15px; 
+}
+
+
+/* .dollar-sign {
+    
 }
 
 .set-price {
@@ -35,8 +82,17 @@ h4 {
     margin-bottom: 15px; 
 }
 
+.sign-input {
+    display: flex;
+    flex-direction: row;
+}
+
+.price-input {
+    width: 400px;
+} */
+
 .add-photos {
-    border: solid red 1px;
+    /* border: solid red 1px; */
     margin-bottom: 15px; 
 }
 
