@@ -1,13 +1,13 @@
 import "./CreateSpot.css";
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { csrfFetch } from '../../store/csrf';
 import { createSpot } from "../../store/spots";
 
 function CreateSpot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.session.user);
 
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
@@ -17,10 +17,18 @@ function CreateSpot() {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [previewImage, setPreviewImage] = useState('');
-  const [otherImages, setOtherImages] = useState(["", "", "", ""]);
+  const [otherImages, setOtherImages] = useState([]);
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
+
   const [errors, setErrors] = useState([]);
+
+  if (!user) {
+    return navigate("/", {
+      state: { error: "Please login to create a spot" },
+      replace: true
+    });
+  }
 
   const handleOtherImages = (index, value) => {
     const updatedImages = [...otherImages];
@@ -31,6 +39,8 @@ function CreateSpot() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrors([]);
+  
     const newSpot = {
       name,
       address,
@@ -39,23 +49,21 @@ function CreateSpot() {
       country,
       price: parseFloat(price),
       description,
-      previewImage,
-      latitude: latitude ? parseFloat(latitude) : null,
-      longitude: longitude ? parseFloat(longitude) : null,
-      SpotImages: [previewImage, ...otherImages.filter((url) => url)].map(
-        (url) => ({ url }) // only include valid image URLs
-      )
+      lat: latitude ? parseFloat(latitude) : null,
+      lng: longitude ? parseFloat(longitude) : null
     };
 
+    const imageUrls = [previewImage, ...otherImages.filter((url) => url.trim() !== "")];
+  
     try {
-      console.log("newSpot: ", newSpot)
-      const createdSpot = await dispatch(createSpot(newSpot));
-      navigate(`/spots/${createdSpot.id}`); // redirect to the new spot's page
+      const createdSpot = await dispatch(createSpot(newSpot, imageUrls));
+      console.log("created spot: ", createdSpot)
+      navigate(`/spots/${createdSpot.id}`); // Redirect to the new spot page
     } catch (error) {
-      setErrors(error.errors || ["Something went wrong."]);
+      console.error("Error creating spot:", error);
+      setErrors(error.errors || ["An error occurred."]);
     }
-
-  }
+  };
 
 
   return (
@@ -135,7 +143,7 @@ function CreateSpot() {
             <input
               type="number"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(parseFloat(e.target.value))}
               min="0"
               required
             />
@@ -153,14 +161,15 @@ function CreateSpot() {
               onChange={(e) => setPreviewImage(e.target.value)}
               required
             />
-            {otherImages.map((img, index) => (
-              <input
-              key={index}  
+            {otherImages.map((url, index) => (
+              <input 
+              key={index}
               type="text"
-              value={img}
+              value={url}
               onChange={(e) => handleOtherImages(index, e.target.value)}
               />
-          ))}
+            ))}
+            <button type="button" onClick={() => setOtherImages([...otherImages, ""])}>Add another image</button>
           </div>
 
         <hr></hr>

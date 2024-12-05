@@ -6,6 +6,7 @@ const GET_SPOTS = "spots/GET_SPOTS";
 const GET_SPOTS_DETAILS = "spots/GET_SPOTS_DETAILS";
 const CREATE_SPOT = "spots/CREATE_SPOT";
 
+
 // action creators
 const getSpotsAction = (spots) => {
     return {
@@ -21,10 +22,10 @@ const getSpotDetails = (spot) => {
     };
 };
 
-const createSpotAction = (spot) => {
+const createSpotAction = (spotForm) => {
     return {
         type: CREATE_SPOT,
-        payload: spot
+        payload: spotForm
     };
 };
 
@@ -54,29 +55,42 @@ export const getDetails = (spotId) => async (dispatch) => {
     return dispatch(getSpotDetails(data));
 }
 
-export const createSpot = (newSpotData) => async (dispatch) => {
+export const createSpot = (newSpotData, imageUrl) => async (dispatch) => {
     const response = await csrfFetch("/api/spots", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newSpotData),
     });
+
     console.log("response: ", response)
+
     if (response.ok) {
         const newSpot = await response.json();
+        dispatch(createSpotAction(newSpot));
+        
+        const spotId = newSpot.id;
 
-        const normalizedSpot = {
-            ...newSpot,
-            id: newSpot.id,
+        // Add each image associated with the spot
+    for (const [index, url] of imageUrl.entries()) {
+        const imgDetails = {
+          url,
+          preview: index === 0, // Mark the first image as the preview
         };
-        console.log("new: ", normalizedSpot)
-
-        dispatch(createSpotAction(normalizedSpot));
-        return normalizedSpot;
+  
+        await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(imgDetails),
+        });
+      }
+  
+      return newSpot; // Return the newly created spot for navigation
     } else {
-        const errorData = await response.json();
-        throw errorData;
+      const errorData = await response.json();
+      console.error("Error response:", errorData);
+      throw errorData;
     }
-}
+  };
 
 
 // spots initial state
