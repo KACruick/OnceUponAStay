@@ -58,7 +58,8 @@ function CreateSpot() {
     try {
       const createdSpot = await dispatch(createSpot(newSpot, imageUrls));
       console.log("created spot: ", createdSpot)
-      navigate(`/spots/${createdSpot.id}`); // Redirect to the new spot page
+      console.log("createdSpot.id", createdSpot.id)
+      navigate(`/api/spots/${createdSpot.id}`); // Redirect to the new spot page
     } catch (error) {
       console.error("Error creating spot:", error);
       setErrors(error.errors || ["An error occurred."]);
