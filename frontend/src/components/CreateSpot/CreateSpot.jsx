@@ -85,8 +85,8 @@ function CreateSpot() {
       <div>
         <form onSubmit={handleSubmit}>
           <div className="set-location">
-            <p>Where&apos;s your place located?</p>
-            <p>Guests will only get your exact address once they book a reservation.</p>
+            <h3>Where&apos;s your place located?</h3>
+            <h4>Guests will only get your exact address once they book a reservation.</h4>
             <label>
             Country:
             <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} required />
@@ -116,8 +116,8 @@ function CreateSpot() {
         <hr></hr>
 
           <div className="description">
-            <p>Describe your place to guests</p>
-            <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+            <h3>Describe your place to guests</h3>
+            <h4>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h4>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -128,16 +128,16 @@ function CreateSpot() {
         <hr></hr>
 
           <div className="create-title">
-            <p>Create a title for your spot</p>
-            <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
+            <h3>Create a title for your spot</h3>
+            <h4>Catch guests&apos; attention with a spot title that highlights what makes your place special.</h4>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
 
         <hr></hr>
 
           <div className="set-price">
-            <p>Set a base price for your spot</p>
-            <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+            <h3>Set a base price for your spot</h3>
+            <h4>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
             <label>
             $
             <input
@@ -153,8 +153,8 @@ function CreateSpot() {
         <hr></hr>
 
           <div className="add-photos">
-            <p>Liven up your spot with photos</p>
-            <p>Submit a link to at least one photo to publish your spot.</p>
+            <h3>Liven up your spot with photos</h3>
+            <h4>Submit a link to at least one photo to publish your spot.</h4>
             <input
               type="text"
               value={previewImage}
@@ -173,10 +173,12 @@ function CreateSpot() {
           </div>
 
         <hr></hr>
-
-          <button type="submit">
-            Create Spot
-          </button>
+          
+          <div className="button-div">
+            <button type="submit">
+              Create Spot
+            </button>
+          </div>
 
         </form>
 

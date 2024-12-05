@@ -1,0 +1,46 @@
+.create-spot-container{
+    width: 400px;
+    margin: auto;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+h3{
+    font-weight: 500;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+.set-location {
+    border: solid red 1px;
+    margin-bottom: 15px;
+}
+
+.description {
+    border: solid red 1px;
+    margin-bottom: 15px; 
+}
+
+.create-title {
+    border: solid red 1px;
+    margin-bottom: 15px; 
+}
+
+.set-price {
+    border: solid red 1px;
+    margin-bottom: 15px; 
+}
+
+.add-photos {
+    border: solid red 1px;
+    margin-bottom: 15px; 
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+}
