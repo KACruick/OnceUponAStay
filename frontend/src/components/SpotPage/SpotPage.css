@@ -100,6 +100,10 @@
     height: 30px;
 }
 
+.reserve-button:hover {
+    background-color: #c07485;
+}
+
 /* reviews section styling */
 
 hr {
@@ -118,6 +122,19 @@ hr {
     width: 200px;
     justify-content: space-between;
     align-items: center;
+}
+
+.post-review-button {
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;  
+    margin-left: 10px;
+}
+
+.post-review-button:hover {
+    background-color: #c07485;
 }
 
 .review-card {
