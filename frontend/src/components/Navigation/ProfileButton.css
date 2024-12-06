@@ -49,6 +49,9 @@
   }
 
   .options{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     text-align: center;
   }
 
@@ -59,4 +62,14 @@
 
   .manage-spots {
     text-align: center;
+  }
+
+  .logout-button-div {
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-dropdown {
+    margin-top: 30px;
+    border: 2px solid grey;
   }

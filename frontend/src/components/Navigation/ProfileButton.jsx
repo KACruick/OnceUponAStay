@@ -63,9 +63,8 @@ function ProfileButton({ user }) {
         {user ? (
           <>
             <div className='options'>
-              <li>Hello, {user.username}</li>
-              {/* <li>{user.firstName} {user.lastName}</li> */}
-              <li>{user.email}</li>
+              <div>Hello, {user.username}</div>
+              <div>{user.email}</div>
             </div>
             
             <hr></hr>
@@ -76,9 +75,9 @@ function ProfileButton({ user }) {
             
             <hr></hr>
 
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <div className='logout-button-div'>
+              <button className='logout-button' onClick={logout}>Log Out</button>
+            </div>
           </>
         ) : (
           <>
