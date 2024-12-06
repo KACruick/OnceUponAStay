@@ -79,7 +79,7 @@ function ManageSpots() {
 
                         <button
                         className="button-link"
-                        onClick={() => navigate(`api/spots/${spot.id}/edit`)}
+                        onClick={() => navigate(`/api/spots/${spot.id}/edit`)}
                         >
                         Update
                         </button>

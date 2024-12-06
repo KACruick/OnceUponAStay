@@ -62,6 +62,10 @@ const router = createBrowserRouter([
         element: <SpotPage /> 
       },
       {
+        path: "/api/spots/:spotId/edit",
+        element: <CreateSpot/>
+      },
+      {
         path: '*',
         element: <h1>Page Not Found</h1>
       }
