@@ -1,0 +1,64 @@
+import './CreateReviewModal.css';
+import { IoMdStar } from "react-icons/io";
+// import { IoMdStarHalf } from "react-icons/io";
+// import { IoMdStarOutline } from "react-icons/io";
+import { useState, useEffect } from 'react';
+
+function CreateReview({ spotId }) {
+
+  const [stars, setStars] = useState([false, false, false, false, false])
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState('');
+
+  // Helper function to handle star click
+  const handleStarClick = (index) => {
+    setRating(index + 1)
+  }
+
+  // Helper function to render stars
+  const fillStars = () => {
+    return [0, 1, 2, 3, 4].map((index) => (
+      <IoMdStar
+        key={index}
+        className={index < rating ? 'filled-star' : 'empty-star'}
+        onClick={() => handleStarClick(index)} // Update rating on click
+      />
+    ));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // use thunk action to submit review 
+  }
+
+  return (
+    <div>
+
+      <div className='header'>
+        <h1>How was your stay?</h1>
+      </div>
+
+      <div className='textarea-div'>
+        <textarea 
+          value={review}
+          placeholder="Leave your review here..."
+          onChange={(e) => setReview(e.target.value)}
+          required>
+        </textarea>
+      </div>
+
+      <div className='stars-div'>
+          {fillStars()}
+      </div>
+
+      <div className="button-div">
+        <button type="submit" onClick={handleSubmit} disabled={!review || rating === 0}>
+          Submit Your Review
+        </button>
+      </div>
+
+    </div>
+  )
+}
+
+export default CreateReview

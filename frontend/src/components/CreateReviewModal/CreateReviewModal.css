@@ -1,0 +1,17 @@
+
+.filled-star {
+    color: #ffc107; /* Gold color for filled stars */
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .empty-star {
+    color: #e4e5e9; /* Grey color for empty stars */
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .filled-star:hover,
+  .empty-star:hover {
+    color: #ff9f00; /* Lighter gold on hover */
+  }

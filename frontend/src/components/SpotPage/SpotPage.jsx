@@ -6,6 +6,8 @@ import { fetchReviews } from '../../store/reviews';
 import './SpotPage.css';
 import { IoMdStar } from "react-icons/io";
 import { RxDotFilled } from "react-icons/rx";
+import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx'
+import CreateReviewModal from '../CreateReviewModal/CreateReviewModal.jsx';
 
 
 
@@ -16,6 +18,7 @@ function SpotPage() {
 
     const spot = useSelector((state) => state.spots.spotDetails);
     const reviews = useSelector((state) => state.reviews.reviewsBySpot[spotId] || [])
+    const user = useSelector((state) => state.session.user);
 
     console.log("spotId: ", spotId)
     // console.log("Spot from Redux state:", spot);
@@ -24,6 +27,8 @@ function SpotPage() {
         dispatch(getDetails(spotId))
         dispatch(fetchReviews(spotId))
     }, [dispatch, spotId])
+
+    const isOwner = user && spot.Owner?.id === user.id;
 
     console.log("spot details: ", spot)
     console.log("reviews: ", reviews)
@@ -45,7 +50,6 @@ function SpotPage() {
     <div className='spot-page-container'>
 
         <div className='spot-details-container'>
-            {/* <h1>Spot Page</h1> */}
             <div className='name-location'>
                 <div className='name'>{spot.name}</div>
                 <div className='location'>{spot.city}, {spot.state}, {spot.country}</div>
@@ -89,6 +93,16 @@ function SpotPage() {
                 <h3><IoMdStar /> {spot.avgStarRating}</h3>
                 < RxDotFilled />
                 <h3>{spot.numReviews} reviews</h3>
+            </div>
+
+            <div className='post-review-div'>
+                {user && !isOwner && (
+                    <OpenModalButton
+                        buttonText="Post Your Review"
+                        modalComponent={<CreateReviewModal spotId={spotId} />}
+                        className="post-review-button"
+                    />
+                )}
             </div>
 
             {/* <h2>Reviews</h2> */}

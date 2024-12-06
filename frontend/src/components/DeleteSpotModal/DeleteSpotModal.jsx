@@ -1,4 +1,4 @@
-import React from 'react'
+
 import "./DeleteSpotModal.css"
 import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
