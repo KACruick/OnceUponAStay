@@ -63,13 +63,31 @@
   .manage-spots {
     text-align: center;
   }
+  .manage-spots:hover {
+    background-color: #d98d9a;
+    opacity: 80%;
+  }
 
   .logout-button-div {
     display: flex;
     justify-content: center;
   }
 
-  .profile-dropdown {
+.logout-button-div:hover {
+  background-color: #d98d9a;
+  opacity: 80%;
+}
+
+
+.profile-dropdown {
     margin-top: 30px;
     border: 2px solid grey;
-  }
+}
+
+.logout-button {
+  background-color: #d98d9a;
+  border: none;
+  border-radius: 20px;
+  height: 35px;
+  width: 75px;
+}
