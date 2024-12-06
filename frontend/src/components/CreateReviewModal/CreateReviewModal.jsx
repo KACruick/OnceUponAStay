@@ -8,20 +8,19 @@ function CreateReview({ spotId }) {
 
   // const [stars, setStars] = useState([false, false, false, false, false])
   const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const [review, setReview] = useState('');
 
-  // Helper function to handle star click
-  const handleStarClick = (index) => {
-    setRating(index + 1)
-  }
 
   // Helper function to render stars
   const fillStars = () => {
     return [0, 1, 2, 3, 4].map((index) => (
       <IoMdStar
         key={index}
-        className={index < rating ? 'filled-star' : 'empty-star'}
-        onClick={() => handleStarClick(index)} // Update rating on click
+        className={index < (hoverRating || rating) ? 'filled-star' : 'empty-star'}
+        onClick={() => setRating(index + 1)} // Update rating on click
+        onMouseEnter={() => setHoverRating(index + 1)} // Update hover state
+        onMouseLeave={() => setHoverRating(0)} // Reset hover state
       />
     ));
   }
