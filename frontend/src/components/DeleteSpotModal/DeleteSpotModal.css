@@ -1,0 +1,33 @@
+.modal-container {
+    height: 190px;
+    width: 400px;
+    border-radius: 8px;
+}
+
+.h4-container {
+    width: 380px;
+    margin-left: 15px;
+}
+
+.action-buttons {
+    margin-left: 15px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    gap:12px;
+}
+
+.yes, .no {
+    height: 35px;
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);;
+}
+
+.yes:hover, .no:hover {
+   background-color: #c07485;
+}

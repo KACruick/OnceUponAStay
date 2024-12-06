@@ -10,6 +10,7 @@ import { getSpots } from "./store/spots";
 import BottomNav from './components/Navigation/BottomNav.jsx';
 import SpotPage from './components/SpotPage/SpotPage.jsx';
 import CreateSpot from './components/CreateSpot/CreateSpot.jsx';
+import ManageSpots from './components/ManageSpots/ManageSpots.jsx';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -49,12 +50,16 @@ const router = createBrowserRouter([
         element: <SignupFormModal />
       },
       {
-        path: "/api/spots/:spotId",
-        element: <SpotPage /> 
+        path: "/api/spots", 
+        element: <CreateSpot/>
       },
       {
-        path: "/api/spots", 
-        element: < CreateSpot/>
+        path: "api/spots/current",
+        element: <ManageSpots />
+      },
+      {
+        path: "/api/spots/:spotId",
+        element: <SpotPage /> 
       },
       {
         path: '*',

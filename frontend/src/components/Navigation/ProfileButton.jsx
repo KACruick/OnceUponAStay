@@ -7,9 +7,8 @@ import * as sessionActions from '../../store/session';
 import LoginFormModal from '../LoginFormModal/LoginFormModal.jsx'
 import SignupFormModal from '../SignupFormModal/SignupFormModal.jsx';
 import OpenModalMenuItem from './OpenModalMenuItem.jsx';
-
 import { TbMenu2 } from "react-icons/tb";
-
+import { Link } from 'react-router-dom';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -59,12 +58,24 @@ function ProfileButton({ user }) {
         </div>
       </button>
 
+   
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
+            <div className='options'>
+              <li>Hello, {user.username}</li>
+              {/* <li>{user.firstName} {user.lastName}</li> */}
+              <li>{user.email}</li>
+            </div>
+            
+            <hr></hr>
+
+            <div className='manage-spots'>
+              <Link to="api/spots/current" className="manage-link">Manage Spots</Link>
+            </div>
+            
+            <hr></hr>
+
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
@@ -84,6 +95,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
+    
     </>
   );
 }

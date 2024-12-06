@@ -39,7 +39,7 @@ function SpotPage() {
     //     if (!imgs) return "https://placehold.co/600x400/ffcc00/png"
     // }
     
-   
+   console.log("spot.owner: ", spot.Owner)
 
   return (
     <div className='spot-page-container'>
@@ -61,6 +61,7 @@ function SpotPage() {
                 </div>
             </div>
             <div className='under-pictures-container'>
+                
                 <div className='spot-text'>
                     <div className='owner'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
                     <div className='description'>{spot.description}</div>

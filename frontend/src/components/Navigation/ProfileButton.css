@@ -47,3 +47,16 @@
   .profile-button:hover {
     color: #555;
   }
+
+  .options{
+    text-align: center;
+  }
+
+  .manage-link {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .manage-spots {
+    text-align: center;
+  }

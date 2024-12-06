@@ -1,0 +1,143 @@
+
+.page {
+    border: 1px solid red;
+  
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 50px;
+}
+
+.header-title {
+    display: flex;
+    justify-content: left;
+}
+
+.create-spot-link {
+    text-decoration: none;
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.create-spot-link:hover {
+    background-color: #c07485;
+}
+
+.container {
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+  
+  .spot-tile-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .spot-tile {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+  }
+  
+  .spot-tile:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .spot-image-container img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .spot-tile-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .spot-tile-location {
+    font-size: 16px;
+    margin: 0 0 8px;
+    display: flex;
+    justify-content: space-between;   
+  }
+  
+  .spot-tile-rating {
+    /* font-weight: bold; */
+    margin-left: 8px;
+  }
+  
+  .price-night{
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .spot-tile-price {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+
+/* .update-link {
+    padding: 7px 15px;
+    background-color: #d98d9a;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+} */
+
+.button-link {
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.button-link:hover {
+    background-color: #c07485;
+}
+
+.delete-modal {
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;  
+    margin-left: 10px;
+}
+
+.delete-modal:hover {
+    background-color: #c07485;
+}
+
+@media (max-width: 768px) {
+    .spot-tile {
+      flex: 1 1 calc(50% - 20px);  /* Make each tile take up 50% of the container width on medium screens */
+    }
+}
+  
+@media (max-width: 480px) {
+    .spot-tile {
+     flex: 1 1 calc(100% - 20px);  /* Make each tile take up 100% of the container width on mobile screens */
+    } 
+} 

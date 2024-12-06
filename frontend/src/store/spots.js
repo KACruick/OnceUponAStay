@@ -5,6 +5,8 @@ import { csrfFetch } from "./csrf";
 const GET_SPOTS = "spots/GET_SPOTS";
 const GET_SPOTS_DETAILS = "spots/GET_SPOTS_DETAILS";
 const CREATE_SPOT = "spots/CREATE_SPOT";
+    // update
+const DELETE_SPOT = "spots/DELETE_SPOT";
 
 
 // action creators
@@ -29,6 +31,13 @@ const createSpotAction = (spotForm) => {
     };
 };
 
+const deleteSpotAction = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        payload: spotId,
+    };
+};
+
 
 // thunks
 export const getSpots = () => async (dispatch) => {
@@ -39,7 +48,7 @@ export const getSpots = () => async (dispatch) => {
         // console.log('API response:', data)
         // console.log("key into 1 spot", data.Spots[0])
 
-        // Normalize spots into an object with spot IDs as keys
+        // Normalize spots into an object with id as key
         const normalizedSpots = data.Spots.reduce((acc, spot) => {
             acc[spot.id] = spot;
             return acc;
@@ -90,7 +99,21 @@ export const createSpot = (newSpotData, imageUrl) => async (dispatch) => {
       console.error("Error response:", errorData);
       throw errorData;
     }
-  };
+};
+
+export const deleteSpot = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "DELETE",
+    });
+  
+    if (response.ok) {
+      dispatch(deleteSpotAction(spotId));
+    } else {
+      const error = await response.json();
+      console.error("Error: ", error);
+      throw error;
+    }
+};
 
 
 // spots initial state
@@ -114,6 +137,14 @@ const spotsReducer = (state = initialState, action) => {
                 ...state,
                 allSpots: newAllSpots,
                 spotDetails: action.payload, // since we load the spots page after submit
+            };
+        }
+        case DELETE_SPOT: {
+            const { [action.payload]: deleted, ...remainingSpots } = state.allSpots;
+            return {
+                ...state,
+                allSpots: remainingSpots,
+                spotDetails: state.spotDetails.id === action.payload ? {} : state.spotDetails,
             };
         }
     default:
