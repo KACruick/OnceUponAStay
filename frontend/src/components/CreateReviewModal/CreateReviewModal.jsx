@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 function CreateReview({ spotId }) {
 
-  const [stars, setStars] = useState([false, false, false, false, false])
+  // const [stars, setStars] = useState([false, false, false, false, false])
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
@@ -32,15 +32,16 @@ function CreateReview({ spotId }) {
   }
 
   return (
-    <div>
+    <div className='review-modal-container'>
 
-      <div className='header'>
-        <h1>How was your stay?</h1>
+      <div className='header-div'>
+        <h1 className='header-title'>How was your stay?</h1>
       </div>
 
       <div className='textarea-div'>
         <textarea 
           value={review}
+          className='text'
           placeholder="Leave your review here..."
           onChange={(e) => setReview(e.target.value)}
           required>
@@ -52,7 +53,7 @@ function CreateReview({ spotId }) {
       </div>
 
       <div className="button-div">
-        <button type="submit" onClick={handleSubmit} disabled={!review || rating === 0}>
+        <button className='submit-review-button' type="submit" onClick={handleSubmit} disabled={!review || rating === 0}>
           Submit Your Review
         </button>
       </div>

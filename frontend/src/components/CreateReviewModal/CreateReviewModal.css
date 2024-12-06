@@ -1,17 +1,58 @@
 
+.review-modal-container {
+    /* border: 3px red solid; */
+    border-radius: 8px;
+    width: 400px;
+}
+
+.header-div {
+    display: flex;
+    justify-content: center;
+}
+
+.textarea-div {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+}
+
+.text {
+    width: 350px;
+    border: 2px solid grey;
+}
+
+.stars-div {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
 .filled-star {
     color: #ffc107; /* Gold color for filled stars */
     cursor: pointer;
     font-size: 24px;
-  }
+}
   
-  .empty-star {
+.empty-star {
     color: #e4e5e9; /* Grey color for empty stars */
     cursor: pointer;
     font-size: 24px;
-  }
+}
   
-  .filled-star:hover,
-  .empty-star:hover {
+.filled-star:hover,
+.empty-star:hover {
     color: #ff9f00; /* Lighter gold on hover */
-  }
+}
+
+
+
+.submit-review-button {
+    height: 35px;
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
