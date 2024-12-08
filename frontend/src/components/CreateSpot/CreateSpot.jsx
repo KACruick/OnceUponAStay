@@ -152,19 +152,19 @@ function CreateSpot() {
             <h4>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
             
             <div className="sign-input">
-            <label>
-              <div className="dollar-sign">$</div>
-            
-            <input
-              className="price-input"
-              type="number"
-              placeholder="Price per night (USD)"
-              value={price}
-              onChange={(e) => setPrice(parseFloat(e.target.value))}
-              min="0"
-              required
-            />
-            </label>
+              <label className="dollar-sign">
+                $
+              </label>
+              <input
+                className="price-input"
+                type="number"
+                placeholder="Price per night (USD)"
+                value={price}
+                onChange={(e) => setPrice(parseFloat(e.target.value))}
+                min="0"
+                required
+              />
+              
             </div>
 
           </div>
@@ -174,21 +174,26 @@ function CreateSpot() {
           <div className="add-photos">
             <h3>Liven up your spot with photos</h3>
             <h4>Submit a link to at least one photo to publish your spot.</h4>
-            <input
-              type="text"
-              placeholder="Preview Image URL"
-              value={previewImage}
-              onChange={(e) => setPreviewImage(e.target.value)}
-              required
-            />
-            {otherImages.map((url, index) => (
-              <input 
-              key={index}
-              type="text"
-              value={url}
-              onChange={(e) => handleOtherImages(index, e.target.value)}
-              />
-            ))}
+
+            <div className="url-inputs">
+                <input
+                  type="text"
+                  placeholder="Preview Image URL"
+                  value={previewImage}
+                  onChange={(e) => setPreviewImage(e.target.value)}
+                  required
+                />
+                {Array.from({ length: 4 }, (url, index) => (
+                  <input 
+                  key={index}
+                  type="text"
+                  placeholder="Image URL"
+                  value={url}
+                  onChange={(e) => handleOtherImages(index, e.target.value)}
+                  />
+                ))}
+            </div>
+
             <button type="button" onClick={() => setOtherImages([...otherImages, ""])}>Add another image</button>
           </div>
 
