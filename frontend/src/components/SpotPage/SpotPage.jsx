@@ -20,18 +20,22 @@ function SpotPage() {
     const reviews = useSelector((state) => state.reviews.reviewsBySpot[spotId] || [])
     const user = useSelector((state) => state.session.user);
 
-    console.log("spotId: ", spotId)
+    // console.log("spotId: ", spotId)
     // console.log("Spot from Redux state:", spot);
     
+    const isOwner = user && spot.Owner?.id === user.id;
+
     useEffect(() => {
         dispatch(getDetails(spotId))
         dispatch(fetchReviews(spotId))
     }, [dispatch, spotId])
 
-    const isOwner = user && spot.Owner?.id === user.id;
+    if (!spot || Object.keys(spot).length === 0) {
+        return <p>Loading spot details...</p>;
+    }
 
-    console.log("spot details: ", spot)
-    console.log("reviews: ", reviews)
+    // console.log("spot details: ", spot)
+    // console.log("reviews: ", reviews)
     
     //helper functions for returning image urls
     // function mainImg(spot) {
@@ -67,7 +71,7 @@ function SpotPage() {
             <div className='under-pictures-container'>
                 
                 <div className='spot-text'>
-                    <div className='owner'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
+                    <div className='owner'>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</div>
                     <div className='description'>{spot.description}</div>
                 </div>
 
