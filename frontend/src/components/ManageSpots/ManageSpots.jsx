@@ -47,7 +47,9 @@ function ManageSpots() {
          
     
           {userSpots.length === 0 ? (
-            <p>You don&apos;t have any spots yet</p>
+            <div className='no-spots'>
+                <p>You don&apos;t have any spots yet</p>
+            </div>
           ) : (
 
             <div className="container">
