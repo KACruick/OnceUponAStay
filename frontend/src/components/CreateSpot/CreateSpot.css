@@ -141,3 +141,15 @@ textarea {
     display: flex;
     justify-content: center;
 }
+
+.button-div button {
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.button-div button:hover {
+    background-color: #c07485;
+}
