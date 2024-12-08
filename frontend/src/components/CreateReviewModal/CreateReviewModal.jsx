@@ -2,15 +2,19 @@ import './CreateReviewModal.css';
 import { IoMdStar } from "react-icons/io";
 // import { IoMdStarHalf } from "react-icons/io";
 // import { IoMdStarOutline } from "react-icons/io";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { createReview, fetchReviews } from "../../store/reviews";
+import { useModal } from "../../context/Modal";
 
 function CreateReview({ spotId }) {
-
+  const dispatch = useDispatch();
   // const [stars, setStars] = useState([false, false, false, false, false])
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [review, setReview] = useState('');
 
+  const { closeModal } = useModal();
 
   // Helper function to render stars
   const fillStars = () => {
@@ -25,9 +29,18 @@ function CreateReview({ spotId }) {
     ));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("submit ...")
     // use thunk action to submit review 
+    try {
+      const newReview = await dispatch(createReview(spotId, { review, stars: rating }));
+      console.log("Review submitted successfully:", newReview);
+      closeModal();
+      await dispatch(fetchReviews(spotId));
+    } catch (error) {
+      console.error("Failed to submit review:", error.message);
+    }
   }
 
   return (
