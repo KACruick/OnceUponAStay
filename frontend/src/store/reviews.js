@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 // actions
 const GET_REVIEWS = "reviews/GET_REVIEWS";
 const ADD_REVIEW = "reviews/ADD_REVIEW";
+const REMOVE_REVIEW = "reviews/REMOVE_REVIEW";
 
 // action creators
 const getReviews = (spotId, reviews) => {
@@ -18,6 +19,11 @@ const addReview = (spotId, review) => {
         payload: { spotId, review }
     }
 }
+
+const removeReview = (reviewId) => ({
+    type: REMOVE_REVIEW,
+    payload: reviewId,
+});
 
 // thunks
 export const fetchReviews = (spotId) => async (dispatch) => {
@@ -47,6 +53,18 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
         console.error("Failed to submit review:", error.message);
     }
 }
+
+export const deleteReview = (reviewId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      dispatch(removeReview(reviewId));
+    } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to delete review");
+    }
+  };
 
 //initial state
 const initialState = {
@@ -78,6 +96,15 @@ const reviewsReducer = (state = initialState, action) => {
                     },
                 },
             };
+        }
+        case REMOVE_REVIEW: {
+            const newState = { ...state };
+            for (const spotId in newState.reviewsBySpot) {
+              if (newState.reviewsBySpot[spotId][reviewId]) {
+                delete newState.reviewsBySpot[spotId][reviewId];
+              }
+            }
+            return newState;
         }
         default: 
             return state;

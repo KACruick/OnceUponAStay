@@ -8,7 +8,7 @@ import { IoMdStar } from "react-icons/io";
 import { RxDotFilled } from "react-icons/rx";
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx'
 import CreateReviewModal from '../CreateReviewModal/CreateReviewModal.jsx';
-
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal.jsx';
 
 
 function SpotPage() {
@@ -118,15 +118,29 @@ function SpotPage() {
                 year: 'numeric',
             });
 
+            const isReviewAuthor = user && review.User?.id === user.id;
+
+
+
             return (
                 <div key={review.id} className='review-card'>
                     <div className='review-header'>
-                        <strong>{review.User?.firstName || 'Anonymous'}</strong>
+                        <strong>{review.User?.firstName}</strong>
                         <span>{formattedDate}</span>
                     </div>
                     <div className='review-body'>
                         <p>{review.review}</p>
                     </div>
+                    {isReviewAuthor && (
+                    <div className='delete-button-div'>
+                        <OpenModalButton
+                        buttonText="Delete"
+                        modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                        className="delete-modal"
+                        />
+                    </div>
+                    )}
+
                 </div>
             );
             })
