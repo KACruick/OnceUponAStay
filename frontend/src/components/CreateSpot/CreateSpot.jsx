@@ -194,7 +194,7 @@ function CreateSpot() {
                 ))}
             </div>
 
-            <button type="button" onClick={() => setOtherImages([...otherImages, ""])}>Add another image</button>
+            {/* <button type="button" onClick={() => setOtherImages([...otherImages, ""])}>Add another image</button> */}
           </div>
 
         <hr></hr>
