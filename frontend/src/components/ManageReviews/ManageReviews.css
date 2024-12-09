@@ -3,3 +3,16 @@
 .update-delete-div {
     display: flex;
 }
+
+.update-modal {
+    background-color: #d98d9a;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;  
+    margin-left: 10px;
+}
+
+.update-modal:hover {
+    background-color: #c07485;
+}
