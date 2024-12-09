@@ -1,13 +1,15 @@
 import "./CreateSpot.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createSpot } from "../../store/spots";
+import { useNavigate, useParams } from 'react-router-dom';
+import { createSpot, updateSpot, getDetails } from "../../store/spots";
 
 function CreateSpot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { spotId } = useParams();
   const user = useSelector((state) => state.session.user);
+  const existingSpot = useSelector((state) => state.spots.spotDetails);
 
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
@@ -22,6 +24,7 @@ function CreateSpot() {
   const [longitude, setLongitude] = useState('');
 
   const [errors, setErrors] = useState([]);
+  const [isUpdate] = useState(!!spotId);
 
   if (!user) {
     return navigate("/", {
@@ -29,6 +32,32 @@ function CreateSpot() {
       replace: true
     });
   }
+
+  console.log("existingSpot: ", existingSpot);
+  console.log("spotId: ", spotId);
+
+  useEffect(() => {
+    if (isUpdate && spotId) {
+      dispatch(getDetails(spotId))
+    }
+  }, [dispatch, spotId, isUpdate])
+
+  useEffect(() => {
+    if (isUpdate && existingSpot) {
+        setName(existingSpot.name || '');
+        setAddress(existingSpot.address || '');
+        setCity(existingSpot.city || '');
+        setState(existingSpot.state || '');
+        setCountry(existingSpot.country || '');
+        setPrice(existingSpot.price || '');
+        setDescription(existingSpot.description || '');
+        setLatitude(existingSpot.latitude || '');
+        setLongitude(existingSpot.longitude || '');
+        setPreviewImage(existingSpot.previewImage || '');
+        setOtherImages(existingSpot.otherImages || ['','','','']);
+    }
+  }, [existingSpot, isUpdate])
+
 
   const handleOtherImages = (index, value) => {
     const updatedImages = [...otherImages];
@@ -41,7 +70,7 @@ function CreateSpot() {
 
     setErrors([]);
   
-    const newSpot = {
+    const spotData = {
       name,
       address,
       city,
@@ -54,12 +83,20 @@ function CreateSpot() {
     };
 
     const imageUrls = [previewImage, ...otherImages.filter((url) => url.trim() !== "")];
-  
+    
+    console.log("isUpdate: ", isUpdate)
+
     try {
-      const createdSpot = await dispatch(createSpot(newSpot, imageUrls));
-      console.log("created spot: ", createdSpot)
-      console.log("createdSpot.id", createdSpot.id)
-      navigate(`/api/spots/${createdSpot.id}`); // Redirect to the new spot page
+      if (isUpdate) { //update existing spot
+        const updatedSpot = await dispatch(updateSpot(spotId, spotData, imageUrls));
+        console.log("updated spot: ", updatedSpot)
+        navigate(`/api/spots/${spotId}`);
+      } else { //create a new spot
+        const createdSpot = await dispatch(createSpot(spotData, imageUrls));
+        // console.log("created spot: ", createdSpot)
+        // console.log("createdSpot.id", createdSpot.id)
+        navigate(`/api/spots/${createdSpot.id}`); // Redirect to the new spot page
+      }
     } catch (error) {
       console.error("Error creating spot:", error);
       setErrors(error.errors || ["An error occurred."]);
@@ -71,7 +108,8 @@ function CreateSpot() {
     <div className="create-spot-container">
 
       <div className="header">
-        <h1>Create a new Spot</h1>
+        <h1>{isUpdate ? "Update your Spot" : "Create a new Spot"}</h1>
+        {/* <h1>Create a new Spot</h1> */}
         {errors.length > 0 && (
           <ul className="errors">
             {errors.map((error, idx) => (
@@ -201,7 +239,7 @@ function CreateSpot() {
           
           <div className="button-div">
             <button type="submit">
-              Create Spot
+              {isUpdate ? "Update Spot" : "Create Spot"}
             </button>
           </div>
 
