@@ -142,7 +142,7 @@ hr {
     border-radius: 8px;
     margin-top: 30px;
     margin-bottom: 30px;
-   
+    padding: 5px;
 }
 
 .review-header {
