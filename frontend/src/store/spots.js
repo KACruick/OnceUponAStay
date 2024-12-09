@@ -4,7 +4,6 @@ import { csrfFetch } from "./csrf";
 // actions
 const GET_SPOTS = "spots/GET_SPOTS";
 const GET_SPOTS_DETAILS = "spots/GET_SPOTS_DETAILS";
-// const UPDATE_SPOT_DETAILS = 'spots/UPDATE_SPOT_DETAILS';
 const CREATE_SPOT = "spots/CREATE_SPOT";
 const UPDATE_SPOT = "spots/UPDATE_SPOT"
 const DELETE_SPOT = "spots/DELETE_SPOT";
@@ -25,7 +24,6 @@ const getSpotDetails = (spot) => {
     };
 };
 
-// const updateSpotDetails = ()
 
 const createSpotAction = (spotForm) => {
     return {
@@ -70,7 +68,7 @@ export const getSpots = () => async (dispatch) => {
 export const getDetails = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
     const data = await response.json();
-    console.log("API: ", data)
+    // console.log("API: ", data)
     return dispatch(getSpotDetails(data));
 }
 
@@ -156,7 +154,12 @@ const spotsReducer = (state = initialState, action) => {
         case GET_SPOTS:
             return { ...state, allSpots: { ...action.payload } };
         case GET_SPOTS_DETAILS: {
-            return { ...state, spotDetails: action.payload };
+            const newAllSpots = { ...state.allSpots, [action.payload.id]: action.payload };
+            return {
+                ...state,
+                spotDetails: action.payload,
+                allSpots: newAllSpots,
+            };
         }
         case CREATE_SPOT: {
             const newAllSpots = { ...state.allSpots, [action.payload.id]: action.payload };

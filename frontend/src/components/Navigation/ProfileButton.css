@@ -60,10 +60,10 @@
     color: #333;
   }
 
-  .manage-spots {
+  .manage-div {
     text-align: center;
   }
-  .manage-spots:hover {
+  .manage-link:hover {
     background-color: #d98d9a;
     opacity: 80%;
   }

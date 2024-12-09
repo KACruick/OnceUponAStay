@@ -32,7 +32,7 @@ function CreateReview({ spotId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit ...")
+    // console.log("submit ...")
     // use thunk action to submit review 
     try {
       const newReview = await dispatch(createReview(spotId, { review, stars: rating }));

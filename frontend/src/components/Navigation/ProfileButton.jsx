@@ -69,8 +69,9 @@ function ProfileButton({ user }) {
             
             <hr></hr>
 
-            <div className='manage-spots'>
-              <Link to="api/spots/current" className="manage-link">Manage Spots</Link>
+            <div className='manage-div'>
+              <div><Link to="api/spots/current" className="manage-link">Manage Spots</Link></div>
+              <div><Link to="api/reviews/current" className='manage-link'>Manage Reviews</Link></div>
             </div>
             
             <hr></hr>

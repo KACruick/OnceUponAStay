@@ -9,6 +9,7 @@ import { RxDotFilled } from "react-icons/rx";
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx'
 import CreateReviewModal from '../CreateReviewModal/CreateReviewModal.jsx';
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal.jsx';
+import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal.jsx';
 
 
 function SpotPage() {
@@ -132,15 +133,38 @@ function SpotPage() {
                     <div className='review-body'>
                         <p>{review.review}</p>
                     </div>
-                    {isReviewAuthor && (
-                    <div className='delete-button-div'>
+
+                {/* To render review Update and delete Buttons */}
+                {isReviewAuthor && (
+                    <div className='update-delete-div'>
+                        {/* Update Button */}
+                        <div>
                         <OpenModalButton
-                        buttonText="Delete"
-                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
-                        className="delete-modal"
+                            buttonText="Update"
+                            modalComponent={
+                                <UpdateReviewModal 
+                                    reviewId={review.id} 
+                                    initialReview={review.review} 
+                                    initialRating={review.stars} 
+                                    spotId={review.spotId}
+                                    pageType="spot"
+                                />
+                            }
+                            className='update-modal'
                         />
+                        </div>
+
+                        {/* Delete Button */}
+                        <div>
+                        <OpenModalButton
+                            buttonText="Delete"
+                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+                            className="delete-modal"
+                        />
+                        </div>
+
                     </div>
-                    )}
+                )}
 
                 </div>
             );

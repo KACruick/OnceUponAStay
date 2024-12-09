@@ -11,6 +11,7 @@ import BottomNav from './components/Navigation/BottomNav.jsx';
 import SpotPage from './components/SpotPage/SpotPage.jsx';
 import CreateSpot from './components/CreateSpot/CreateSpot.jsx';
 import ManageSpots from './components/ManageSpots/ManageSpots.jsx';
+import ManageReviews from './components/ManageReviews/ManageReviews.jsx';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/api/spots/:spotId/edit",
         element: <CreateSpot/>
+      },
+      {
+        path: "/api/reviews/current",
+        element: <ManageReviews />
       },
       {
         path: '*',
