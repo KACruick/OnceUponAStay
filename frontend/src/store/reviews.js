@@ -20,10 +20,12 @@ const addReview = (spotId, review) => {
     }
 }
 
-const removeReview = (reviewId) => ({
-    type: REMOVE_REVIEW,
-    payload: reviewId,
-});
+const removeReview = (reviewId, spotId) => {
+    return {
+        type: REMOVE_REVIEW,
+        payload: { reviewId, spotId},
+    }
+};
 
 // thunks
 export const fetchReviews = (spotId) => async (dispatch) => {
@@ -47,6 +49,7 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
         console.log("New review received:", newReview);
         dispatch(addReview(spotId, newReview))
         dispatch(fetchReviews(spotId));
+        dispatch(getDetails(spotId)) // fetch updated spot details (for updated avgStarRating and numReviews)
         return true;
         // return newReview;
     } catch (error) {
@@ -59,7 +62,8 @@ export const deleteReview = (reviewId) => async (dispatch) => {
       method: "DELETE",
     });
     if (response.ok) {
-      dispatch(removeReview(reviewId));
+        const data = await response.json();
+      dispatch(removeReview(reviewId, data.spotId));
     } else {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to delete review");
@@ -76,11 +80,15 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_REVIEWS:{
             const { spotId, reviews } = action.payload;
+            const reviewsObject = reviews.reduce((acc, review) => {
+                acc[review.id] = review;
+                return acc;
+            }, {});
             return {
                 ...state,
                 reviewsBySpot: {
                   ...state.reviewsBySpot,
-                  [spotId]: reviews
+                  [spotId]: reviewsObject,
                 }
             }
         }
@@ -98,13 +106,20 @@ const reviewsReducer = (state = initialState, action) => {
             };
         }
         case REMOVE_REVIEW: {
-            const newState = { ...state };
-            for (const spotId in newState.reviewsBySpot) {
-              if (newState.reviewsBySpot[spotId][reviewId]) {
-                delete newState.reviewsBySpot[spotId][reviewId];
-              }
-            }
-            return newState;
+            const { reviewId, spotId } = action.payload;
+            const updatedReviews = { ...state.reviewsBySpot[spotId] };
+
+            // Remove the review by reviewId
+            delete updatedReviews[reviewId];
+
+            return {
+                ...state,
+                reviewsBySpot: {
+                    ...state.reviewsBySpot,
+                    [spotId]: updatedReviews,
+                }
+                
+            };
         }
         default: 
             return state;

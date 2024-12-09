@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 // actions
 const GET_SPOTS = "spots/GET_SPOTS";
 const GET_SPOTS_DETAILS = "spots/GET_SPOTS_DETAILS";
+// const UPDATE_SPOT_DETAILS = 'spots/UPDATE_SPOT_DETAILS';
 const CREATE_SPOT = "spots/CREATE_SPOT";
 const UPDATE_SPOT = "spots/UPDATE_SPOT"
 const DELETE_SPOT = "spots/DELETE_SPOT";
@@ -23,6 +24,8 @@ const getSpotDetails = (spot) => {
         payload: spot
     };
 };
+
+// const updateSpotDetails = ()
 
 const createSpotAction = (spotForm) => {
     return {

@@ -5,6 +5,7 @@ import { IoMdStar } from "react-icons/io";
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { createReview, fetchReviews } from "../../store/reviews";
+import { getDetails } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 
 function CreateReview({ spotId }) {
@@ -38,6 +39,7 @@ function CreateReview({ spotId }) {
       console.log("Review submitted successfully:", newReview);
       closeModal();
       await dispatch(fetchReviews(spotId));
+      await dispatch(getDetails(spotId));
     } catch (error) {
       console.error("Failed to submit review:", error.message);
     }

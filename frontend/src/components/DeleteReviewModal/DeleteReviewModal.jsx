@@ -1,9 +1,10 @@
 import "./DeleteReviewModal.css"
 import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
-import { deleteReview } from "../../store/reviews";
+import { fetchReviews, deleteReview } from "../../store/reviews";
+import { getDetails } from "../../store/spots";
 
-function DeleteReviewModal({ reviewId }) {
+function DeleteReviewModal({ reviewId, spotId }) {
 
   const { closeModal } = useModal();
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ function DeleteReviewModal({ reviewId }) {
     try {
       await dispatch(deleteReview(reviewId));
       closeModal();
+      // Refetch reviews and spot details
+      dispatch(fetchReviews(spotId)); // Refetch reviews
+      dispatch(getDetails(spotId));   // Refetch spot details
     } catch (error) {
       console.error("Failed to delete review:", error.message);
     }

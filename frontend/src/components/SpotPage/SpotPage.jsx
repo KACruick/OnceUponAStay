@@ -17,13 +17,15 @@ function SpotPage() {
     const dispatch = useDispatch();
 
     const spot = useSelector((state) => state.spots.spotDetails);
-    const reviews = useSelector((state) => state.reviews.reviewsBySpot[spotId] || [])
+    const reviews = useSelector((state) => state.reviews.reviewsBySpot[spotId] || {})
     const user = useSelector((state) => state.session.user);
 
     // console.log("spotId: ", spotId)
     // console.log("Spot from Redux state:", spot);
     
     const isOwner = user && spot.Owner?.id === user.id;
+    console.log("reviews", reviews)
+    const hasReviewedSpot = Object.keys(reviews).some((id) => reviews[id].User?.id === user?.id); // .some method returns true if it finds a matching review
 
     useEffect(() => {
         dispatch(getDetails(spotId))
@@ -100,7 +102,7 @@ function SpotPage() {
             </div>
 
             <div className='post-review-div'>
-                {user && !isOwner && (
+                {user && !isOwner && !hasReviewedSpot && (
                     <OpenModalButton
                         buttonText="Post Your Review"
                         modalComponent={<CreateReviewModal spotId={spotId} />}
@@ -110,8 +112,8 @@ function SpotPage() {
             </div>
 
             {/* <h2>Reviews</h2> */}
-            {reviews && reviews.length > 0 ? (
-            reviews.map((review) => {
+            {reviews && Object.keys(reviews).length > 0 ? (
+            Object.values(reviews).map((review) => {
             const reviewDate = new Date(review.createdAt);
             const formattedDate = reviewDate.toLocaleString('en-US', {
                 month: 'long',
@@ -119,7 +121,6 @@ function SpotPage() {
             });
 
             const isReviewAuthor = user && review.User?.id === user.id;
-
 
 
             return (
@@ -135,7 +136,7 @@ function SpotPage() {
                     <div className='delete-button-div'>
                         <OpenModalButton
                         buttonText="Delete"
-                        modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
                         className="delete-modal"
                         />
                     </div>
