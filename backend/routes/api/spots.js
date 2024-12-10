@@ -363,7 +363,7 @@ router.put('/:id', requireAuth, async (req, res) => {
     }
 
     //error: Validation error
-    if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
+    if (!address || !city || !state || !country || !name || !description || !price) {
         return res.status(400).json({
             message: "Bad Request",
             errors: {
