@@ -19,7 +19,7 @@ function CreateSpot() {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [previewImage, setPreviewImage] = useState('');
-  const [otherImages, setOtherImages] = useState([]);
+  const [otherImages, setOtherImages] = useState(['', '', '', '']);
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
 
@@ -53,8 +53,15 @@ function CreateSpot() {
         setDescription(existingSpot.description || '');
         setLatitude(existingSpot.latitude || '');
         setLongitude(existingSpot.longitude || '');
-        setPreviewImage(existingSpot.previewImage || '');
-        setOtherImages(existingSpot.otherImages || ['','','','']);
+
+        console.log("existingSpot.SpotImages:", existingSpot.SpotImages)
+        console.log("the preview image: ", existingSpot.SpotImages[0].url)
+        const preview = existingSpot.SpotImages[0].url || '';
+
+        const others = existingSpot.SpotImages.slice(1).map((img) => img.url) || ['', '', '', ''];
+        console.log("other imgs: ", others)
+        setPreviewImage(preview);
+        setOtherImages(others);
     }
   }, [existingSpot, isUpdate])
 
@@ -64,6 +71,8 @@ function CreateSpot() {
     updatedImages[index] = value;
     setOtherImages(updatedImages);
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -152,11 +161,11 @@ function CreateSpot() {
           <div className="lat-long">
             <label>
             Latitude:
-            <input type="text" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)}  />
+            <input type="number" step="any" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)}  />
             </label>
             <label>
             Longitude:
-            <input type="text" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)}  />
+            <input type="number" step="any" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)}  />
             </label>
           </div>
 
@@ -221,11 +230,11 @@ function CreateSpot() {
                   onChange={(e) => setPreviewImage(e.target.value)}
                   required
                 />
-                {Array.from({ length: 4 }, (url, index) => (
+                {otherImages.map((url, index) => (
                   <input 
                   key={index}
                   type="text"
-                  placeholder="Image URL"
+                  placeholder="Additional Image URL"
                   value={url}
                   onChange={(e) => handleOtherImages(index, e.target.value)}
                   />

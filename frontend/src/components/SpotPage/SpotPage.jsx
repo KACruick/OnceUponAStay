@@ -58,10 +58,10 @@ function SpotPage() {
         // Get the main image 
         const mainImg = spot.SpotImages[0].url
         console.log("Spot Images:", spot.SpotImages);
-        console.log("Spot Images[1]:", spot.SpotImages[0]);
+        console.log("Spot Images[0]:", spot.SpotImages[0]);
         console.log("Main Image URL: ", mainImg);
 
-    
+        console.log("Spot Images[1]:", spot.SpotImages[1]);
         // Get other images (or fallback to placeholder)
         // const otherImages = spot.SpotImages?.filter((img) => img.id !== 1) || [];
 
