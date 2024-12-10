@@ -33,6 +33,10 @@ function SpotPage() {
         dispatch(fetchReviews(spotId))
     }, [dispatch, spotId])
 
+    useEffect(() => {
+        console.log("Reviews for this spot:", reviews);  // Verify reviews in the component
+      }, [reviews]);
+
     if (!spot || Object.keys(spot).length === 0) {
         return <p>Loading spot details...</p>;
     }
