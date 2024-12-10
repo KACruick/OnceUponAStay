@@ -159,3 +159,21 @@ hr {
     display: flex;
     flex-direction: column;
 }
+
+@media (max-width: 768px) {
+    .img-container {
+        flex-direction: column;
+        height: auto; 
+    }
+
+    .main-img,
+    .others {
+        width: 100%; 
+        height: auto; 
+    }
+
+    .others {
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto; 
+    }
+}

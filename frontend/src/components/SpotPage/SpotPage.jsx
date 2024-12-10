@@ -60,11 +60,12 @@ function SpotPage() {
         console.log("Spot Images:", spot.SpotImages);
         console.log("Spot Images[1]:", spot.SpotImages[0]);
         console.log("Main Image URL: ", mainImg);
+
     
         // Get other images (or fallback to placeholder)
         // const otherImages = spot.SpotImages?.filter((img) => img.id !== 1) || [];
 
-   console.log("spot.owner: ", spot.Owner)
+//    console.log("spot.owner: ", spot.Owner)
 
   return (
     <div className='spot-page-container'>
