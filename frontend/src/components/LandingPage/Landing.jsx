@@ -39,15 +39,15 @@ function LandingPage() {
                     <p className="spot-tile-price">${spot.price}</p> <p>night</p>
                 </div>
             </div>
+          </div>
+          <Tooltip id={`tooltip-${spot.id}`} place="top" effect="solid" className="tooltip-name" >{spot.name}</Tooltip>
         </div>
-  </div>
-  <Tooltip id={`tooltip-${spot.id}`} className="tooltip-name" >{spot.name}</Tooltip>
-  </Link>
-))}
-    </section>
+          </Link>
+          ))}
+      </section>
         </>
       );
-    }
+}
 
 export default LandingPage;
 

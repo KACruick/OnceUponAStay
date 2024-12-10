@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdStar } from "react-icons/io";
 import { getSpots } from '../../store/spots';
+import { Tooltip } from 'react-tooltip';
 import './ManageSpots.css'
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx'
 import DeleteSpotModal from '../DeleteSpotModal/DeleteSpotModal.jsx'
@@ -56,7 +57,7 @@ function ManageSpots() {
               {userSpots.map((spot) => (
                 <div key={spot.id} className="spot-tile-container">
                   <Link to={`/api/spots/${spot.id}`} className="spot-tile-link">
-                    <div className="spot-tile">
+                    <div className="spot-tile" data-tooltip-id={`tooltip-${spot.id}`}>
                       <div className="spot-image-container">
                         <img src={spot.previewImage} alt={spot.name} />
                       </div>
@@ -71,6 +72,7 @@ function ManageSpots() {
                           ${spot.price} <span>night</span>
                         </p>
                       </div>
+                      <Tooltip id={`tooltip-${spot.id}`} place="top" effect="solid" className="tooltip-name" >{spot.name}</Tooltip>
                     </div>
                   </Link>
                   <div className="spot-actions">
