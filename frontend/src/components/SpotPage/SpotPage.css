@@ -16,31 +16,41 @@
 .img-container {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 5px; 
     border: 2px solid black;
+    width: 100%; 
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .main-img {
     width: 50%;
 }
 
-.others {
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 10px; 
-    width: 50%
-}
-
-.img {
+.main-img img {
     width: 100%; 
-    height: 150px; 
+    height: 100%; 
     object-fit: cover; 
+    border-radius: 5px; 
 }
 
-.img img {
+.others {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px; 
+    width: 50%; 
+}
+
+.others .img {
     width: 100%; 
+    height: 100%; 
+}
+
+.others .img img {
+    width: 100%;
     height: 100%;
-    object-fit: cover;    
+    object-fit: cover;
+    border-radius: 5px; /* Optional */  
 }
 
 .under-pictures-container {

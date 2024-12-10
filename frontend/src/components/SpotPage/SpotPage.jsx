@@ -25,7 +25,7 @@ function SpotPage() {
     // console.log("Spot from Redux state:", spot);
     
     const isOwner = user && spot.Owner?.id === user.id;
-    console.log("reviews", reviews)
+    // console.log("reviews", reviews)
     const hasReviewedSpot = Object.keys(reviews).some((id) => reviews[id].User?.id === user?.id); // .some method returns true if it finds a matching review
 
     useEffect(() => {
@@ -33,12 +33,12 @@ function SpotPage() {
         dispatch(fetchReviews(spotId))
     }, [dispatch, spotId])
 
-    useEffect(() => {
-        console.log("Reviews for this spot:", reviews);  // Verify reviews in the component
-      }, [reviews]);
+    // useEffect(() => {
+    //     console.log("Reviews for this spot:", reviews);  // Verify reviews in the component
+    //   }, [reviews]);
 
     if (!spot || Object.keys(spot).length === 0) {
-        return <p>Loading spot details...</p>;
+        return <p>Loading spot details...</p>; 
     }
 
     // console.log("spot details: ", spot)
@@ -55,6 +55,15 @@ function SpotPage() {
     //     if (!imgs) return "https://placehold.co/600x400/ffcc00/png"
     // }
     
+        // Get the main image 
+        const mainImg = spot.SpotImages[0].url
+        console.log("Spot Images:", spot.SpotImages);
+        console.log("Spot Images[1]:", spot.SpotImages[0]);
+        console.log("Main Image URL: ", mainImg);
+    
+        // Get other images (or fallback to placeholder)
+        // const otherImages = spot.SpotImages?.filter((img) => img.id !== 1) || [];
+
    console.log("spot.owner: ", spot.Owner)
 
   return (
@@ -67,13 +76,16 @@ function SpotPage() {
             </div>
             
             <div className='img-container'>
-                <div className='main-img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} main image`}/> </div>
-                <div className='others'>
-                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
-                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
-                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
-                    <div className='img'> <img src="https://placehold.co/600x400/ffcc00/png" alt={`${spot.name} alternative img`}/> </div>
-                </div>
+                <div className='main-img'> <img src={mainImg} alt={`${spot.name} main image`}/> </div>
+                {/* <div className='others'>
+                    {otherImages.length > 0 && 
+                        otherImages.map((img) => (
+                            <div className="img" key={img.id}>
+                                <img src={img.url} alt={`${spot.name} alternative img`} />
+                            </div>
+                        ))
+                    }
+                </div> */}
             </div>
             <div className='under-pictures-container'>
                 
