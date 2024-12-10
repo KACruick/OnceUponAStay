@@ -17,14 +17,16 @@
     display: flex;
     flex-direction: row;
     gap: 5px; 
-    border: 2px solid black;
+    /* border: 2px solid black; */
     width: 100%; 
     max-width: 1200px;
     margin: 0 auto;
+    height: calc(50vh);
 }
 
 .main-img {
     width: 50%;
+    height: 100%;
 }
 
 .main-img img {
@@ -37,31 +39,35 @@
 .others {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px; 
+    gap: 5px; 
     width: 50%; 
+    height: 100%;
 }
 
 .others .img {
     width: 100%; 
     height: 100%; 
+    overflow: hidden;
 }
 
 .others .img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 5px; /* Optional */  
+    border-radius: 5px;
 }
 
 .under-pictures-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between; 
     margin-top: 10px;
 }
 
 .spot-text {
     /* border: 1px solid black; */
-    width: 70%;
+    width: 60%;
+    margin-right: 30px;
 }
 
 .owner {
@@ -84,6 +90,7 @@
     margin-bottom: 20px;
     margin-top: 15px;
     justify-content: space-around;
+    /* margin-right:  */
  
 }
 
