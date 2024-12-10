@@ -63,7 +63,9 @@ function SpotPage() {
 
         console.log("Spot Images[1]:", spot.SpotImages[1]);
         // Get other images (or fallback to placeholder)
-        // const otherImages = spot.SpotImages?.filter((img) => img.id !== 1) || [];
+        const otherImages = spot.SpotImages.slice(1).map((img) => img.url)
+        console.log("other img: ", otherImages)
+        
 
 //    console.log("spot.owner: ", spot.Owner)
 
@@ -78,15 +80,15 @@ function SpotPage() {
             
             <div className='img-container'>
                 <div className='main-img'> <img src={mainImg} alt={`${spot.name} main image`}/> </div>
-                {/* <div className='others'>
+                <div className='others'>
                     {otherImages.length > 0 && 
-                        otherImages.map((img) => (
-                            <div className="img" key={img.id}>
-                                <img src={img.url} alt={`${spot.name} alternative img`} />
+                        otherImages.map((imgUrl, index) => (
+                            <div className="img" key={index}>
+                                <img src={imgUrl} alt={`${spot.name} additional img`} />
                             </div>
                         ))
                     }
-                </div> */}
+                </div>
             </div>
             <div className='under-pictures-container'>
                 
