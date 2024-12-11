@@ -1,8 +1,10 @@
 import "./CreateSpot.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
+//import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createSpot, updateSpot, getDetails } from "../../store/spots";
+import { createSpot, updateSpot } from "../../store/spots";
+//import { getDetails } from "../../store/spots";
 
 function CreateSpot() {
   const dispatch = useDispatch();
