@@ -15,7 +15,7 @@ function CreateReview({ spotId }) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [review, setReview] = useState('');
-  // const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
   const { closeModal } = useModal();
 
@@ -34,7 +34,7 @@ function CreateReview({ spotId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setErrors({});
+    setErrors({});
     // console.log("submit ...")
     // use thunk action to submit review 
     try {
@@ -46,9 +46,9 @@ function CreateReview({ spotId }) {
     } catch (error) {
       console.error("Failed to submit review:", error.message);
 
-      // if (error?.response?.data?.errors) {
-      //   setErrors(error.response.data.message);
-      // } 
+      if (error?.response?.data?.errors) {
+        setErrors({genreal: error.response.data.message});
+      } 
     }
   }
 
@@ -59,9 +59,9 @@ function CreateReview({ spotId }) {
         <h1 className='header-title'>How was your stay?</h1>
       </div>
 
-      {/* <div className='error-container'>
-        {errors.length > 0 && <p>{errors}</p>}
-      </div> */}
+      <div className='error-container'>
+        {errors?.general && <p>{errors.general}</p>}
+      </div>
 
       <div className='textarea-div'>
         <textarea 
