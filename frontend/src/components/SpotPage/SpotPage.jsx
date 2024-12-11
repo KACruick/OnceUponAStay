@@ -57,14 +57,14 @@ function SpotPage() {
     
         // Get the main image 
         const mainImg = spot.SpotImages[0].url
-        console.log("Spot Images:", spot.SpotImages);
-        console.log("Spot Images[0]:", spot.SpotImages[0]);
-        console.log("Main Image URL: ", mainImg);
+        // console.log("Spot Images:", spot.SpotImages);
+        // console.log("Spot Images[0]:", spot.SpotImages[0]);
+        // console.log("Main Image URL: ", mainImg);
 
-        console.log("Spot Images[1]:", spot.SpotImages[1]);
+        // console.log("Spot Images[1]:", spot.SpotImages[1]);
         // Get other images (or fallback to placeholder)
         const otherImages = spot.SpotImages.slice(1).map((img) => img.url)
-        console.log("other img: ", otherImages)
+        // console.log("other img: ", otherImages)
         
 
 //    console.log("spot.owner: ", spot.Owner)
@@ -133,7 +133,9 @@ function SpotPage() {
 
             {/* <h2>Reviews</h2> */}
             {reviews && Object.keys(reviews).length > 0 ? (
-            Object.values(reviews).map((review) => {
+            Object.values(reviews)
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .map((review) => {
             const reviewDate = new Date(review.createdAt);
             const formattedDate = reviewDate.toLocaleString('en-US', {
                 month: 'long',
