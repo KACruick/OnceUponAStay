@@ -1,6 +1,6 @@
 
 .sign-up-container {
-    height: 340px;
+    height: 400px;
     width: 500px;
     border: 2px solid black;
     border-radius: 8px;
@@ -39,3 +39,8 @@ input {
 .sign-up-button:hover {
     background-color: #354A26;
 }
+
+.sign-up-button:disabled {
+    background-color: #D3D3D3; 
+    color: #A9A9A9; 
+  }

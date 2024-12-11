@@ -15,6 +15,8 @@ function SignupFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+  const incompleteSignup = !email || !username || !firstName || !lastName || !password || !confirmPassword;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
@@ -44,6 +46,13 @@ function SignupFormModal() {
   return (
     <div className='sign-up-container'>
       <h1>Sign Up</h1>
+
+      <div className='error-container'>
+      {Object.values(errors).map((error, idx) => (
+        <p key={idx} className='error-message'>{error}</p>
+      ))}
+      </div>
+
       <form className='form-div' onSubmit={handleSubmit}>
 
           <input
@@ -54,7 +63,7 @@ function SignupFormModal() {
             required
           />
      
-          {errors.firstName && <p>{errors.firstName}</p>}
+          {/* {errors.firstName && <p>{errors.firstName}</p>} */}
 
           <input
             type="text"
@@ -64,7 +73,7 @@ function SignupFormModal() {
             required
           />
    
-          {errors.lastName && <p>{errors.lastName}</p>}
+          {/* {errors.lastName && <p>{errors.lastName}</p>} */}
 
           <input
             type="text"
@@ -74,7 +83,7 @@ function SignupFormModal() {
             required
           />
       
-          {errors.email && <p>{errors.email}</p>}
+          {/* {errors.email && <p>{errors.email}</p>} */}
        
           <input
             type="text"
@@ -84,7 +93,7 @@ function SignupFormModal() {
             required
           />
   
-          {errors.username && <p>{errors.username}</p>}
+          {/* {errors.username && <p>{errors.username}</p>} */}
       
   
           <input
@@ -95,7 +104,7 @@ function SignupFormModal() {
             required
           />
       
-          {errors.password && <p>{errors.password}</p>}
+          {/* {errors.password && <p>{errors.password}</p>} */}
      
           <input
             type="password"
@@ -105,10 +114,10 @@ function SignupFormModal() {
             required
           />
     
-        {errors.confirmPassword && (
+        {/* {errors.confirmPassword && (
           <p>{errors.confirmPassword}</p>
-        )}
-        <button type="submit" className='sign-up-button'>Sign Up</button>
+        )} */}
+        <button type="submit" className='sign-up-button' disabled={incompleteSignup}>Sign Up</button>
       </form>
     </div>
   );
