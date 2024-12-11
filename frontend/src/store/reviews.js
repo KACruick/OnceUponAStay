@@ -1,3 +1,4 @@
+// import { getDetails } from "./store/spots.js";
 import { csrfFetch } from "./csrf";
 
 // actions
@@ -72,7 +73,7 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
         // console.log("New review received:", newReview);
         dispatch(addReview(spotId, newReview))
         dispatch(fetchReviews(spotId));
-        dispatch(getDetails(spotId)) // fetch updated spot details (for updated avgStarRating and numReviews)
+        // dispatch(getDetails(spotId)) // fetch updated spot details (for updated avgStarRating and numReviews)
         return true;
         // return newReview;
     } catch (error) {

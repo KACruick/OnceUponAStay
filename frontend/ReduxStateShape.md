@@ -1,4 +1,4 @@
-//  Create a .js file that has a mock up of your normalized Redux store
+//  Create a file that has a mock up of your normalized Redux store
 
 const mockReduxStore = {
     session: {

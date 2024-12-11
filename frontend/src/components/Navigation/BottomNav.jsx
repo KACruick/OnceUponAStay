@@ -1,4 +1,4 @@
-import React from 'react'
+
 import "./BottomNav.css"
 
 function BottomNav() {

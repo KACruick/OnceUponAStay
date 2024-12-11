@@ -85,7 +85,7 @@ export const createSpot = (newSpotData, imageUrl) => async (dispatch) => {
         const newSpot = await response.json();
         dispatch(createSpotAction(newSpot));
         
-        const spotId = newSpot.id;
+        // const spotId = newSpot.id;
 
         // Add each image associated with the spot
     for (const [index, url] of imageUrl.entries()) {
@@ -178,7 +178,7 @@ const spotsReducer = (state = initialState, action) => {
             };
         }
         case DELETE_SPOT: {
-            const { [action.payload]: deleted, ...remainingSpots } = state.allSpots;
+            const { [action.payload]: _, ...remainingSpots } = state.allSpots;
             return {
                 ...state,
                 allSpots: remainingSpots,
