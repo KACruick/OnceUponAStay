@@ -22,7 +22,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Cozy Cottage',
-        description: "Nestled in the heart of the picturesque English countryside, this charming cottage offers a tranquil escape from the hustle and bustle of city life. Surrounded by rolling green hills and lush gardens, the cottage exudes rustic charm with its thatched roof, stone walls, and flower-filled window boxes. Inside, you'll find a cozy living area with a wood-burning fireplace, exposed wooden beams, and vintage decor that captures the essence of country living. The fully equipped kitchen and dining nook are perfect for preparing and enjoying hearty meals, while the inviting bedroom ensures a restful night's sleep. Step outside onto the private patio to take in breathtaking views, or enjoy a cup of tea in the garden. Whether you're seeking a romantic getaway or a peaceful retreat, this countryside gem is the ideal spot.",
+        description: "Nestled in the heart of the picturesque English countryside, this charming cottage offers a tranquil escape from the hustle and bustle of city life. Surrounded by rolling green hills and lush gardens, the cottage exudes rustic charm with its thatched roof, stone walls, and flower-filled window boxes. Inside, you'll find a cozy living area with a wood-burning fireplace, exposed wooden beams, and vintage decor that captures the essence of country living. Step outside onto the private patio to take in breathtaking views, or enjoy a cup of tea in the garden.",
         price: 125,
       },
       //spot 2
@@ -100,7 +100,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Casa de los Gatos',
-        description: "Welcome to this spacious, traditional Argentine home, where the charm of rustic elegance meets the warmth of local culture. Set on expansive grounds, this grand house boasts high ceilings, classic wood finishes, and large windows that allow for an abundance of natural light. Inside, you'll find beautifully decorated rooms, each with a unique blend of vintage and modern touches. From the cozy living room with its inviting fireplace to the large kitchen perfect for family meals, this home exudes comfort and character. As you wander through the garden, you’ll encounter a group of friendly feral cats, who have adopted the property as their home. These curious and affectionate cats will delight in your company as you explore the lush grounds, adding a special touch of local charm to your stay. Whether you're enjoying a peaceful afternoon on the porch or discovering the natural beauty surrounding you, this house offers a truly authentic Argentine experience.",
+        description: "Welcome to this spacious, traditional Argentine home, where the charm of rustic elegance meets the warmth of local culture. Set on expansive grounds, this grand house boasts high ceilings, classic wood finishes, and large windows that allow for an abundance of natural light. Inside, you'll find beautifully decorated rooms, each with a unique blend of vintage and modern touches. As you wander through the garden, you’ll encounter a group of friendly feral cats, who have adopted the property as their home. These curious and affectionate cats will delight in your company as you explore the lush grounds, adding a special touch of local charm to your stay.",
         price: 100,
       },
       //spot 8
@@ -113,7 +113,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Royal Oaks Mansion',
-        description: "Experience the elegance and charm of New Orleans with this stunning mansion, located just steps from the iconic French Quarter. The grand home is a perfect blend of historic Southern architecture and modern luxury, with stately columns, intricate ironwork balconies, and beautifully restored hardwood floors. Inside, you'll find spacious rooms with high ceilings and large windows that allow for plenty of natural light. The formal dining room, opulent living spaces, and gourmet kitchen are designed for both comfort and entertaining. Outside, the lush courtyard offers a serene escape, while the rooftop terrace boasts breathtaking views of the French Quarter and the Mississippi River. Whether you're strolling through the vibrant streets of the neighborhood or enjoying a quiet evening in the garden, this mansion provides the perfect setting for a luxurious New Orleans experience.",
+        description: "Experience the elegance and charm of New Orleans with this stunning mansion, located just steps from the iconic French Quarter. The grand home is a perfect blend of historic Southern architecture and modern luxury, with stately columns, intricate ironwork balconies, and beautifully restored hardwood floors. Inside, you'll find spacious rooms with high ceilings and large windows that allow for plenty of natural light.",
         price: 175,
       },
       //spot 9
@@ -126,7 +126,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Seaside Retreat Beach House',
-        description: "Nestled along the rugged beauty of the Oregon coast, this charming beach house offers the perfect blend of comfort and coastal adventure. With breathtaking views of the Pacific Ocean, this two-story retreat features large windows that let in natural light and stunning sunsets. The open-concept living area boasts cozy furnishings, a stone fireplace, and a fully equipped kitchen perfect for gathering with loved ones. Enjoy a spacious deck with plenty of seating, ideal for morning coffee or evening barbecues while listening to the waves crash below. Whether you're strolling along the nearby sandy beach, exploring tide pools, or simply relaxing in the hammock, this beach house is an idyllic coastal getaway.",
+        description: "Nestled along the rugged beauty of the Oregon coast, this charming beach house offers the perfect blend of comfort and coastal adventure. With breathtaking views of the Pacific Ocean, this two-story retreat features large windows that let in natural light and stunning sunsets. The open-concept living area boasts cozy furnishings, a stone fireplace, and a fully equipped kitchen perfect for gathering with loved ones.",
         price: 325,
       },
       //spot 10
