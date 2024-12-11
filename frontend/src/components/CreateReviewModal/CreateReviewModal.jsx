@@ -8,12 +8,14 @@ import { createReview, fetchReviews } from "../../store/reviews";
 import { getDetails } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 
+
 function CreateReview({ spotId }) {
   const dispatch = useDispatch();
   // const [stars, setStars] = useState([false, false, false, false, false])
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [review, setReview] = useState('');
+  // const [errors, setErrors] = useState({});
 
   const { closeModal } = useModal();
 
@@ -32,6 +34,7 @@ function CreateReview({ spotId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // setErrors({});
     // console.log("submit ...")
     // use thunk action to submit review 
     try {
@@ -42,6 +45,10 @@ function CreateReview({ spotId }) {
       await dispatch(getDetails(spotId));
     } catch (error) {
       console.error("Failed to submit review:", error.message);
+
+      // if (error?.response?.data?.errors) {
+      //   setErrors(error.response.data.message);
+      // } 
     }
   }
 
@@ -51,6 +58,10 @@ function CreateReview({ spotId }) {
       <div className='header-div'>
         <h1 className='header-title'>How was your stay?</h1>
       </div>
+
+      {/* <div className='error-container'>
+        {errors.length > 0 && <p>{errors}</p>}
+      </div> */}
 
       <div className='textarea-div'>
         <textarea 
