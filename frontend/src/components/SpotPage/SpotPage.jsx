@@ -109,7 +109,7 @@ function SpotPage() {
                         
                     </div>
                     <div>
-                        <button className='reserve-button'>Reserve</button>
+                        <button className='reserve-button' onClick={() => alert("Feature coming soon")}>Reserve</button>
                     </div>
                 </div>
             </div>
