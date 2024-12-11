@@ -5,7 +5,6 @@ import { getDetails } from '../../store/spots';
 import { fetchReviews } from '../../store/reviews';
 import './SpotPage.css';
 import { IoMdStar } from "react-icons/io";
-import { RxDotFilled } from "react-icons/rx";
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx'
 import CreateReviewModal from '../CreateReviewModal/CreateReviewModal.jsx';
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal.jsx';
@@ -124,7 +123,6 @@ function SpotPage() {
                 <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating}</h3>
                 {spot.numReviews > 0 && (
                     <div>
-                        < RxDotFilled />
                         <h3>{spot.numReviews} reviews</h3>
                     </div>
                 )}
