@@ -178,7 +178,8 @@ const spotsReducer = (state = initialState, action) => {
             };
         }
         case DELETE_SPOT: {
-            const { [action.payload]: _, ...remainingSpots } = state.allSpots;
+            const remainingSpots = { ...state.allSpots };
+            delete remainingSpots[action.payload];
             return {
                 ...state,
                 allSpots: remainingSpots,
