@@ -56,14 +56,16 @@ function SpotPage() {
     // }
     
         // Get the main image 
-        const mainImg = spot.SpotImages[0].url
+        // const mainImg = spot.SpotImages[0].url
+        const mainImg = spot.SpotImages && spot.SpotImages.length > 0 ? spot.SpotImages[0].url : "https://placehold.co/600x400/ffcc00/png";
         // console.log("Spot Images:", spot.SpotImages);
         // console.log("Spot Images[0]:", spot.SpotImages[0]);
         // console.log("Main Image URL: ", mainImg);
 
         // console.log("Spot Images[1]:", spot.SpotImages[1]);
         // Get other images (or fallback to placeholder)
-        const otherImages = spot.SpotImages.slice(1).map((img) => img.url)
+        // const otherImages = spot.SpotImages.slice(1).map((img) => img.url)
+        const otherImages = spot.SpotImages && spot.SpotImages.length > 1 ? spot.SpotImages.slice(1).map((img) => img.url) : [];
         // console.log("other img: ", otherImages)
         
 
