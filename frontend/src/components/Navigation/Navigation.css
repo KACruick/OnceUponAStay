@@ -11,16 +11,14 @@ nav {
 .icon {
     display: flex;
     align-items: center;
-    color: #c15c6e;
+    color: #354A26;
 }
 
-.house {
-    color: #c15c6e;
-}
+
 
 .title{
     margin: 5px;
-    color: #c15c6e;
+    color: #354A26;
     text-decoration: none;
     font-family: "Montserrat Alternates", sans-serif;
     font-weight: 400;
@@ -36,12 +34,12 @@ nav {
 }
 
 .create-link {
-    color: #c15c6e;
+    color: #354A26;
     text-decoration: none;
     margin-right: 10px;
 }
 
 .profile-button {
-    border: 1px solid #c15c6e;
+    border: 1px solid #354A26;
     border-radius: 25px;
 }

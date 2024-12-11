@@ -1,8 +1,11 @@
 
 /* .page {
-     border: 1px solid red; 
-  
+  /* background-color: #f1e3d3; */
+  /* background-color: #f1f4f0; 
 } */
+
+/* #d98d9a; */
+/* #c07485; */
 
 .header {
     display: flex;
@@ -18,7 +21,7 @@
 
 .create-spot-link {
     text-decoration: none;
-    background-color: #d98d9a;
+    background-color: #9AAB89;
     color: white;
     padding: 7px 15px;
     border: none;
@@ -26,7 +29,7 @@
 }
 
 .create-spot-link:hover {
-    background-color: #c07485;
+    background-color: #354A26;
 }
 
 .no-spots {
@@ -56,6 +59,7 @@
     width: 300px;
     transition: box-shadow 0.3s;
     cursor: pointer;
+    margin-bottom: 10px;
   }
   
   .spot-tile:hover {
@@ -109,8 +113,12 @@
     text-align: center;
 } */
 
+.spot-actions {
+  margin-bottom: 20px;
+}
+
 .button-link {
-    background-color: #d98d9a;
+    background-color: #9AAB89;
     color: white;
     padding: 7px 15px;
     border: none;
@@ -118,11 +126,11 @@
 }
 
 .button-link:hover {
-    background-color: #c07485;
+    background-color: #354A26;
 }
 
 .delete-modal {
-    background-color: #d98d9a;
+    background-color: #9AAB89;
     color: white;
     padding: 7px 15px;
     border: none;
@@ -131,7 +139,7 @@
 }
 
 .delete-modal:hover {
-    background-color: #c07485;
+    background-color: #354A26;
 }
 
 @media (max-width: 768px) {

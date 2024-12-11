@@ -27,7 +27,7 @@ input {
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    height: 350px;
+    height: 320px;
     gap: 10px;
 }
 
@@ -143,7 +143,7 @@ textarea {
 }
 
 .button-div button {
-    background-color: #d98d9a;
+    background-color: #9AAB89;
     color: white;
     padding: 7px 15px;
     border: none;
@@ -151,5 +151,5 @@ textarea {
 }
 
 .button-div button:hover {
-    background-color: #c07485;
+    background-color: #354A26;
 }

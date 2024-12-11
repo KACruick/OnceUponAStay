@@ -111,14 +111,15 @@
 }
 
 .reserve-button {
-    background-color: #d98d9a;
+    background-color: #9AAB89;
+    color: white;
     width: 275px;
     margin-left: 20px;
     height: 30px;
 }
 
 .reserve-button:hover {
-    background-color: #c07485;
+    background-color: #354A26;
 }
 
 /* reviews section styling */
@@ -141,8 +142,16 @@ hr {
     align-items: center;
 }
 
+h3{
+    margin-top: 0;
+}
+
+.post-review-div {
+    margin-top: 10px;
+}
+
 .post-review-button {
-    background-color: #d98d9a;
+    background-color: #9AAB89;
     color: white;
     padding: 7px 15px;
     border: none;
@@ -151,7 +160,7 @@ hr {
 }
 
 .post-review-button:hover {
-    background-color: #c07485;
+    background-color: #354A26;
 }
 
 .review-card {
