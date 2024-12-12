@@ -93,7 +93,7 @@ function CreateSpot() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setErrors({});
+    // setErrors({});
     // if (Object.keys(checkError).length > 0){
     //   setErrors(checkError);
     //   return
