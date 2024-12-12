@@ -15,10 +15,10 @@ function LandingPage() {
       dispatch(getSpots());
     }, [dispatch]);
 
-    console.log("spots[1].avgRating", spots[1].avgRating)
-    console.log("spots[1].numReviews", spots[1].numReviews)
-    console.log("spots[11].avgRating", spots[11].avgRating)
-    console.log("spots[11].numReviews", spots[11].numReviews)
+    // console.log("spots[1].avgRating", spots[1]?.avgRating)
+    // console.log("spots[1].numReviews", spots[1]?.numReviews)
+    // console.log("spots[11].avgRating", spots[11]?.avgRating)
+    // console.log("spots[11].numReviews", spots[11]?.numReviews)
 
     return (
         <>
