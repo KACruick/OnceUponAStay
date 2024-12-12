@@ -57,7 +57,7 @@ function CreateSpot() {
       });
     }
 
-  }, [dispatch, spotId, isUpdate, user])
+  }, [dispatch, spotId, isUpdate, user, navigate])
 
   useEffect(() => {
     if (isUpdate && existingSpot) {
