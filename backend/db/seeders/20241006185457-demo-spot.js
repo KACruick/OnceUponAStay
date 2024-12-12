@@ -22,7 +22,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Cozy Cottage',
-        description: "Nestled in the heart of the picturesque English countryside, this charming cottage offers a tranquil escape from the hustle and bustle of city life. Surrounded by rolling green hills and lush gardens, the cottage exudes rustic charm with its thatched roof, stone walls, and flower-filled window boxes. Inside, you'll find a cozy living area with a wood-burning fireplace, exposed wooden beams, and vintage decor that captures the essence of country living. Step outside onto the private patio to take in breathtaking views, or enjoy a cup of tea in the garden.",
+        description: "Nestled in the heart of the English countryside, this charming cottage offers a tranquil escape from city life. Inside, you'll find a cozy living area with a wood-burning fireplace, exposed wooden beams, and vintage decor that captures the essence of country living.",
         price: 125,
       },
       //spot 2
