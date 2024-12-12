@@ -127,8 +127,8 @@ function CreateSpot() {
         navigate(`/api/spots/${createdSpot.id}`); // Redirect to the new spot page
       }
     } catch (error) {
-      // console.error("Error creating spot:", error);
-      const errorData = await error.json();
+      console.error("Error creating spot:", error);
+      //const errorData = await error.json();
       //setErrors(errorData.errors || {});
     }
   };
