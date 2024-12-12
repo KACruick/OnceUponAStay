@@ -22,7 +22,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Cozy Cottage',
-        description: "Nestled in the heart of the English countryside, this charming cottage offers a tranquil escape from city life. Inside, you'll find a cozy living area with a wood-burning fireplace and decor that captures the essence of country living.",
+        description: 'Nestled in the heart of the English countryside, this charming cottage offers a tranquil escape from city life.',
+        //description: "Nestled in the heart of the English countryside, this charming cottage offers a tranquil escape from city life. Inside, you'll find a cozy living area with a wood-burning fireplace and decor that captures the essence of country living.",
         price: 125,
       },
       //spot 2
@@ -35,7 +36,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Log Cabin',
-        description: "Escape to a secluded log cabin hidden deep in the serene forests of northern California. This rustic retreat is surrounded by towering redwoods and offers breathtaking views of the untouched wilderness.",
+        description: 'Escape to a secluded log cabin hidden deep in the serene forests of northern California.',
+        //description: "Escape to a secluded log cabin hidden deep in the serene forests of northern California. This rustic retreat is surrounded by towering redwoods and offers breathtaking views of the untouched wilderness.",
         price: 115,
       },
       //spot 3
@@ -48,7 +50,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Traditional German Home',
-        description: "Discover the charm of traditional German living in this beautiful home, nestled in a picturesque village in the Bavarian countryside.",
+        description: 'Discover the charm of traditional German living in this beautiful home, nestled in a picturesque village in the Bavarian countryside.',
+        //description: "Discover the charm of traditional German living in this beautiful home, nestled in a picturesque village in the Bavarian countryside.",
         price: 160,
       },
       //spot 4
@@ -61,7 +64,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Modern Seattle apartment',
-        description: "Welcome to your sleek and stylish modern apartment in the heart of Seattle. Featuring large windows, you'll enjoy stunning views of the the iconic Space Needle.",
+        description: 'Welcome to your sleek and stylish modern apartment in the heart of Seattle. Featuring large windows, you"ll enjoy stunning views of the the iconic Space Needle.',
         price: 250,
       },
       //spot 5
@@ -87,7 +90,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Townhouse',
-        description: "Step into urban elegance with this stunning townhouse located just steps away from the Philadelphia iconic City Hall. Perfectly blending historic charm with modern sophistication, this residence offers the ultimate city living experience in the heart of Philadelphia.",
+        description: 'Step into urban elegance with this stunning townhouse located just steps away from the Philadelphia iconic City Hall.',
+        // description: "Step into urban elegance with this stunning townhouse located just steps away from the Philadelphia iconic City Hall. Perfectly blending historic charm with modern sophistication, this residence offers the ultimate city living experience in the heart of Philadelphia.",
         price: 200,
       },
       //spot 7
@@ -100,7 +104,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Casa de los Gatos',
-        description: "Welcome to this traditional Argentine home, where the charm of rustic elegance meets the warmth of local culture. Set on expansive grounds, this grand house boasts high ceilings, classic wood finishes, and large windows that allow for an abundance of natural light.",
+        description: 'Welcome to this traditional Argentine home, where the charm of rustic elegance meets the warmth of local culture.',
+        // description: "Welcome to this traditional Argentine home, where the charm of rustic elegance meets the warmth of local culture. Set on expansive grounds, this grand house boasts high ceilings, classic wood finishes, and large windows that allow for an abundance of natural light.",
         price: 100,
       },
       //spot 8
@@ -113,7 +118,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Royal Oaks Mansion',
-        description: "Experience the elegance and charm of New Orleans with this stunning mansion, located just steps from the iconic French Quarter. Inside, you'll find spacious rooms with high ceilings and large windows that allow for plenty of natural light.",
+        description: 'Experience the elegance and charm of New Orleans with this stunning mansion, located just steps from the iconic French Quarter.',
+        //description: "Experience the elegance and charm of New Orleans with this stunning mansion, located just steps from the iconic French Quarter. Inside, you'll find spacious rooms with high ceilings and large windows that allow for plenty of natural light.",
         price: 175,
       },
       //spot 9
@@ -139,7 +145,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Dunhaven Castle',
-        description: "Step back in time and experience the magic of staying in a historic Scottish castle, nestled amidst rolling hills and lush greenery. Perfect for large gatherings, like a family reunion, a milestone celebration, or a corporate retreat.",
+        description: 'Step back in time and experience the magic of staying in a historic Scottish castle, nestled amidst rolling hills and lush greenery.',
+        // description: "Step back in time and experience the magic of staying in a historic Scottish castle, nestled amidst rolling hills and lush greenery. Perfect for large gatherings, like a family reunion, a milestone celebration, or a corporate retreat.",
         price: 500,
       },
     ], { validate: true });
