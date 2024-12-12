@@ -85,7 +85,7 @@ function CreateSpot() {
 
   const validateFields = () => {
     const errors = {};
-    const urlRegex = /\.(png|jpg|jpeg)$/i; 
+    const urlRegex = /(png|jpg|jpeg)/i; 
     if (!name) errors.name = "Name is required";
     if (!address) errors.address = "Address is required";
     if (!city) errors.city = "City is required";
@@ -97,12 +97,12 @@ function CreateSpot() {
     if (!previewImage) {
       errors.previewImage = "Preview image is required";
     } else if (!urlRegex.test(previewImage)) {
-      errors.previewImage = "Preview image URL must end in .png, .jpg, or .jpeg";
+      errors.previewImage = "Preview image URL must contain .png, .jpg, or .jpeg";
     }
 
     otherImages.forEach((url) => {
       if (url.trim() && !urlRegex.test(url)) {
-        errors.otherImages = "Image URL must end in .png, .jpg, or .jpeg";
+        errors.otherImages = "Image URL must contain .png, .jpg, or .jpeg";
       }
     })
 
