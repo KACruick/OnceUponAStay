@@ -14,7 +14,7 @@ function CreateSpot() {
   const { spotId } = useParams();
   const user = useSelector((state) => state.session.user);
   const existingSpot = useSelector((state) => state.spots.spotDetails);
-  const [errors, setErrors] = useState({});
+  //const [errors, setErrors] = useState({});
 
   const [name, setName] = useState('');
     // if (!name) {errors.name = "Please enter a name for your spot"}
