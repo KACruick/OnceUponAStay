@@ -1,10 +1,10 @@
 import "./CreateSpot.css";
 import { useState} from "react";
-//import { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createSpot, updateSpot } from "../../store/spots";
-//import { getDetails } from "../../store/spots";
+import { getDetails } from "../../store/spots";
 
 
 
@@ -42,44 +42,44 @@ function CreateSpot() {
 
   const [isUpdate] = useState(!!spotId);
 
-  if (!user) {
-    return navigate("/", {
-      state: { error: "Please login to create a spot" },
-      replace: true
-    });
-  }
+  // if (!user) {
+  //   return navigate("/", {
+  //     state: { error: "Please login to create a spot" },
+  //     replace: true
+  //   });
+  // }
 
   console.log("existingSpot: ", existingSpot);
   // console.log("spotId: ", spotId);
 
-  // useEffect(() => {
-  //   if (isUpdate && spotId) {
-  //     dispatch(getDetails(spotId))
-  //   }
-  // }, [dispatch, spotId, isUpdate])
+  useEffect(() => {
+    if (isUpdate && spotId) {
+      dispatch(getDetails(spotId))
+    }
+  }, [dispatch, spotId, isUpdate])
 
-  // useEffect(() => {
-  //   if (isUpdate && existingSpot) {
-  //       setName(existingSpot.name || '');
-  //       setAddress(existingSpot.address || '');
-  //       setCity(existingSpot.city || '');
-  //       setState(existingSpot.state || '');
-  //       setCountry(existingSpot.country || '');
-  //       setPrice(existingSpot.price || '');
-  //       setDescription(existingSpot.description || '');
-  //       setLatitude(existingSpot.latitude || '');
-  //       setLongitude(existingSpot.longitude || '');
+  useEffect(() => {
+    if (isUpdate && existingSpot) {
+        setName(existingSpot.name || '');
+        setAddress(existingSpot.address || '');
+        setCity(existingSpot.city || '');
+        setState(existingSpot.state || '');
+        setCountry(existingSpot.country || '');
+        setPrice(existingSpot.price || '');
+        setDescription(existingSpot.description || '');
+        setLatitude(existingSpot.latitude || '');
+        setLongitude(existingSpot.longitude || '');
 
-  //       console.log("existingSpot.SpotImages:", existingSpot.SpotImages)
-  //       console.log("the preview image: ", existingSpot.SpotImages[0].url)
-  //       const preview = existingSpot.SpotImages[0].url || '';
+        // console.log("existingSpot.SpotImages:", existingSpot.SpotImages)
+        // console.log("the preview image: ", existingSpot.SpotImages[0].url)
+        const preview = existingSpot.SpotImages[0].url || '';
 
-  //       const others = existingSpot.SpotImages.slice(1).map((img) => img.url) || ['', '', '', ''];
-  //       console.log("other imgs: ", others)
-  //       setPreviewImage(preview);
-  //       setOtherImages(others);
-  //   }
-  // }, [existingSpot, isUpdate])
+        const others = existingSpot.SpotImages.slice(1).map((img) => img.url) || ['', '', '', ''];
+        // console.log("other imgs: ", others)
+        setPreviewImage(preview);
+        setOtherImages(others);
+    }
+  }, [existingSpot, isUpdate])
 
 
   const handleOtherImages = (index, value) => {
