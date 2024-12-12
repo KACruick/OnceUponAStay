@@ -129,7 +129,7 @@ function CreateSpot() {
     } catch (error) {
       // console.error("Error creating spot:", error);
       const errorData = await error.json();
-      setErrors(errorData.errors || {});
+      //setErrors(errorData.errors || {});
     }
   };
 
