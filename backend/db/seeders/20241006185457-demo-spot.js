@@ -126,7 +126,8 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Seaside Retreat Beach House',
-        description: "Nestled along the rugged beauty of the Oregon coast, this charming beach house offers the perfect blend of comfort and coastal adventure."
+        description: "Nestled along the rugged beauty of the Oregon coast, this charming beach house offers the perfect blend of comfort and coastal adventure.",
+        price: 150,
       },
       //spot 10
       {
