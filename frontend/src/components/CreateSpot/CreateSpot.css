@@ -18,6 +18,18 @@ h4 {
     font-size: small;
 }
 
+.error-message {
+    color: red;
+    font-size: small;
+    margin: 0;
+}
+
+.label-div {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 input {
     width: 440px;
 }
@@ -35,7 +47,7 @@ input {
     /* border: solid red 1px; */
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 .ctry-street input {
     margin-left: 0;

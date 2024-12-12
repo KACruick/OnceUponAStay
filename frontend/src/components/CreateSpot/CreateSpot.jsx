@@ -8,30 +8,24 @@ import { getDetails } from "../../store/spots";
 
 
 
+
 function CreateSpot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { spotId } = useParams();
   const user = useSelector((state) => state.session.user);
   const existingSpot = useSelector((state) => state.spots.spotDetails);
-  //const [errors, setErrors] = useState({});
+
+  const [errors, setErrors] = useState({});
 
   const [name, setName] = useState('');
-    // if (!name) {errors.name = "Please enter a name for your spot"}
   const [address, setAddress] = useState('');
-    // if (!address) {errors.address = "Address is required"}
   const [city, setCity] = useState('');
-    // if (!city) {errors.city = "City is required"}
   const [state, setState] = useState('');
-    // if (!state) {errors.state = "State is required"}
   const [country, setCountry] = useState('');
-    // if (!country) {errors.country = "Country is required"}
   const [price, setPrice] = useState('');
-    // if (!price) {errors.price = "Price is required"}
   const [description, setDescription] = useState('');
-    // if (!description) {errors.description = "Description needs a minimum of 30 characters"}
   const [previewImage, setPreviewImage] = useState('');
-    // if (!previewImage) {errors.previewImage = "Preview image is required"}
   const [otherImages, setOtherImages] = useState(['', '', '', '']);
 
 
@@ -89,16 +83,40 @@ function CreateSpot() {
     setOtherImages(updatedImages);
   };
 
+  const validateFields = () => {
+    const errors = {};
+    const urlRegex = /\.(png|jpg|jpeg)$/i; 
+    if (!name) errors.name = "Name is required";
+    if (!address) errors.address = "Address is required";
+    if (!city) errors.city = "City is required";
+    if (!state) errors.state = "State is required";
+    if (!country) errors.country = "Country is required";
+    if (!price || price <= 0) errors.price = "Price is required";
+    if (!description || description.length < 30) errors.description = "Description needs a minimum of 30 characters";
 
+    if (!previewImage) {
+      errors.previewImage = "Preview image is required";
+    } else if (!urlRegex.test(previewImage)) {
+      errors.previewImage = "Preview image URL must end in .png, .jpg, or .jpeg";
+    }
+
+    otherImages.forEach((url) => {
+      if (url.trim() && !urlRegex.test(url)) {
+        errors.otherImages = "Image URL must end in .png, .jpg, or .jpeg";
+      }
+    })
+
+    return errors;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = validateFields();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
-    // setErrors({});
-    // if (Object.keys(checkError).length > 0){
-    //   setErrors(checkError);
-    //   return
-    // }
   
     const spotData = {
       name,
@@ -114,7 +132,7 @@ function CreateSpot() {
 
     const imageUrls = [previewImage, ...otherImages.filter((url) => url.trim() !== "")];
     
-    console.log("isUpdate: ", isUpdate)
+    //console.log("isUpdate: ", isUpdate)
 
     try {
       if (isUpdate) { //update existing spot
@@ -129,25 +147,18 @@ function CreateSpot() {
       }
     } catch (error) {
       console.error("Error creating spot:", error);
-      //const errorData = await error.json();
-      //setErrors(errorData.errors || {});
     }
   };
 
+  const renderError = (field) => {
+    return errors[field] ?  <div className="error">{errors[field]}</div> : null;
+  }
 
   return (
     <div className="create-spot-container">
 
       <div className="header">
         <h1>{isUpdate ? "Update your Spot" : "Create a new Spot"}</h1>
-
-        {/* {errors.length > 0 && (
-          <ul className="errors">
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-          </ul>
-        )} */}
       </div>
 
       <div>
@@ -157,29 +168,38 @@ function CreateSpot() {
             <h4>Guests will only get your exact address once they book a reservation.</h4>
             
           <div className="ctry-street">
-            <label>
-            Country: 
-            {/* {errors.country && (<div className="error">{errors.country}</div>)} */}
-            <input type="text" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} required />
-            </label>
-            <label>
-            Street Address: 
-            {/* {errors.address && (<div className="error">{errors.address}</div>)} */}
-            <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
-            </label>
+            <div className="label-div">
+              <label>Country: </label>
+              <p className="error-message">{renderError("country")}</p>
+            </div>
+            <input type="text" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+            
+            <div className="label-div">
+              <label>Street Address: </label>
+              <p className="error-message">{renderError("address")}</p>
+            </div>
+            <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+            
           </div>
             
           <div className="city-state">
-            <label>
-            City: 
-            {/* {errors.city && (<div className="error">{errors.city}</div>)} */}
-            <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} required />
-            </label>
-            <label>
-            State: 
-            {/* {errors.state && (<div className="error">{errors.state}</div>)} */}
-            <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} required />
-            </label>
+
+            <div className="city">
+              <div className="label-div">
+                <label>City: </label>
+                <p className="error-message">{renderError("city")}</p>
+              </div>
+              <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
+
+            <div>
+              <div className="label-div">
+                <label>State: </label>
+                <p className="error-message">{renderError("state")}</p>
+              </div>
+              <input type="text" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
+            </div>
+
           </div>
 
           <div className="lat-long">
@@ -204,9 +224,8 @@ function CreateSpot() {
               value={description}
               placeholder="Please write at least 30 characters"
               onChange={(e) => setDescription(e.target.value)}
-              required
             ></textarea>
-            {/* {errors.description && (<div className="error">{errors.description}</div>)} */}
+            <p className="error-message">{renderError("description")}</p>
           </div>
 
         <hr></hr>
@@ -214,8 +233,8 @@ function CreateSpot() {
           <div className="create-title">
             <h3>Create a title for your spot</h3>
             <h4>Catch guests&apos; attention with a spot title that highlights what makes your place special.</h4>
-            <input type="text" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} required />
-            {/* {errors.name && (<div className="error">{errors.name}</div>)} */}
+            <input type="text" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} />
+            <p className="error-message">{renderError("name")}</p>
           </div>
 
         <hr></hr>
@@ -235,11 +254,10 @@ function CreateSpot() {
                 value={price}
                 onChange={(e) => setPrice(parseFloat(e.target.value))}
                 min="0"
-                required
               />
               
             </div>
-            {/* {errors.price && (<div className="error">{errors.price}</div>)} */}
+            <p className="error-message">{renderError("price")}</p>
           </div>
           
         <hr></hr>
@@ -254,10 +272,9 @@ function CreateSpot() {
                   placeholder="Preview Image URL"
                   value={previewImage}
                   onChange={(e) => setPreviewImage(e.target.value)}
-                  required
                 />
-                {/* {errors.previewImage && (<div className="error">{errors.previewImage}</div>)} */}
-                {/* need error under any url field if they don't have the proper file types */}
+                <p className="error-message">{renderError("previewImage")}</p>
+                <p className="error-message">{errors.otherImages}</p>
                 {otherImages.map((url, index) => (
                   <input 
                   key={index}
@@ -267,9 +284,10 @@ function CreateSpot() {
                   onChange={(e) => handleOtherImages(index, e.target.value)}
                   />
                 ))}
+
             </div>
 
-            {/* <button type="button" onClick={() => setOtherImages([...otherImages, ""])}>Add another image</button> */}
+            
           </div>
 
         <hr></hr>
