@@ -57,11 +57,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     name: {
-      type: DataTypes.STRING(1000),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     price: {
