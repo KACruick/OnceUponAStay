@@ -91,7 +91,7 @@ const calculateAvgStarRating = async (spotId) => {
     if (reviewCount > 0) {
         return parseFloat((totalStars / reviewCount).toFixed(1));
     } else {
-        return "No reviews yet";
+        return 0;
     }
 };
 
@@ -211,7 +211,7 @@ function calculateExtraDetails(spot) {
         spot.avgStarRating = parseFloat((totalStars / reviewCount).toFixed(1));
 
     } else {
-        spot.avgStarRating = "no reviews yet";
+        spot.avgStarRating = 0;
         spot.numReviews = 0;
     }
     delete spot.Reviews;

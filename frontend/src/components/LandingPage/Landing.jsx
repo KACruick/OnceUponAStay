@@ -15,8 +15,10 @@ function LandingPage() {
       dispatch(getSpots());
     }, [dispatch]);
 
-    // console.log("", spots[11].avgRating)
-    // console.log("", spots[11].numReviews)
+    console.log("spots[1].avgRating", spots[1].avgRating)
+    console.log("spots[1].numReviews", spots[1].numReviews)
+    console.log("spots[11].avgRating", spots[11].avgRating)
+    console.log("spots[11].numReviews", spots[11].numReviews)
 
     return (
         <>
@@ -34,7 +36,7 @@ function LandingPage() {
                 <div>
                     <p className="spot-tile-location">
                         {spot.city}, {spot.state}
-                        <span className="spot-tile-rating"><IoMdStar /> {spot.numReviews === undefined ? "New" : spot.avgRating}</span>
+                        <span className="spot-tile-rating"><IoMdStar /> {spot.avgRating === 0 ? "New" : spot.avgRating}</span>
                     </p>
                 </div>
                 <div className="price-night">
