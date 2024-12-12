@@ -42,12 +42,6 @@ function CreateSpot() {
 
   const [isUpdate] = useState(!!spotId);
 
-  // if (!user) {
-  //   return navigate("/", {
-  //     state: { error: "Please login to create a spot" },
-  //     replace: true
-  //   });
-  // }
 
   console.log("existingSpot: ", existingSpot);
   // console.log("spotId: ", spotId);
@@ -56,7 +50,14 @@ function CreateSpot() {
     if (isUpdate && spotId) {
       dispatch(getDetails(spotId))
     }
-  }, [dispatch, spotId, isUpdate])
+    if (!user) {
+      return navigate("/", {
+        state: { error: "Please login to create a spot" },
+        replace: true
+      });
+    }
+
+  }, [dispatch, spotId, isUpdate, user])
 
   useEffect(() => {
     if (isUpdate && existingSpot) {
