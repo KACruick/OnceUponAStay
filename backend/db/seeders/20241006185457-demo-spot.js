@@ -22,7 +22,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Cozy Cottage',
-        description: "Nestled in the heart of the English countryside, this charming cottage offers a tranquil escape from city life. Inside, you'll find a cozy living area with a wood-burning fireplace, exposed wooden beams, and vintage decor that captures the essence of country living.",
+        description: "Nestled in the heart of the English countryside, this charming cottage offers a tranquil escape from city life. Inside, you'll find a cozy living area with a wood-burning fireplace and decor that captures the essence of country living.",
         price: 125,
       },
       //spot 2
@@ -87,7 +87,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Townhouse',
-        description: "Step into urban elegance with this stunning townhouse located just steps away from Philadelphia’s iconic City Hall. Perfectly blending historic charm with modern sophistication, this residence offers the ultimate city living experience in the heart of Philadelphia.",
+        description: "Step into urban elegance with this stunning townhouse located just steps away from the Philadelphia iconic City Hall. Perfectly blending historic charm with modern sophistication, this residence offers the ultimate city living experience in the heart of Philadelphia.",
         price: 200,
       },
       //spot 7
@@ -138,7 +138,7 @@ module.exports = {
         lat: null,
         lng: null,
         name: 'Dunhaven Castle',
-        description: "Step back in time and experience the magic of staying in a historic Scottish castle, nestled amidst rolling hills and lush greenery. Perfect for large gatherings, whether it’s a family reunion, a milestone celebration, or a corporate retreat.",
+        description: "Step back in time and experience the magic of staying in a historic Scottish castle, nestled amidst rolling hills and lush greenery. Perfect for large gatherings, like a family reunion, a milestone celebration, or a corporate retreat.",
         price: 500,
       },
     ], { validate: true });
