@@ -43,7 +43,7 @@ function LoginFormModal() {
                 value={credential}
                 placeholder='Username or Email'
                 onChange={(e) => setCredential(e.target.value)}
-                required
+                
               />
         </div>
 
@@ -53,7 +53,7 @@ function LoginFormModal() {
                 value={password}
                 placeholder='Password'
                 onChange={(e) => setPassword(e.target.value)}
-                required
+               
               />
         </div>
 
@@ -61,7 +61,7 @@ function LoginFormModal() {
             {/* {errors.credential && (
               <p>{errors.credential}</p>
             )} */}
-            <button className="login-button" type="submit">Log In</button>
+            <button disabled={credential.length < 4 || password.length < 6} className="login-button" type="submit">Log In</button>
         </div>
 
       </form>
