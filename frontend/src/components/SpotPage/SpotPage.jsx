@@ -101,7 +101,7 @@ function SpotPage() {
                 <div className='reserve-container'>
                     <div className='reserve-info'>
                         <div className='price'>${spot.price} night</div>
-                        <div className='rating'><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating}</div>
+                        <div className='rating'><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
                         {spot.numReviews > 0 && (
                             <div className='num-reviews'>{spot.numReviews} reviews</div>
                         )}
@@ -120,7 +120,7 @@ function SpotPage() {
         <div className='reviews-container'>
  
             <div className='reviews-top'>
-                <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating}</h3>
+                <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</h3>
                 {spot.numReviews > 0 && (
                     <div>
                         <h3>{spot.numReviews} reviews</h3>
