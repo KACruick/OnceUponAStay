@@ -43,6 +43,10 @@ function SpotPage() {
 
     // console.log("spot details: ", spot)
     // console.log("reviews: ", reviews)
+
+    // console.log("spot.avgStarRating", spot.avgStarRating)
+    // console.log("spot.avgStarRating.toFixed(1)", spot.avgStarRating.toFixed(1))
+
     
     //helper functions for returning image urls
     // function mainImg(spot) {
@@ -102,7 +106,7 @@ function SpotPage() {
                 <div className='reserve-container'>
                     <div className='reserve-info'>
                         <div className='price'>${spot.price} night</div>
-                        <div className='rating'><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
+                        <div className='rating'><IoMdStar /> {!spot.avgStarRating || spot.avgStarRating === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
                         {spot.numReviews > 0 && (<div className='small-dot'><GoDotFill size={8} /></div> )}
                         {spot.numReviews > 0 && (
                             <div className='num-reviews'>{spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}</div>
@@ -122,7 +126,7 @@ function SpotPage() {
         <div className='reviews-container'>
  
             <div className='reviews-top'>
-                <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</h3>
+                <h3><IoMdStar /> {!spot.avgStarRating || spot.avgStarRating === 0 ? "New" : spot.avgStarRating.toFixed(1)}</h3>
                 {spot.numReviews > 0 && (<div className='small-dot'><GoDotFill size={8} /></div>)}
                 {spot.numReviews > 0 && (
                     <div>
