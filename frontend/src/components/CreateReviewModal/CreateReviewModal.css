@@ -5,17 +5,29 @@
     width: 400px;
 }
 
-.header-div {
+.review-header-div {
     display: flex;
     justify-content: center;
+   
+    height: 40px;
 }
 
 
+
+.review-error-container {
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-size: small;
+ 
+    
+}
 
 .textarea-div {
     /* border: 1px solid red; */
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .text {
