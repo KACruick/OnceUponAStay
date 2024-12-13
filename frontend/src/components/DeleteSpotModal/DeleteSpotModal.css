@@ -18,7 +18,17 @@
     gap:12px;
 }
 
-.yes, .no {
+.yes {
+    height: 35px;
+    background-color: grey;
+    color: white;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);;
+}
+
+.no {
     height: 35px;
     background-color: #9AAB89;
     color: white;
@@ -27,6 +37,7 @@
     border-radius: 6px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);;
 }
+
 
 .yes:hover, .no:hover {
    background-color: #354A26;

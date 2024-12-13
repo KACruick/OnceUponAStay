@@ -5,6 +5,7 @@ import { getDetails } from '../../store/spots';
 import { fetchReviews } from '../../store/reviews';
 import './SpotPage.css';
 import { IoMdStar } from "react-icons/io";
+import { GoDotFill } from "react-icons/go";
 import OpenModalButton from '../OpenModalButton/OpenModalButton.jsx'
 import CreateReviewModal from '../CreateReviewModal/CreateReviewModal.jsx';
 import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal.jsx';
@@ -101,7 +102,8 @@ function SpotPage() {
                 <div className='reserve-container'>
                     <div className='reserve-info'>
                         <div className='price'>${spot.price} night</div>
-                        <div className='rating'><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating}</div>
+                        <div className='rating'><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
+                        <div className='small-dot'><GoDotFill size={8} /></div>
                         {spot.numReviews > 0 && (
                             <div className='num-reviews'>{spot.numReviews} reviews</div>
                         )}
@@ -120,10 +122,11 @@ function SpotPage() {
         <div className='reviews-container'>
  
             <div className='reviews-top'>
-                <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating}</h3>
+                <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</h3>
+                <div className='small-dot'><GoDotFill size={8} /></div>
                 {spot.numReviews > 0 && (
                     <div>
-                        <h3>{spot.numReviews} reviews</h3>
+                        <h3>{spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}</h3>
                     </div>
                 )}
             </div>
@@ -198,7 +201,7 @@ function SpotPage() {
             );
             })
             ) : (
-            <p>No reviews yet</p>
+            <p>Be the first to post a review!</p>
             )}
         </div>
     </div>

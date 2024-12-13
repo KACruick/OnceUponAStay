@@ -8,12 +8,13 @@ import LoginFormModal from '../LoginFormModal/LoginFormModal.jsx'
 import SignupFormModal from '../SignupFormModal/SignupFormModal.jsx';
 import OpenModalMenuItem from './OpenModalMenuItem.jsx';
 import { TbMenu2 } from "react-icons/tb";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const navigate = useNavigate();
 
   // Toggle the dropdown menu
   const toggleMenu = (e) => {
@@ -42,6 +43,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    navigate('/'); // Redirect to home page
   };
 
   // Dynamically set dropdown visibility

@@ -47,7 +47,12 @@ function CreateReview({ spotId }) {
       console.error("Failed to submit review:", error.message);
 
       if (error?.response?.data?.errors) {
-        setErrors({genreal: error.response.data.message});
+        const newErrors = {};
+
+        if (error.response.data.message) {
+          newErrors.general = error.response.data.message
+        }
+        setErrors(newErrors)
       } 
     }
   }
@@ -69,7 +74,7 @@ function CreateReview({ spotId }) {
           className='text'
           placeholder="Leave your review here..."
           onChange={(e) => setReview(e.target.value)}
-          required>
+          >
         </textarea>
       </div>
 
@@ -78,7 +83,7 @@ function CreateReview({ spotId }) {
       </div>
 
       <div className="button-div">
-        <button className='submit-review-button' type="submit" onClick={handleSubmit} disabled={!review || rating === 0}>
+        <button className='submit-review-button' type="submit" onClick={handleSubmit} disabled={!review || review.length < 10 || rating === 0}>
           Submit Your Review
         </button>
       </div>

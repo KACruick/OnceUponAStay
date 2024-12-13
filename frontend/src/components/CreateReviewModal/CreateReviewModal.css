@@ -59,6 +59,13 @@
     margin-bottom: 20px;
 }
 
+.submit-review-button:disabled{
+    background-color: grey;
+}
+.submit-review-button:disabled:hover{
+    background-color: grey;
+}
+
 .submit-review-button:hover {
     background-color: #c07485;
 }

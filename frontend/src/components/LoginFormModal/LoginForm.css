@@ -72,6 +72,10 @@ h1 {
     background-color: #9AAB89;
 }
 
+.login-button:disabled{
+    background-color: grey;
+}
+
 .login-button:hover {
     background-color: #354A26;
 }

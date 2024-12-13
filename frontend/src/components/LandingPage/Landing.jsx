@@ -36,7 +36,7 @@ function LandingPage() {
                 <div>
                     <p className="spot-tile-location">
                         {spot.city}, {spot.state}
-                        <span className="spot-tile-rating"><IoMdStar /> {spot.avgRating === 0 ? "New" : spot.avgRating}</span>
+                        <span className="spot-tile-rating"><IoMdStar /> {spot.avgRating === 0 || spot.avgRating == null ? "New" : spot.avgRating.toFixed(1)}</span>
                     </p>
                 </div>
                 <div className="price-night">
