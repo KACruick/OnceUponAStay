@@ -205,7 +205,7 @@ function SpotPage() {
             );
             })
             ) : (
-            <p>Be the first to post a review!</p>
+            !isOwner && <p>Be the first to post a review!</p>
             )}
         </div>
     </div>
