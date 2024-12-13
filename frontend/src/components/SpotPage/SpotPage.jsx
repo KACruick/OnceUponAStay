@@ -105,7 +105,7 @@ function SpotPage() {
                         <div className='rating'><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
                         {spot.numReviews > 0 && (<div className='small-dot'><GoDotFill size={8} /></div> )}
                         {spot.numReviews > 0 && (
-                            <div className='num-reviews'>{spot.numReviews} reviews</div>
+                            <div className='num-reviews'>{spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}</div>
                         )}
                         
                     </div>
