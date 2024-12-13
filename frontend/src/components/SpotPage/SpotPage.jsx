@@ -198,7 +198,7 @@ function SpotPage() {
             );
             })
             ) : (
-            <p>No reviews yet</p>
+            <p>Be the first to post a review!</p>
             )}
         </div>
     </div>
