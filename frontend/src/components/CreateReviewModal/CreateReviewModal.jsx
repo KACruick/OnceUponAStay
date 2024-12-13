@@ -78,7 +78,7 @@ function CreateReview({ spotId }) {
       </div>
 
       <div className="button-div">
-        <button className='submit-review-button' type="submit" onClick={handleSubmit} disabled={!review || rating === 0}>
+        <button className='submit-review-button' type="submit" onClick={handleSubmit} disabled={!review || review.length < 10 || rating === 0}>
           Submit Your Review
         </button>
       </div>
