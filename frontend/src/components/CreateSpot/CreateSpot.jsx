@@ -279,7 +279,7 @@ function CreateSpot() {
                   <input 
                   key={index}
                   type="text"
-                  placeholder="Additional Image URL"
+                  placeholder="Image URL"
                   value={url}
                   onChange={(e) => handleOtherImages(index, e.target.value)}
                   />
