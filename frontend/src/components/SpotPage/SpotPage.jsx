@@ -123,7 +123,7 @@ function SpotPage() {
                 <h3><IoMdStar /> {spot.numReviews === 0 ? "New" : spot.avgStarRating.toFixed(1)}</h3>
                 {spot.numReviews > 0 && (
                     <div>
-                        <h3>{spot.numReviews} reviews</h3>
+                        <h3>{spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}</h3>
                     </div>
                 )}
             </div>
