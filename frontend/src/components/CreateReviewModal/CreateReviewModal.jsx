@@ -44,27 +44,35 @@ function CreateReview({ spotId }) {
       await dispatch(fetchReviews(spotId));
       await dispatch(getDetails(spotId));
     } catch (error) {
-      console.error("Failed to submit review:", error.message);
+      console.log("Failed to submit review:", error);
 
-      if (error?.response?.data?.errors) {
-        const newErrors = {};
-
-        if (error.response.data.message) {
-          newErrors.general = error.response.data.message
+      
+    if (error instanceof Response) {
+      try {
+        const errorData = await error.json(); // Parse the JSON response to display the backend API error message
+        if (errorData.message) {
+          setErrors({ general: errorData.message }); 
+        } else {
+          setErrors({ general: "Something went wrong. Please try again." });
         }
-        setErrors(newErrors)
-      } 
+      } catch (parseError) {
+        console.error("Failed to parse error response:", parseError);
+        setErrors({ general: "Something went wrong. Please try again." });
+      }
+    } else {
+      setErrors({ general: "Something went wrong. Please try again." });
+    }
     }
   }
 
   return (
     <div className='review-modal-container'>
 
-      <div className='header-div'>
+      <div className='review-header-div'>
         <h1 className='header-title'>How was your stay?</h1>
       </div>
 
-      <div className='error-container'>
+      <div className='review-error-container'>
         {errors?.general && <p>{errors.general}</p>}
       </div>
 
