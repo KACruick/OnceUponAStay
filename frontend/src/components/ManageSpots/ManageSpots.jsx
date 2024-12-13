@@ -65,7 +65,7 @@ function ManageSpots() {
                         <p className="spot-tile-location">
                           {spot.city}, {spot.state}
                           <span className="spot-tile-rating">
-                            <IoMdStar /> {spot.avgRating === 0 ? "New" : spot.avgRating.toFixed(1)}
+                            <IoMdStar /> {!spot.avgRating || spot.avgRating === 0 ? "New" : spot.avgRating.toFixed(1)}
                           </span>
                         </p>
                         <p className="spot-tile-price">
