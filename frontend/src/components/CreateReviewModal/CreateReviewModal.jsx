@@ -47,7 +47,12 @@ function CreateReview({ spotId }) {
       console.error("Failed to submit review:", error.message);
 
       if (error?.response?.data?.errors) {
-        setErrors({genreal: error.response.data.message});
+        const newErrors = {};
+
+        if (error.response.data.message) {
+          newErrors.general = error.response.data.message
+        }
+        setErrors(newErrors)
       } 
     }
   }
