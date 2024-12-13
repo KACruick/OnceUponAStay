@@ -1,6 +1,6 @@
 
 .sign-up-container {
-    height: 400px;
+    height: 370px;
     width: 500px;
     border: 2px solid black;
     border-radius: 8px;
@@ -19,21 +19,21 @@
 
 input {
     border: 2px solid black;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 0 auto;
     height: 20px;
 }
 
 .sign-up-button {
     height: 35px;
+    width: 450px;
     background-color: #9AAB89;
     color: white;
     padding: 7px 15px;
     border: none;
     /* border-radius: 6px; */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-left: 20px;
-    margin-right: 27px;
+    margin: 0 auto;
+    
 }
 
 .sign-up-button:hover {
