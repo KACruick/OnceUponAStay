@@ -110,6 +110,12 @@
     font-size: small;
 }
 
+.small-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .reserve-button {
     background-color: #9AAB89;
     color: white;
