@@ -15,33 +15,43 @@ function SignupFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const incompleteSignup = !email || !username || !firstName || !lastName || !password || !confirmPassword;
+  const incompleteSignup = !email || !username || username.length < 4 || !firstName || !lastName || !password || password.length < 6 || !confirmPassword || confirmPassword.length < 6;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
+    const newErrors = {}
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Confirm Password field must be the same as the Password field";
+    }
+
+    setErrors({});
+
+    try {
+      await dispatch(
         sessionActions.signup({
           email,
           username,
           firstName,
           lastName,
-          password
+          password,
         })
-      )
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data?.errors) {
-            setErrors(data.errors);
-          }
-        });
+      );
+      closeModal();
+    } catch (res) {
+      if (res && res.json) {
+        const data = await res.json();
+        console.log("Backend Response Data:", data); 
+        if (data?.errors) {
+          if (data.errors.email) newErrors.email = "The provided email is invalid";
+          if (data.errors.username) newErrors.username = "Username must be unique";
+        }
+      }
     }
-    return setErrors({
-      confirmPassword: "Confirm Password field must be the same as the Password field"
-    });
+    console.log("newErrors: ", newErrors)
+    setErrors(newErrors);
   };
+
 
   return (
     <div className='sign-up-container'>
@@ -60,7 +70,7 @@ function SignupFormModal() {
             value={firstName}
             placeholder='First Name'
             onChange={(e) => setFirstName(e.target.value)}
-            required
+           
           />
      
           {/* {errors.firstName && <p>{errors.firstName}</p>} */}
@@ -70,7 +80,7 @@ function SignupFormModal() {
             value={lastName}
             placeholder='Last Name'
             onChange={(e) => setLastName(e.target.value)}
-            required
+          
           />
    
           {/* {errors.lastName && <p>{errors.lastName}</p>} */}
@@ -80,7 +90,7 @@ function SignupFormModal() {
             value={email}
             placeholder='Email'
             onChange={(e) => setEmail(e.target.value)}
-            required
+    
           />
       
           {/* {errors.email && <p>{errors.email}</p>} */}
@@ -90,7 +100,7 @@ function SignupFormModal() {
             value={username}
             placeholder='Username'
             onChange={(e) => setUsername(e.target.value)}
-            required
+            
           />
   
           {/* {errors.username && <p>{errors.username}</p>} */}
@@ -101,7 +111,7 @@ function SignupFormModal() {
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+       
           />
       
           {/* {errors.password && <p>{errors.password}</p>} */}
@@ -111,7 +121,7 @@ function SignupFormModal() {
             placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+     
           />
     
         {/* {errors.confirmPassword && (
