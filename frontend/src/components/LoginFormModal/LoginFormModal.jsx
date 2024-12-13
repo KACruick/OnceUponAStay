@@ -71,8 +71,8 @@ function LoginFormModal() {
           type="button" 
           className="demo-user-button"
           onClick={() => {
-              setCredential('FakeUser1');
-              setPassword('password');
+              setCredential('FakeUser5');
+              setPassword('password5');
           }}
           >
           Demo User
