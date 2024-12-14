@@ -14,6 +14,7 @@ h3 {
 
 h4 {
     margin-top: 0;
+   
     font-weight: 500;
     font-size: small;
 }
@@ -39,7 +40,7 @@ input {
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    height: 320px;
+    height: 260px;
     gap: 10px;
 }
 
@@ -48,6 +49,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-top: 0;
 }
 .ctry-street input {
     margin-left: 0;

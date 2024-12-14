@@ -30,8 +30,8 @@ function CreateSpot() {
 
 
 
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+  // const [latitude, setLatitude] = useState('');
+  // const [longitude, setLongitude] = useState('');
 
 
   const [isUpdate] = useState(!!spotId);
@@ -62,8 +62,8 @@ function CreateSpot() {
         setCountry(existingSpot.country || '');
         setPrice(existingSpot.price || '');
         setDescription(existingSpot.description || '');
-        setLatitude(existingSpot.latitude || '');
-        setLongitude(existingSpot.longitude || '');
+        // setLatitude(existingSpot.latitude || '');
+        // setLongitude(existingSpot.longitude || '');
 
         // console.log("existingSpot.SpotImages:", existingSpot.SpotImages)
         // console.log("the preview image: ", existingSpot.SpotImages[0].url)
@@ -127,8 +127,8 @@ function CreateSpot() {
       country,
       price: parseFloat(price),
       description,
-      lat: latitude ? parseFloat(latitude) : null,
-      lng: longitude ? parseFloat(longitude) : null
+      // lat: latitude ? parseFloat(latitude) : null,
+      // lng: longitude ? parseFloat(longitude) : null
     };
 
     const imageUrls = [previewImage, ...otherImages.filter((url) => url.trim() !== "")];
@@ -203,7 +203,7 @@ function CreateSpot() {
 
           </div>
 
-          <div className="lat-long">
+          {/* <div className="lat-long">
             <label>
             Latitude:
             <input type="number" step="any" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)}  />
@@ -212,7 +212,7 @@ function CreateSpot() {
             Longitude:
             <input type="number" step="any" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)}  />
             </label>
-          </div>
+          </div> */}
 
           </div>
 
