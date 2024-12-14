@@ -94,6 +94,12 @@
  
 }
 
+.rating-reviews-div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .reserve-info {
     display: flex;
     flex-direction: row;
@@ -142,9 +148,10 @@ hr {
     display: flex;
     flex-direction: row;
     text-align: center;
-    /* border: 1px solid black; */
+    /* border: 1px solid red; */
     width: 200px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 12px;
     align-items: center;
 }
 

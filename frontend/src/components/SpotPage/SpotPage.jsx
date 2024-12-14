@@ -106,12 +106,13 @@ function SpotPage() {
                 <div className='reserve-container'>
                     <div className='reserve-info'>
                         <div className='price'>${spot.price} night</div>
-                        <div className='rating'><IoMdStar /> {!spot.avgStarRating || spot.avgStarRating === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
-                        {spot.numReviews > 0 && (<div className='small-dot'><GoDotFill size={8} /></div> )}
-                        {spot.numReviews > 0 && (
-                            <div className='num-reviews'>{spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}</div>
-                        )}
-                        
+                        <div className='rating-reviews-div'>
+                            <div className='rating'><IoMdStar /> {!spot.avgStarRating || spot.avgStarRating === 0 ? "New" : spot.avgStarRating.toFixed(1)}</div>
+                            {spot.numReviews > 0 && (<div className='small-dot'><GoDotFill size={8} /></div> )}
+                            {spot.numReviews > 0 && (
+                                <div className='num-reviews'>{spot.numReviews} {spot.numReviews === 1 ? "Review" : "Reviews"}</div>
+                            )}
+                        </div>
                     </div>
                     <div>
                         <button className='reserve-button' onClick={() => alert("Feature coming soon")}>Reserve</button>
