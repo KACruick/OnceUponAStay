@@ -192,7 +192,7 @@ function CreateSpot() {
               <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
 
-            <div>
+            <div className="state">
               <div className="label-div">
                 <label>State: </label>
                 <p className="error-message">{renderError("state")}</p>

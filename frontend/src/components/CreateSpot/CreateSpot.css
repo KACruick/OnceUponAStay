@@ -57,6 +57,7 @@ input {
     /* border: solid red 1px; */
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 
@@ -69,6 +70,7 @@ input {
     /* border: solid red 1px; */
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 .lat-long input {
