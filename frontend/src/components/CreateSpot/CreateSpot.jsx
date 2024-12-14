@@ -71,8 +71,9 @@ function CreateSpot() {
 
         const others = existingSpot.SpotImages.slice(1).map((img) => img.url) || ['', '', '', ''];
         // console.log("other imgs: ", others)
+        const paddedOthers = [...others, '', '', '', ''].slice(0, 4); // get exactly 4 fields
         setPreviewImage(preview);
-        setOtherImages(others);
+        setOtherImages(paddedOthers);
     }
   }, [existingSpot, isUpdate])
 
@@ -192,7 +193,7 @@ function CreateSpot() {
               <input type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
 
-            <div>
+            <div className="state">
               <div className="label-div">
                 <label>State: </label>
                 <p className="error-message">{renderError("state")}</p>
