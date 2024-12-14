@@ -220,7 +220,7 @@ function CreateSpot() {
 
           <div className="description">
             <h3>Describe your place to guests</h3>
-            <h4>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h4>
+            <h4>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</h4>
             <textarea
               value={description}
               placeholder="Please write at least 30 characters"
