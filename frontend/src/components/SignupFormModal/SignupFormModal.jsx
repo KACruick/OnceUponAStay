@@ -64,69 +64,74 @@ function SignupFormModal() {
       </div>
 
       <form className='form-div' onSubmit={handleSubmit}>
+        <div className='signup-section-div'>
+          <label className='signup-label'>First Name</label>
+            <input
+              type="text"
+              value={firstName}
+              // placeholder='First Name'
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            {/* {errors.firstName && <p>{errors.firstName}</p>} */}
+        </div>
 
-          <input
-            type="text"
-            value={firstName}
-            placeholder='First Name'
-            onChange={(e) => setFirstName(e.target.value)}
-           
-          />
-     
-          {/* {errors.firstName && <p>{errors.firstName}</p>} */}
+        <div className='signup-section-div'>
+          <label className='signup-label'>Last Name</label>
+            <input
+              type="text"
+              value={lastName}
+              // placeholder='Last Name'
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            {/* {errors.lastName && <p>{errors.lastName}</p>} */}
+        </div>
 
-          <input
-            type="text"
-            value={lastName}
-            placeholder='Last Name'
-            onChange={(e) => setLastName(e.target.value)}
-          
-          />
-   
-          {/* {errors.lastName && <p>{errors.lastName}</p>} */}
-
+        <div className='signup-section-div'>
+          <label className='signup-label'>Email</label>
           <input
             type="text"
             value={email}
-            placeholder='Email'
+            // placeholder='Email'
             onChange={(e) => setEmail(e.target.value)}
-    
           />
-      
           {/* {errors.email && <p>{errors.email}</p>} */}
-       
+        </div>
+
+        <div className='signup-section-div'>
+          <label className='signup-label'>Username</label>
           <input
             type="text"
             value={username}
-            placeholder='Username'
+            // placeholder='Username'
             onChange={(e) => setUsername(e.target.value)}
-            
           />
-  
           {/* {errors.username && <p>{errors.username}</p>} */}
-      
-  
+        </div>
+
+        <div className='signup-section-div'>
+          <label className='signup-label'>Password</label>
           <input
             type="password"
-            placeholder='Password'
+            // placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-       
           />
-      
           {/* {errors.password && <p>{errors.password}</p>} */}
-     
+        </div>
+
+        <div className='signup-section-div'>
+          <label className='signup-label'>Confirm Password</label>
           <input
             type="password"
-            placeholder='Confirm Password'
+            // placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-     
           />
-    
-        {/* {errors.confirmPassword && (
-          <p>{errors.confirmPassword}</p>
-        )} */}
+          {/* {errors.confirmPassword && (
+            <p>{errors.confirmPassword}</p>
+          )} */}
+        </div>
+
         <button type="submit" className='sign-up-button' disabled={incompleteSignup}>Sign Up</button>
       </form>
     </div>
