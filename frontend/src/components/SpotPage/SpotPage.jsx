@@ -48,17 +48,6 @@ function SpotPage() {
     // console.log("spot.avgStarRating.toFixed(1)", spot.avgStarRating.toFixed(1))
 
     
-    //helper functions for returning image urls
-    // function mainImg(spot) {
-    //     const img = spot.SpotImages.find((img) => img.id === 1);
-    //     if (!img) return "https://placehold.co/600x400/ffcc00/png"
-    //     return img.url
-    // }
-    // function otherImg(spot) {
-    //     const imgs = spot.SpotImages.filter((img) => img.id !== 1);
-    //     if (!imgs) return "https://placehold.co/600x400/ffcc00/png"
-    // }
-    
         // Get the main image 
         // const mainImg = spot.SpotImages[0].url
         const mainImg = spot.SpotImages && spot.SpotImages.length > 0 ? spot.SpotImages[0].url : "https://placehold.co/600x400/ffcc00/png";
