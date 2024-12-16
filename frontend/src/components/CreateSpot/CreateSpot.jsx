@@ -37,7 +37,7 @@ function CreateSpot() {
   const [isUpdate] = useState(!!spotId);
 
 
-  console.log("existingSpot: ", existingSpot);
+  // console.log("existingSpot: ", existingSpot);
   // console.log("spotId: ", spotId);
 
   useEffect(() => {
