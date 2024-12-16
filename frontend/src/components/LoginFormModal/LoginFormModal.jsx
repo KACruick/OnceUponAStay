@@ -71,8 +71,14 @@ function LoginFormModal() {
           type="button" 
           className="demo-user-button"
           onClick={() => {
-              setCredential('FakeUser5');
-              setPassword('password5');
+              return dispatch(sessionActions.login({ credential: 'FakeUser5', password: 'password5' }))
+              .then(closeModal)
+              .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                  setErrors(data.errors);
+                }
+              });
           }}
           >
           Demo User
