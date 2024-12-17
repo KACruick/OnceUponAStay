@@ -13,7 +13,7 @@ function CreateSpot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { spotId } = useParams();
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user); //only used to check if logged in or not //unnecessary?
   const existingSpot = useSelector((state) => state.spots.spotDetails);
 
   const [errors, setErrors] = useState({});
@@ -27,14 +27,11 @@ function CreateSpot() {
   const [description, setDescription] = useState('');
   const [previewImage, setPreviewImage] = useState('');
   const [otherImages, setOtherImages] = useState(['', '', '', '']);
-
-
-
   // const [latitude, setLatitude] = useState('');
   // const [longitude, setLongitude] = useState('');
 
-
-  const [isUpdate] = useState(!!spotId);
+  // determines if this is an update based on spot id being truthy or false
+  const isUpdate = !!spotId;
 
 
   // console.log("existingSpot: ", existingSpot);
@@ -78,6 +75,7 @@ function CreateSpot() {
   }, [existingSpot, isUpdate])
 
 
+  // helper function to set otherImages URls
   const handleOtherImages = (index, value) => {
     const updatedImages = [...otherImages];
     updatedImages[index] = value;
@@ -102,7 +100,7 @@ function CreateSpot() {
     }
 
     otherImages.forEach((url) => {
-      if (url.trim() && !urlRegex.test(url)) {
+      if (url.trim() && !urlRegex.test(url)) {    //.trim() checks for empty string
         errors.otherImages = "Image URL must contain .png, .jpg, or .jpeg";
       }
     })
@@ -131,7 +129,7 @@ function CreateSpot() {
       // lng: longitude ? parseFloat(longitude) : null
     };
 
-    const imageUrls = [previewImage, ...otherImages.filter((url) => url.trim() !== "")];
+    const imageUrls = [previewImage, ...otherImages.filter((url) => url.trim() !== "")]; //gets rid of extra space, and is not empty string
     
     //console.log("isUpdate: ", isUpdate)
 
